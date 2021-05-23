@@ -1,0 +1,58 @@
+.Header {
+  width: 100%;
+  padding: 0 30px;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  height: 136px;
+  &__logo {
+    display: flex;
+  }
+  &__title {
+    padding-left: 15px;
+    font-size: 32px;
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__team {
+    display: flex;
+    align-items: center;
+  }
+  &__teamPerson {
+    width: 30px;
+    height: 30px;
+  }
+  &__teamPerson:not(:last-child) {
+    margin-right: 5px;
+  }
+  &__share {
+    margin: 0 15px 0 10px;
+    border: none;
+    transition: .5s;
+    background-color: #EAEAEA;
+    height: 100%;
+    color: #131313;
+    max-height: 30px;
+    padding: 0 15px;
+    border-radius: 15px;
+  }
+  &__share:hover {
+    background-color: #CFCFCF;
+    cursor: pointer;
+  }
+  &__chat{
+    background-color: #FFF8DD;
+    border: none;
+    transition: .5s;
+    color: #FFC200;
+    height: 100%;
+    max-height: 30px;
+    padding: 0 15px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  &__chat:hover {
+    background-color: #FFECA3;
+  }
+}

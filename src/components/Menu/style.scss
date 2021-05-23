@@ -1,0 +1,18 @@
+.Menu {
+  padding: 0;
+  &__list {
+    display: flex;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+  }
+  &__link {
+    text-decoration: none;
+    color: #131313;
+    opacity: .7;
+    font-weight: 600;
+  }
+  &__rout:not(:last-child) {
+    padding-right: 30px;
+  }
+}
