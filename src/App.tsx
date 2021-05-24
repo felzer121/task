@@ -10,7 +10,7 @@ import projectIcon3 from './Pic3.png'
 import logo from './logo.svg'
 import { Page } from './components/Page'
 import { TasksPage } from './pages/TasksPage'
-import { TaskType, ToDoType } from './pages/TasksPage/types'
+import { TaskType } from './pages/TasksPage/types'
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },
@@ -27,6 +27,7 @@ const TASKS: TaskType[] = [
     assignTo: 'Linzell Bowman',
     dueOn: 'Tue, Dec 25',
     tag: 'Marketing',
+    category: 'backlog',
     followers: [],
     description:
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
@@ -37,6 +38,7 @@ const TASKS: TaskType[] = [
     createdAt: 1620837011,
     assignTo: 'Linzell Bowman',
     dueOn: 'Tue, Dec 25',
+    category: 'backlog',
     tag: 'Developement',
     followers: [],
     description:
@@ -47,20 +49,20 @@ const TASKS: TaskType[] = [
     author: 'Added by Kristin A.',
     createdAt: 1620837011,
     assignTo: 'Linzell Bowman',
+    category: 'backlog',
     dueOn: 'Tue, Dec 25',
     tag: 'Design',
     followers: [],
     description:
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
-  }
-]
-const TODO: ToDoType[] = [
+  },
   {
     title: 'An option to search in current projects or in all projects',
     author: 'Added by Kristin A.',
     createdAt: 1620837011,
     assignTo: 'Linzell Bowman',
     dueOn: 'Tue, Dec 25',
+    category: 'todo',
     tag: 'Marketing',
     followers: [],
     description:
@@ -73,6 +75,7 @@ const TODO: ToDoType[] = [
     assignTo: 'Linzell Bowman',
     dueOn: 'Tue, Dec 25',
     tag: 'Marketing',
+    category: 'todo',
     followers: [],
     description:
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
@@ -90,7 +93,7 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <Page title='tasks'>
-                <TasksPage tasks={TASKS} toDo={TODO} />
+                <TasksPage tasks={TASKS} />
               </Page>
             </Route>
           </Switch>

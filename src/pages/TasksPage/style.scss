@@ -2,8 +2,88 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
+  &__about {
+    display: flex;
+    margin-top: 30px;
+    border-bottom: solid 1px #ececec;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    &Item {
+      margin-right: 40px;
+      &Title {
+        font-family: Heebo, sans-serif;
+        font-style: normal;
+        margin: 0;
+        padding-bottom: 5px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+        text-transform: uppercase;
+        color: #131313;
+      }
+      &Tag {
+        display: flex;
+        height: 25px;
+        justify-content: center;
+        align-items: center;
+        background: #f5f0ff;
+        border-radius: 10.5px;
+        &Span {
+          font-family: Heebo, sans-serif;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 20px;
+          padding: 0 10px;
+          text-transform: uppercase;
+          color: #764ced;
+        }
+      }
+    }
+    &More {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eaeaea;
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 50%;
+    }
+    &Span {
+      font-family: Heebo, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #131313;
+    }
+  }
+  &__description {
+    &Title {
+      font-family: Heebo, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 23px;
+      text-transform: uppercase;
+      color: #131313;
+    }
+    &Span {
+      font-family: Heebo, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 26px;
+      color: #131313;
+    }
+  }
   &__left {
+    max-width: 385px;
+    background-color: #ffffff;
+    padding: 30px;
     overflow: scroll;
+    box-sizing: border-box;
     height: 100%;
   }
   &__left::-webkit-scrollbar {
@@ -13,11 +93,9 @@
     margin-top: 30px;
   }
   &__container {
-    max-width: 385px;
+    display: flex;
     box-sizing: border-box;
     width: 100%;
-    padding: 30px;
-    background-color: #ffffff;
     border-radius: 8px;
   }
   &__title {

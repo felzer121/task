@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.scss'
-import { TaskType, ToDoType } from './types'
+import projectIcon1 from './Pic1.png'
+import { TaskType } from './types'
+import { Task } from '../../components/Task'
+
 interface TasksPageProps {
   tasks: TaskType[]
-  toDo: ToDoType[]
 }
 
-const TasksPage = ({ tasks, toDo }: TasksPageProps) => {
+const TasksPage = ({ tasks }: TasksPageProps) => {
+  const [task, setTask] = useState(tasks[0])
+  const toDoTasks: TaskType[] = tasks.filter(item => item.category === 'todo')
+  const backlogTasks: TaskType[] = tasks.filter(item => item.category === 'backlog')
+  const onSelectedTask = (task: TaskType): void => {
+    setTask(task)
+  }
   return (
     <div className='TasksPage'>
       <div className='TasksPage__container'>
@@ -17,9 +25,9 @@ const TasksPage = ({ tasks, toDo }: TasksPageProps) => {
               <button className='TasksPage__button'>+ Add Task</button>
             </div>
             <div className='TasksPage__content'>
-              {tasks.map(task => {
+              {backlogTasks.map(task => {
                 return (
-                  <div className='TasksPage__item'>
+                  <div className='TasksPage__item' onClick={() => onSelectedTask(task)}>
                     <div className='TasksPage__itemStatus'></div>
                     <div className='TasksPage__itemContent'>
                       <span className='TasksPage__itemTitle'>{task.title}</span>
@@ -35,12 +43,12 @@ const TasksPage = ({ tasks, toDo }: TasksPageProps) => {
               <button className='TasksPage__button'>+ Add Task</button>
             </div>
             <div className='TasksPage__content'>
-              {toDo.map(toDo => {
+              {toDoTasks.map(task => {
                 return (
                   <div className='TasksPage__item'>
                     <div className='TasksPage__itemStatus'></div>
                     <div className='TasksPage__itemContent'>
-                      <span className='TasksPage__itemTitle'>{toDo.title}</span>
+                      <span className='TasksPage__itemTitle'>{task.title}</span>
                     </div>
                   </div>
                 )
@@ -48,7 +56,7 @@ const TasksPage = ({ tasks, toDo }: TasksPageProps) => {
             </div>
           </div>
         </div>
-        <div className='TasksPage__right'></div>
+        <Task task={task} />
       </div>
     </div>
   )
