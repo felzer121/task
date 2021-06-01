@@ -1,0 +1,113 @@
+.FilesPageTable {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  &__item {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 20px 0 20px 0;
+    width: 100%;
+    max-width: 80%;
+  }
+  &__element {
+    display: flex;
+    border-top: solid 1px #ececec;
+    width: 100%;
+  }
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+  &__downloadButton {
+    background: none;
+    cursor: pointer;
+    border: none;
+  }
+  &__downloadButton svg {
+    transition: 0.5s;
+  }
+  &__downloadButton:hover svg {
+    fill: #0a0b0c;
+  }
+  &__actionSvg {
+    padding-left: 10px;
+  }
+  &__actionButton {
+    background-color: #eaeaea;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    transition: 0.5s;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    color: #131313;
+  }
+  &__actionButton:hover {
+    background-color: #bfbfbf;
+  }
+  &__itemElem {
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #131313;
+    mix-blend-mode: normal;
+    opacity: 0.7;
+  }
+  &__itemElem-name {
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #131313;
+    opacity: 1;
+  }
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+  &__itemElem {
+    display: flex;
+    align-items: center;
+  }
+  &__actions {
+    max-width: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  &__itemElem:nth-of-type(1) {
+    max-width: 40px;
+    width: 100%;
+  }
+  &__itemElem:nth-of-type(2) {
+    max-width: 200px;
+    width: 100%;
+  }
+  &__itemElem:nth-of-type(3) {
+    max-width: 70px;
+    width: 100%;
+  }
+  &__itemElem:nth-of-type(4) {
+    max-width: 170px;
+    width: 100%;
+  }
+  &__itemElem:nth-of-type(5) {
+    max-width: 120px;
+    width: 100%;
+  }
+  &__itemElem:nth-of-type(6) {
+    max-width: 80px;
+    width: 100%;
+  }
+}

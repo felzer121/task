@@ -11,6 +11,7 @@ import logo from './logo.svg'
 import { Page } from './components/Page'
 import { TasksPage } from './pages/TasksPage'
 import { TaskType } from './pages/TasksPage/types'
+import { FilesPage } from './pages/FilesPage'
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },
@@ -21,6 +22,7 @@ const MAIN_MENU: MenuItemType[] = [
 ]
 const TASKS: TaskType[] = [
   {
+    id: 1,
     title: 'Find top 5 customer requests',
     author: 'Added by Kristin A.',
     createdAt: 1620837011,
@@ -33,6 +35,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
   },
   {
+    id: 2,
     title: 'E-mail after registration so that I can confirm my address',
     author: 'Added by Kristin A.',
     createdAt: 1620837011,
@@ -45,6 +48,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
   },
   {
+    id: 3,
     title: 'Two-factor authentication to make my private data more secure ',
     author: 'Added by Kristin A.',
     createdAt: 1620837011,
@@ -57,6 +61,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
   },
   {
+    id: 4,
     title: 'An option to search in current projects or in all projects',
     author: 'Added by Kristin A.',
     createdAt: 1620837011,
@@ -69,6 +74,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
   },
   {
+    id: 5,
     title: 'An option to search in current projects or in all projects',
     author: 'Added by Kristin A.',
     createdAt: 1620837011,
@@ -94,6 +100,11 @@ function App() {
             <Route exact path='/'>
               <Page title='tasks'>
                 <TasksPage tasks={TASKS} />
+              </Page>
+            </Route>
+            <Route exact path='/files'>
+              <Page title='tasks'>
+                <FilesPage />
               </Page>
             </Route>
           </Switch>

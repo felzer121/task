@@ -7,6 +7,22 @@
   overflow: scroll;
   height: 100%;
 }
+.TasksPage__asign {
+  display: flex;
+  align-items: center;
+  .TasksPage__aboutItemSpan {
+    margin-left: 5px;
+  }
+}
+.TasksPage__itemStatus {
+  max-width: 30px;
+  width: 100%;
+  height: 30px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .TasksPage__box {
   display: flex;
   justify-content: space-between;

@@ -53,7 +53,7 @@ const Task = ({ task }: TaskProps) => {
       <div className='TasksPage__about'>
         <div className='TasksPage__aboutItem'>
           <h4 className='TasksPage__aboutItemTitle'>Asign To</h4>
-          <div className='TasksPage__aboutItem'>
+          <div className='TasksPage__aboutItem TasksPage__asign'>
             <img src={projectIcon1} alt='' />
             <span className='TasksPage__aboutItemSpan'>{task.assignTo}</span>
           </div>
