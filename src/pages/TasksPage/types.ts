@@ -1,3 +1,5 @@
+import { FileType } from '../../components/FilesTable/types'
+
 export type TaskType = {
   id: number
   title: string
@@ -9,4 +11,5 @@ export type TaskType = {
   tag: string
   followers: string[]
   description: string
+  files: FileType[]
 }

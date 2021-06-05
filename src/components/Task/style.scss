@@ -14,6 +14,31 @@
     margin-left: 5px;
   }
 }
+.TasksPage {
+  &__file {
+    display: flex;
+  }
+  &__fileDescription {
+    margin-left: 10px;
+  }
+  &__fileTxt {
+    margin: 0;
+  }
+  &__fileInfo {
+    display: flex;
+  }
+  &__fileDelete {
+    padding: 0;
+    margin-left: 15px;
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    background: none;
+    color: #ff1000;
+  }
+}
 .TasksPage__itemStatus {
   max-width: 30px;
   width: 100%;

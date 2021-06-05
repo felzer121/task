@@ -6,21 +6,10 @@
     text-decoration: none;
     list-style: none;
   }
-  &__link {
-    text-decoration: none;
-    color: #131313;
-    opacity: 0.7;
-    font-weight: 600;
-  }
-  &__rout .selected {
-    font-family: Heebo, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
+  &__route .selected {
     opacity: 1;
-    color: #131313;
   }
-  &__rout .selected:after {
+  &__route .selected:after {
     content: '';
     position: absolute;
     width: 100%;
@@ -29,15 +18,23 @@
     left: 0;
     background-color: #ffc200;
   }
-  &__rout &__link {
+  &__route &__link {
     transition: 0.6s;
     position: relative;
   }
-  &__rout:hover &__link {
+  &__route:hover &__link {
     opacity: 1;
     color: #000;
   }
-  &__rout:not(:last-child) {
+  &__route:not(:last-child) {
     padding-right: 30px;
+  }
+  &__link {
+    font-family: Heebo, sans-serif;
+    text-decoration: none;
+    color: #131313;
+    font-size: 16px;
+    opacity: 0.7;
+    font-weight: bold;
   }
 }
