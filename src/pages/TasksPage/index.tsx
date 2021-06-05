@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './style.scss'
-import projectIcon1 from './Pic1.png'
 import { TaskType } from './types'
 import { Task } from '../../components/Task'
 import { TaskCard } from '../../components/TaskCard'
@@ -15,6 +14,9 @@ const TasksPage = ({ tasks }: TasksPageProps) => {
   const backlogTasks: TaskType[] = tasks.filter(item => item.category === 'backlog')
   const onSelectedTask = (openedTask: TaskType): void => {
     setOpenedTask(openedTask)
+  }
+  const onTaskUpdated = (task: TaskType) => {
+    setOpenedTask(task)
   }
   return (
     <div className='TasksPage'>
@@ -65,7 +67,7 @@ const TasksPage = ({ tasks }: TasksPageProps) => {
             </div>
           </div>
         </div>
-        <Task task={openedTask} />
+        <Task task={openedTask} onTaskUpdated={onTaskUpdated} />
       </div>
     </div>
   )
