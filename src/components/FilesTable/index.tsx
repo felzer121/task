@@ -1,11 +1,6 @@
 import React from 'react'
 import './style.scss'
 import { FileType } from './types'
-import icon1 from './pdf.svg'
-import icon2 from './zip.svg'
-import icon3 from './base1.png'
-import icon4 from './base2.png'
-import icon5 from './base3.png'
 
 interface FilesTableProps {
   files: FileType[]
@@ -13,35 +8,33 @@ interface FilesTableProps {
 
 const FilesTable = ({ files }: FilesTableProps) => {
   return (
-    <div className='FilesPageTable'>
-      {files.map(item => {
+    <div className='FilesTable'>
+      {files.map(file => {
         return (
-          <div className='FilesPageTable__element'>
-            <ul className='FilesPageTable__item'>
-              <li className='FilesPageTable__icon FilesPageTable__itemElem'>
-                <img src={item.icon} />
+          <div className='FilesTable__element'>
+            <ul className='FilesTable__item'>
+              <li className='FilesTable__icon FilesTable__itemElem'>
+                <img src={file.icon} alt={file.name} />
               </li>
-              <li className='FilesPageTable__itemElem FilesPageTable__itemElem-name'>
-                {item.name}
-              </li>
-              <li className='FilesPageTable__itemElem'>{item.size}</li>
-              <li className='FilesPageTable__itemElem'>{item.author}</li>
-              <li className='FilesPageTable__itemElem'>
+              <li className='FilesTable__itemElem FilesTable__itemElem-name'>{file.name}</li>
+              <li className='FilesTable__itemElem'>{file.size}</li>
+              <li className='FilesTable__itemElem'>{file.author}</li>
+              <li className='FilesTable__itemElem'>
                 <div className='TasksPage__aboutItemTag'>
-                  <span className='TasksPage__aboutItemTagSpan'>{item.tag}</span>
+                  <span className='TasksPage__aboutItemTagSpan'>{file.tag}</span>
                 </div>
               </li>
-              <li className='FilesPageTable__itemElem'>08 Jan 2019</li>
+              <li className='FilesTable__itemElem'>08 Jan 2019</li>
             </ul>
-            <div className='FilesPageTable__actions'>
-              <button className='FilesPageTable__actionButton'>
+            <div className='FilesTable__actions'>
+              <button className='FilesTable__actionButton'>
                 Actions
                 <svg
                   width='10'
                   height='6'
                   viewBox='0 0 10 6'
                   fill='none'
-                  className='FilesPageTable__actionSvg'
+                  className='FilesTable__actionSvg'
                   xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M9.76246 0.684322L9.28117 0.22601C9.11438 0.075351 8.91958 0 8.69722 0C8.47027 0 8.27779 0.075351 8.11946 0.22601L5.00002 3.19558L1.88061 0.226096C1.7223 0.0754366 1.52977 8.56018e-05 1.30291 8.56018e-05C1.08044 8.56018e-05 0.885688 0.0754366 0.718878 0.226096L0.243897 0.684408C0.0812692 0.839111 0 1.0245 0 1.24041C0 1.46034 0.0813591 1.64364 0.243875 1.79025L4.4223 5.76785C4.57641 5.92257 4.76887 6 5 6C5.22679 6 5.42152 5.92259 5.58399 5.76785L9.76244 1.79025C9.92078 1.63951 10 1.45624 10 1.24041C10 1.02853 9.9208 0.843242 9.76246 0.684322Z'
@@ -49,7 +42,7 @@ const FilesTable = ({ files }: FilesTableProps) => {
                   />
                 </svg>
               </button>
-              <button className='FilesPageTable__downloadButton'>
+              <button className='FilesTable__downloadButton'>
                 <svg
                   width='16'
                   height='18'
