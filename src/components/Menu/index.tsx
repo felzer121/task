@@ -1,6 +1,6 @@
 import React from 'react'
 import { MenuItemType } from './types'
-import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './style.scss'
 
 interface MenuProps {
@@ -10,11 +10,15 @@ interface MenuProps {
 const Menu = ({ menu }: MenuProps) => {
   return (
     <menu className='Menu'>
-      <ul className='Menu__list'>
+      <ul className='Menu__wrapper'>
         {menu.map(item => {
           return (
-            <li className='Menu__route'>
-              <NavLink exact activeClassName='selected' className='Menu__link' to={item.url}>
+            <li>
+              <NavLink
+                exact
+                className='Menu__link'
+                activeClassName='Menu__link_selected'
+                to={item.url}>
                 {item.title}
               </NavLink>
             </li>
