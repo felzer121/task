@@ -93,6 +93,22 @@ const Task = ({ task }: TaskProps) => {
         <h3 className='TasksPage__descriptionTitle'>Description</h3>
         <p className='TasksPage__descriptionSpan'>{task.description}</p>
       </div>
+      <div className='TasksPage__files'>
+        {task.files.map(item => {
+          return (
+            <div className='TasksPage__file'>
+              <img src={item.icon} alt='' />
+              <div className='TasksPage__fileDescription'>
+                <p className='TasksPage__fileTxt'>{item.name}</p>
+                <div className='TasksPage__fileInfo'>
+                  <p className='TasksPage__fileTxt'>{item.size}</p>
+                  <button className='TasksPage__fileDelete'>delete</button>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

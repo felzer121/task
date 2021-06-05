@@ -1,15 +1,18 @@
 import React from 'react'
 import './style.scss'
 import { FilesTitle } from '../../components/FileTitle'
-import { FilesTabel } from '../../components/FilesTabel'
+import { FilesTable } from '../../components/FilesTable'
+import { FileType } from '../../components/FilesTable/types'
 
-interface FilesPageProps {}
+interface FilesPageProps {
+  files: FileType[]
+}
 
-const FilesPage = ({}: FilesPageProps) => {
+const FilesPage = ({ files }: FilesPageProps) => {
   return (
     <div className='FilesPage'>
       <FilesTitle />
-      <FilesTabel />
+      <FilesTable files={files} />
     </div>
   )
 }

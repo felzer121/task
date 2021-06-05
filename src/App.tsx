@@ -32,7 +32,17 @@ const TASKS: TaskType[] = [
     category: 'backlog',
     followers: [],
     description:
-      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
+      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
+    files: [
+      {
+        icon: 'image/pdf.svg',
+        name: 'Redesign Brief 2019.pdf',
+        size: 159,
+        author: 'Mattie Blooman',
+        tag: 'Marketing',
+        date: 1620837011
+      }
+    ]
   },
   {
     id: 2,
@@ -45,7 +55,17 @@ const TASKS: TaskType[] = [
     tag: 'Developement',
     followers: [],
     description:
-      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
+      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
+    files: [
+      {
+        icon: 'image/zip.svg',
+        name: 'All Files.zip',
+        size: 17,
+        author: 'Alfie Wood',
+        tag: 'Marketing',
+        date: 1620837011
+      }
+    ]
   },
   {
     id: 3,
@@ -58,7 +78,17 @@ const TASKS: TaskType[] = [
     tag: 'Design',
     followers: [],
     description:
-      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
+      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
+    files: [
+      {
+        icon: 'image/base1.png',
+        name: 'Header Photo.jpg',
+        size: 5159,
+        author: 'Chinmay Sarasvati',
+        tag: 'Design',
+        date: 1620837011
+      }
+    ]
   },
   {
     id: 4,
@@ -71,7 +101,17 @@ const TASKS: TaskType[] = [
     tag: 'Marketing',
     followers: [],
     description:
-      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
+      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
+    files: [
+      {
+        icon: 'image/base2.png',
+        name: 'Article Image.jpg',
+        size: 432,
+        author: 'Homayoun Shakibaii',
+        tag: 'Developement',
+        date: 1620837011
+      }
+    ]
   },
   {
     id: 5,
@@ -84,11 +124,21 @@ const TASKS: TaskType[] = [
     category: 'todo',
     followers: [],
     description:
-      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.'
+      'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
+    files: [
+      {
+        icon: 'image/base3.png',
+        name: 'Desing Source.png',
+        size: 290,
+        author: 'Ingo Schimpff',
+        tag: 'Marketing',
+        date: 1620837011
+      }
+    ]
   }
 ]
 const USERS: string[] = [projectIcon1, projectIcon2, projectIcon3]
-
+const Files = TASKS.map(item => item.files).flat()
 function App() {
   return (
     <Router>
@@ -102,10 +152,8 @@ function App() {
                 <TasksPage tasks={TASKS} />
               </Page>
             </Route>
-            <Route exact path='/files'>
-              <Page title='tasks'>
-                <FilesPage />
-              </Page>
+            <Route path='/files'>
+              <Page title='tasks'>{<FilesPage files={Files} />}</Page>
             </Route>
           </Switch>
         </div>
