@@ -11,7 +11,7 @@ const FilesTable = ({ files }: FilesTableProps) => {
     <div className='FilesTable'>
       {files.map(file => {
         return (
-          <div className='FilesTable__element'>
+          <div className='FilesTable__element' key={file.id}>
             <ul className='FilesTable__item'>
               <li className='FilesTable__icon FilesTable__itemElem'>
                 <img src={file.icon} alt={file.name} />

@@ -33,6 +33,7 @@ const TasksPage = ({ tasks, globalTaskUpdated }: TasksPageProps) => {
               {backlogTasks.map(task => {
                 return (
                   <TaskCard
+                    key={task.id}
                     task={task}
                     isActive={openedTask.id === task.id}
                     onSelectTask={onSelectedTask}
@@ -49,7 +50,7 @@ const TasksPage = ({ tasks, globalTaskUpdated }: TasksPageProps) => {
             <div className='TasksPage__content'>
               {toDoTasks.map(task => {
                 return (
-                  <div className='TasksPage__item'>
+                  <div className='TasksPage__item' key={task.id}>
                     <div className='TasksPage__itemStatus'>
                       <svg
                         width='12'
