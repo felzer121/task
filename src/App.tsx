@@ -42,6 +42,15 @@ const TASKS: TaskType[] = [
         author: 'Mattie Blooman',
         tag: 'Marketing',
         date: 1620837011
+      },
+      {
+        id: 6,
+        icon: 'image/pdf.svg',
+        name: 'FFF',
+        size: 159,
+        author: 'Mattie Blooman',
+        tag: 'Marketing',
+        date: 1620837011
       }
     ]
   },
@@ -144,6 +153,11 @@ const TASKS: TaskType[] = [
 ]
 const USERS: string[] = [projectIcon1, projectIcon2, projectIcon3]
 const Files = TASKS.map(item => item.files).flat()
+
+const globalTaskUpdated = (task: TaskType) => {
+  TASKS[task.id - 1] = task
+}
+
 function App() {
   return (
     <Router>
@@ -154,7 +168,7 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <Page title='tasks'>
-                <TasksPage tasks={TASKS} />
+                <TasksPage tasks={TASKS} globalTaskUpdated={globalTaskUpdated} />
               </Page>
             </Route>
             <Route path='/files'>
