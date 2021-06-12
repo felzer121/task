@@ -6,14 +6,19 @@ import { TaskCard } from '../../components/TaskCard'
 
 interface TasksPageProps {
   tasks: TaskType[]
+  globalTaskUpdated: (task: TaskType) => void
 }
 
-const TasksPage = ({ tasks }: TasksPageProps) => {
+const TasksPage = ({ tasks, globalTaskUpdated }: TasksPageProps) => {
   const [openedTask, setOpenedTask] = useState(tasks[0])
   const toDoTasks: TaskType[] = tasks.filter(item => item.category === 'todo')
   const backlogTasks: TaskType[] = tasks.filter(item => item.category === 'backlog')
   const onSelectedTask = (openedTask: TaskType): void => {
     setOpenedTask(openedTask)
+  }
+  const onTaskUpdated = (task: TaskType) => {
+    setOpenedTask(task)
+    globalTaskUpdated(task)
   }
   return (
     <div className='TasksPage'>
@@ -65,7 +70,7 @@ const TasksPage = ({ tasks }: TasksPageProps) => {
             </div>
           </div>
         </div>
-        <Task task={openedTask} />
+        <Task task={openedTask} onTaskUpdated={onTaskUpdated} />
       </div>
     </div>
   )

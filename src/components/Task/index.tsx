@@ -5,9 +5,17 @@ import { TaskType } from '../../pages/TasksPage/types'
 
 interface TaskProps {
   task: TaskType
+  onTaskUpdated: (task: TaskType) => void
 }
 
-const Task = ({ task }: TaskProps) => {
+const Task = ({ task, onTaskUpdated }: TaskProps) => {
+  const onDeleteFile = (fileId: number): void => {
+    const newTask: TaskType = {
+      ...task,
+      files: task.files.filter(item => item.id !== fileId)
+    }
+    onTaskUpdated(newTask)
+  }
   return (
     <div className='TasksPage__right'>
       <div className='TasksPage__box'>
@@ -102,7 +110,9 @@ const Task = ({ task }: TaskProps) => {
                 <p className='TasksPage__fileTxt'>{item.name}</p>
                 <div className='TasksPage__fileInfo'>
                   <p className='TasksPage__fileTxt'>{item.size}</p>
-                  <button className='TasksPage__fileDelete'>delete</button>
+                  <button className='TasksPage__fileDelete' onClick={() => onDeleteFile(item.id)}>
+                    delete
+                  </button>
                 </div>
               </div>
             </div>
