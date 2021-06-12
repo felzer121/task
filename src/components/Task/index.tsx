@@ -12,7 +12,7 @@ const Task = ({ task, onTaskUpdated }: TaskProps) => {
   const onDeleteFile = (fileId: number): void => {
     const newTask: TaskType = {
       ...task,
-      files: task.files.filter(item => item.id != fileId)
+      files: task.files.filter(item => item.id !== fileId)
     }
     onTaskUpdated(newTask)
   }
