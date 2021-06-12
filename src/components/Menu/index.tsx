@@ -13,7 +13,7 @@ const Menu = ({ menu }: MenuProps) => {
       <ul className='Menu__wrapper'>
         {menu.map(item => {
           return (
-            <li>
+            <li key={item.url}>
               <NavLink
                 exact
                 className='Menu__link'

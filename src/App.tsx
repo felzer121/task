@@ -35,6 +35,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
     files: [
       {
+        id: 1,
         icon: 'image/pdf.svg',
         name: 'Redesign Brief 2019.pdf',
         size: 159,
@@ -58,6 +59,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
     files: [
       {
+        id: 2,
         icon: 'image/zip.svg',
         name: 'All Files.zip',
         size: 17,
@@ -81,6 +83,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
     files: [
       {
+        id: 3,
         icon: 'image/base1.png',
         name: 'Header Photo.jpg',
         size: 5159,
@@ -104,6 +107,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
     files: [
       {
+        id: 4,
         icon: 'image/base2.png',
         name: 'Article Image.jpg',
         size: 432,
@@ -127,6 +131,7 @@ const TASKS: TaskType[] = [
       'Task Descriptions are used during project planning, project execution and project control. During project planning the task descriptions are used for scope planning and creating estimates. During project execution the task description is used by those doing the activities to ensure they are doing the work correctly.',
     files: [
       {
+        id: 5,
         icon: 'image/base3.png',
         name: 'Desing Source.png',
         size: 290,

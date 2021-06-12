@@ -1,9 +1,7 @@
 import React from 'react'
 import './style.scss'
 
-interface FilesTitleProps {}
-
-const FilesTitle = ({}: FilesTitleProps) => {
+const FilesTitle = () => {
   return (
     <div className='FilesPageTitle'>
       <ul className='FilesPageTitle__ul'>
