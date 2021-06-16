@@ -1,0 +1,21 @@
+.AddComment {
+  display: flex;
+  align-items: center;
+  &__input {
+    background-color: #eaeaea;
+    border: none;
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 10px;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  &__send {
+    background-color: #cef9c6;
+    border-radius: 4px;
+    height: 40px;
+    width: 80px;
+    border: none;
+  }
+}

@@ -15,8 +15,15 @@
   }
 }
 .TasksPage {
+  &__files {
+    display: flex;
+    flex-wrap: wrap;
+  }
   &__file {
     display: flex;
+  }
+  &__file:not(:last-child) {
+    padding-right: 30px;
   }
   &__fileDescription {
     margin-left: 10px;

@@ -16,6 +16,7 @@ const TasksPage = ({ tasks, globalTaskUpdated }: TasksPageProps) => {
   const onSelectedTask = (openedTask: TaskType): void => {
     setOpenedTask(openedTask)
   }
+
   const onTaskUpdated = (task: TaskType) => {
     setOpenedTask(task)
     globalTaskUpdated(task)

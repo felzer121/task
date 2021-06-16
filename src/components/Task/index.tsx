@@ -2,6 +2,7 @@ import React from 'react'
 import './style.scss'
 import projectIcon1 from '../../pages/TasksPage/Pic1.png'
 import { TaskType } from '../../pages/TasksPage/types'
+import Discussion from '../Discussion'
 
 interface TaskProps {
   task: TaskType
@@ -119,6 +120,7 @@ const Task = ({ task, onTaskUpdated }: TaskProps) => {
           )
         })}
       </div>
+      <Discussion comments={task.comments} />
     </div>
   )
 }

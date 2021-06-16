@@ -1,0 +1,40 @@
+.Comment {
+  display: flex;
+  margin-bottom: 20px;
+  &__icon {
+    margin-top: 20px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    z-index: 1;
+    border: 5px solid #ffffff;
+  }
+  &__content {
+    margin-left: -24px;
+    padding: 20px 20px 20px 40px;
+    width: 100%;
+    background: #f7f6f3;
+    border-radius: 10px;
+  }
+  &__name {
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 23px;
+    color: #131313;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__time {
+    font-family: Heebo, sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: right;
+    color: #131313;
+    mix-blend-mode: normal;
+    opacity: 0.7;
+  }
+}
