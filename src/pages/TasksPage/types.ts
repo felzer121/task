@@ -1,4 +1,5 @@
 import { FileType } from '../../components/FilesTable/types'
+import { CommentType } from '../../components/Discussion/types'
 
 export type TaskType = {
   id: number
@@ -12,4 +13,5 @@ export type TaskType = {
   followers: string[]
   description: string
   files: FileType[]
+  comments: CommentType[]
 }

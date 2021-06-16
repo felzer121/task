@@ -46,11 +46,31 @@ const TASKS: TaskType[] = [
       {
         id: 6,
         icon: 'image/pdf.svg',
-        name: 'FFF',
+        name: 'Client Meeting.pdf',
         size: 159,
         author: 'Mattie Blooman',
         tag: 'Marketing',
         date: 1620837011
+      }
+    ],
+    comments: [
+      {
+        id: 1,
+        icon: 'image/base1.png',
+        name: 'Helena Brauer',
+        position: 'Designer',
+        time: 'Yesterday at 12:37pm',
+        comment:
+          'During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes'
+      },
+      {
+        id: 2,
+        icon: 'image/base2.png',
+        name: 'Prescott MacCaffery',
+        position: 'Developer',
+        time: 'Yesterday at 12:37pm',
+        comment:
+          '@Helena Software quality assurance activity in which one or several humans check a program mainly '
       }
     ]
   },
@@ -76,6 +96,17 @@ const TASKS: TaskType[] = [
         tag: 'Marketing',
         date: 1620837011
       }
+    ],
+    comments: [
+      {
+        id: 3,
+        icon: 'image/base3.png',
+        name: 'Helena Brauer',
+        position: 'Designer',
+        time: 'Yesterday at 12:37pm',
+        comment:
+          'During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes'
+      }
     ]
   },
   {
@@ -99,6 +130,17 @@ const TASKS: TaskType[] = [
         author: 'Chinmay Sarasvati',
         tag: 'Design',
         date: 1620837011
+      }
+    ],
+    comments: [
+      {
+        id: 4,
+        icon: 'image/base3.png',
+        name: 'Helena Brauer',
+        position: 'Designer',
+        time: 'Yesterday at 12:37pm',
+        comment:
+          'During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes'
       }
     ]
   },
@@ -124,6 +166,17 @@ const TASKS: TaskType[] = [
         tag: 'Developement',
         date: 1620837011
       }
+    ],
+    comments: [
+      {
+        id: 5,
+        icon: 'image/base3.png',
+        name: 'Helena Brauer',
+        position: 'Designer',
+        time: 'Yesterday at 12:37pm',
+        comment:
+          'During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes'
+      }
     ]
   },
   {
@@ -147,6 +200,17 @@ const TASKS: TaskType[] = [
         author: 'Ingo Schimpff',
         tag: 'Marketing',
         date: 1620837011
+      }
+    ],
+    comments: [
+      {
+        id: 5,
+        icon: 'image/base3.png',
+        name: 'Helena Brauer',
+        position: 'Designer',
+        time: 'Yesterday at 12:37pm',
+        comment:
+          'During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes'
       }
     ]
   }
