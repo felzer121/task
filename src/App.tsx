@@ -221,6 +221,10 @@ const Files = TASKS.map(item => item.files).flat()
 const globalTaskUpdated = (task: TaskType) => {
   TASKS[task.id - 1] = task
 }
+const globalTaskCreate = (task: TaskType) => {
+  TASKS[TASKS.length + 1] = task
+}
+console.log(TASKS)
 
 function App() {
   return (
@@ -232,7 +236,11 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <Page title='tasks'>
-                <TasksPage tasks={TASKS} globalTaskUpdated={globalTaskUpdated} />
+                <TasksPage
+                  tasks={TASKS}
+                  globalTaskUpdated={globalTaskUpdated}
+                  globalTaskCreate={globalTaskCreate}
+                />
               </Page>
             </Route>
             <Route path='/files'>

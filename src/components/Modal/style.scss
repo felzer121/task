@@ -1,0 +1,89 @@
+.ModalTask {
+  &__overflow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    background: rgba(23, 29, 23, 0.8);
+    backdrop-filter: blur(5.43656px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__close {
+    cursor: pointer;
+  }
+  &__body {
+    padding: 30px;
+  }
+  &__label {
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    line-height: 20px;
+  }
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+  }
+  &__button {
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    color: #1d201c;
+    cursor: pointer;
+    background: #cef9c6;
+    border-radius: 25px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    transition: 0.3s;
+    border: none;
+  }
+  &__button:hover {
+    background: #b7eead;
+  }
+  &__input-box {
+    margin-bottom: 20px;
+  }
+  &__titleEl {
+    margin: 0;
+    font-family: Heebo, sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 38px;
+    color: #131313;
+  }
+  &__input {
+    outline: none;
+    background: #eaeaea;
+    border-radius: 8px;
+    height: 50px;
+    padding: 0 20px;
+    border: none;
+  }
+  &__modal {
+    position: absolute;
+    z-index: 5;
+    background-color: #ffffff;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+  }
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px;
+    border-bottom: 1px #ececec solid;
+  }
+}
