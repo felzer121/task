@@ -12,7 +12,7 @@ import { Page } from './components/Page'
 import { TasksPage } from './pages/TasksPage'
 import { TaskType } from './pages/TasksPage/types'
 import { FilesPage } from './pages/FilesPage'
-import { getTasks } from './services/firebase'
+import { getTasks }  from './services/firebase'
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },

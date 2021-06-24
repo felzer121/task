@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ca592dc-aecd-42a6-8c15-a99d94015808" name="Default Changelist" comment="Modal create task add">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="9ca592dc-aecd-42a6-8c15-a99d94015808" name="Default Changelist" comment="Backend files">
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/firebase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/firebase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Modal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modal/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +51,7 @@
       <workItem from="1624282654432" duration="43000" />
       <workItem from="1624287034220" duration="5832000" />
       <workItem from="1624374287160" duration="599000" />
-      <workItem from="1624480691106" duration="11495000" />
+      <workItem from="1624480691106" duration="11808000" />
     </task>
     <task id="LOCAL-00001" summary="Modal create task add">
       <created>1624292767613</created>
@@ -64,7 +60,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624292767613</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Backend files">
+      <created>1624556189608</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1624556189608</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,6 +87,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Modal create task add" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modal create task add" />
+    <MESSAGE value="Backend files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Backend files" />
   </component>
 </project>

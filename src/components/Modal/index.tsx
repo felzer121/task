@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './style.scss'
-import { TaskType } from '../../pages/TasksPage/types'
 
 interface ModalProps{
   open: boolean
