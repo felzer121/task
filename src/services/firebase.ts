@@ -2,19 +2,30 @@ import firebase from 'firebase'
 import { CONFIG } from '../config'
 import 'firebase/auth'
 import 'firebase/database'
+import { TaskType } from '../pages/TasksPage/types'
 
-const app = firebase.initializeApp(CONFIG.firebaseConfig)
+firebase.initializeApp(CONFIG.firebaseConfig)
 
-var db = firebase.firestore();
+const db = firebase.firestore();
 
-db.collection("tasks").add({
-  first: "Ada",
-  last: "Lovelace",
-  born: 1815
-})
-  .then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-  })
-  .catch((error) => {
-    console.error("Error adding document: ", error);
+export const createTask = (task: TaskType) => {
+  db.collection("tasks").add(task)
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+}
+
+export const getTasks = async ():Promise<TaskType[]> => {
+  let tasks:TaskType[] = [];
+  await db.collection("tasks").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      // @ts-ignore
+      tasks.push(doc.data())
+    });
   });
+  console.log(tasks)
+  return tasks
+}
