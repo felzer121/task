@@ -89,8 +89,6 @@ const Task = ({ task, onTaskUpdated }: TaskProps) => {
               fill='none'
               xmlns='http://www.w3.org/2000/svg'>
               <path
-                fillRule='evenodd'
-                clipRule='evenodd'
                 d='M9.93481 6.08679H6.73341V9.5H4.16327V6.08679H0.934814V3.77736H4.16327V0.5H6.73341V3.77736H9.93481V6.08679Z'
                 fill='#9B9B9B'
               />
