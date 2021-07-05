@@ -1,11 +1,17 @@
 import React from 'react'
 import './style.scss'
+import { motion } from 'framer-motion'
 
 const AddComment = () => {
   return (
     <div className='AddComment'>
       <img src='./Userpic.jpg' alt='' />
-      <input className='AddComment__input' type='text' placeholder='Add a comment…' />
+      <motion.textarea className='AddComment__input'
+             placeholder='Add a comment…'
+             whileFocus={{
+               height: ['40px', '150px'],
+             }}
+      />
       <button className='AddComment__send'>Send</button>
     </div>
   )

@@ -1,0 +1,24 @@
+.TasksPage {
+  &__top {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+  }
+
+  &__button {
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 0 20px;
+    border: 0;
+    background: #cef9c6;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    color: #1d201c;
+
+    &:hover {
+      background: #9ae38c;
+    }
+  }
+}

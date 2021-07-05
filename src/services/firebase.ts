@@ -11,6 +11,9 @@ const db = firebase.firestore();
 export const createTask = (task: TaskType) => {
   db.collection("tasks").add(task)
     .then((docRef) => {
+      docRef.update({
+        id: docRef.id
+      })
       console.log("Document written with ID: ", docRef.id);
     })
     .catch((error) => {
@@ -25,7 +28,21 @@ export const getTasks = async ():Promise<TaskType[]> => {
       // @ts-ignore
       tasks.push(doc.data())
     });
-  });
-  console.log(tasks)
+  }); 
   return tasks
+}
+
+export const updateTask = async (task:TaskType) => {
+  var taskRef = db.collection("tasks").doc(task.id);
+
+  return taskRef.update({
+    isDone: task.isDone
+  })
+    .then(() => {
+      console.log("Document successfully updated!");
+    })
+    .catch((error) => {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+    });
 }

@@ -13,6 +13,7 @@ import { TasksPage } from './pages/TasksPage'
 import { TaskType } from './pages/TasksPage/types'
 import { FilesPage } from './pages/FilesPage'
 import { getTasks }  from './services/firebase'
+import { KanbanPage } from './pages/KanbanPage'
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },
@@ -25,17 +26,18 @@ const MAIN_MENU: MenuItemType[] = [
 const USERS: string[] = [projectIcon1, projectIcon2, projectIcon3]
 
 function App() {
+
   const [tasks, setTasks] = useState<TaskType[]>([])
   useEffect(()=> {getTasksFromServer()},[])
   const globalTaskUpdated = (task: TaskType) => {
-    tasks[task.id - 1] = task
   }
   const getTasksFromServer = async ()=> {
     const serversTasks = await getTasks()
     setTasks(serversTasks)
   }
   const files = tasks.map(item => item.files).flat()
-
+  const toDoTasks: TaskType[] = tasks.filter(item => item.category === 'todo')
+  const backlogTasks: TaskType[] = tasks.filter(item => item.category === 'backlog')
   return (
     <Router>
       <div className='App'>
@@ -50,11 +52,13 @@ function App() {
                   tasks={tasks}
                   globalTaskUpdated={globalTaskUpdated}
                 />}
-
               </Page>
             </Route>
             <Route path='/files'>
               <Page title='tasks'>{<FilesPage files={files} />}</Page>
+            </Route>
+            <Route path='/kanban'>
+              <Page title='tasks'>{<KanbanPage globalTaskUpdated={globalTaskUpdated} toDoTasks={toDoTasks} backlogTasks={backlogTasks} />}</Page>
             </Route>
           </Switch>
         </div>
