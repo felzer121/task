@@ -2,13 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ca592dc-aecd-42a6-8c15-a99d94015808" name="Default Changelist" comment="Backend files">
+      <change afterPath="$PROJECT_DIR$/src/components/TaskCard/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TaskList/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TaskList/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/KanbanPage/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/KanbanPage/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modal/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddComment/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddComment/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddComment/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddComment/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskCard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/firebase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/firebase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="SCSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -22,7 +44,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1uGCD0zBnVQfARIiFRggJe26sxB" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -32,6 +56,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -51,7 +76,14 @@
       <workItem from="1624282654432" duration="43000" />
       <workItem from="1624287034220" duration="5832000" />
       <workItem from="1624374287160" duration="599000" />
-      <workItem from="1624480691106" duration="11808000" />
+      <workItem from="1624480691106" duration="13315000" />
+      <workItem from="1624792295085" duration="3503000" />
+      <workItem from="1624870845962" duration="2108000" />
+      <workItem from="1624892119461" duration="1200000" />
+      <workItem from="1624899462141" duration="3788000" />
+      <workItem from="1624957016052" duration="20243000" />
+      <workItem from="1625224239596" duration="287000" />
+      <workItem from="1625478060602" duration="2811000" />
     </task>
     <task id="LOCAL-00001" summary="Modal create task add">
       <created>1624292767613</created>
@@ -67,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624556189608</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Backend files">
+      <created>1624556410186</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1624556410186</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
