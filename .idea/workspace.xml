@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ca592dc-aecd-42a6-8c15-a99d94015808" name="Default Changelist" comment="Backend files">
-      <change afterPath="$PROJECT_DIR$/src/components/TaskCard/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TaskList/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TaskList/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/KanbanPage/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/KanbanPage/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="9ca592dc-aecd-42a6-8c15-a99d94015808" name="Default Changelist" comment="animate element, add kanban">
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddComment/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddComment/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddComment/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddComment/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TaskCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskCard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskCard/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskCard/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskList/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskList/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskList/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/KanbanPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/KanbanPage/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/firebase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/firebase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +74,7 @@
       <workItem from="1624899462141" duration="3788000" />
       <workItem from="1624957016052" duration="20243000" />
       <workItem from="1625224239596" duration="287000" />
-      <workItem from="1625478060602" duration="2811000" />
+      <workItem from="1625478060602" duration="3784000" />
     </task>
     <task id="LOCAL-00001" summary="Modal create task add">
       <created>1624292767613</created>
@@ -106,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624556410186</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="animate element, add kanban">
+      <created>1625501974212</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1625501974212</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +125,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Modal create task add" />
     <MESSAGE value="Backend files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Backend files" />
+    <MESSAGE value="animate element, add kanban" />
+    <option name="LAST_COMMIT_MESSAGE" value="animate element, add kanban" />
   </component>
 </project>

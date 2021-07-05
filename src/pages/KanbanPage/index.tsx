@@ -1,5 +1,5 @@
 import React from 'react'
-import TaskList from '../../components/TaskList'
+import { TaskList } from '../../components/TaskList'
 import { TaskType } from '../TasksPage/types'
 import './style.scss'
 
@@ -9,7 +9,7 @@ interface KanbanPageProps {
   toDoTasks: TaskType[]
 }
 
-const KanbanPage = ({toDoTasks, backlogTasks, globalTaskUpdated}:KanbanPageProps) => {
+export const KanbanPage = ({toDoTasks, backlogTasks, globalTaskUpdated}:KanbanPageProps) => {
   const onSelectedTask = (openedTask: TaskType): void => {
   }
   return (
@@ -23,5 +23,3 @@ const KanbanPage = ({toDoTasks, backlogTasks, globalTaskUpdated}:KanbanPageProps
     </div>
   )
 }
-
-export default KanbanPage

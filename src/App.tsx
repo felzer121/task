@@ -13,7 +13,7 @@ import { TasksPage } from './pages/TasksPage'
 import { TaskType } from './pages/TasksPage/types'
 import { FilesPage } from './pages/FilesPage'
 import { getTasks }  from './services/firebase'
-import KanbanPage from './pages/KanbanPage'
+import { KanbanPage } from './pages/KanbanPage'
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },
@@ -30,7 +30,6 @@ function App() {
   const [tasks, setTasks] = useState<TaskType[]>([])
   useEffect(()=> {getTasksFromServer()},[])
   const globalTaskUpdated = (task: TaskType) => {
-    // tasks[task.id] = task
   }
   const getTasksFromServer = async ()=> {
     const serversTasks = await getTasks()

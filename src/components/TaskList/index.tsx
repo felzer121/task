@@ -12,7 +12,7 @@ interface TaskListProps {
   globalTaskUpdated: (task: TaskType) => void
 }
 
-const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskListProps) => {
+export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskListProps) => {
   const [taskCategoryForCreation, setTaskCategoryForCreation] = useState<CATEGORY_TYPE>(CATEGORY_TYPE.BACKLOG)
   const [isOpen, setIsOpen] = useState(false)
   const [valName, setValName] = useState('')
@@ -139,5 +139,3 @@ const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskListProp
     </div>
   )
 }
-
-export default TaskList

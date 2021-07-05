@@ -25,9 +25,9 @@
     &_active {
       background-color: #fff8dd;
     }
-  }
 
-  &__item:hover {
-    background-color: #edeae1;
+    &:hover {
+      background-color: #edeae1;
+    }
   }
 }
