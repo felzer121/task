@@ -10,6 +10,7 @@ interface TasksPageProps {
 }
 
 const TasksPage = ({ tasks, globalTaskUpdated }: TasksPageProps) => {
+  const isClose = false
   const [openedTask, setOpenedTask] = useState(tasks[0])
   const toDoTasks: TaskType[] = tasks.filter(item => item.category === 'todo')
   const backlogTasks: TaskType[] = tasks.filter(item => item.category === 'backlog')
@@ -27,7 +28,7 @@ const TasksPage = ({ tasks, globalTaskUpdated }: TasksPageProps) => {
           <TaskList tasks={backlogTasks} title='Backlog' onSelectedTask={onSelectedTask} globalTaskUpdated={globalTaskUpdated} />
           <TaskList tasks={toDoTasks} title='To Do' onSelectedTask={onSelectedTask} globalTaskUpdated={globalTaskUpdated} />
         </div>
-        <Task task={openedTask} onTaskUpdated={onTaskUpdated} />
+        <Task task={openedTask} onTaskUpdated={onTaskUpdated} onTaskClose={()=>{}} isClose={isClose} />
       </div>
     </div>
   )

@@ -1,11 +1,14 @@
 .Kanban {
   display: flex;
+  height: 100%;
   &__backlog, &__toDo {
     max-width: 385px;
     width: 100%;
     padding: 30px;
     background: #FFFFFF;
     border-radius: 8px;
+  }
+  &__backlog:not(:last-child) {
     margin-right: 30px;
   }
 }

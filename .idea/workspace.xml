@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ca592dc-aecd-42a6-8c15-a99d94015808" name="Default Changelist" comment="animate element, add kanban">
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TaskCard/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskCard/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TaskList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskList/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TaskList/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskList/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Task/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Task/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Task/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Task/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/KanbanPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/KanbanPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/KanbanPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/KanbanPage/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/TasksPage/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +51,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="ts.external.directory.path" value="C:\Users\Felzer\Desktop\task\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -75,6 +79,10 @@
       <workItem from="1624957016052" duration="20243000" />
       <workItem from="1625224239596" duration="287000" />
       <workItem from="1625478060602" duration="3784000" />
+      <workItem from="1625568659894" duration="37000" />
+      <workItem from="1625741727259" duration="1031000" />
+      <workItem from="1625747731828" duration="7784000" />
+      <workItem from="1625758285259" duration="4604000" />
     </task>
     <task id="LOCAL-00001" summary="Modal create task add">
       <created>1624292767613</created>
