@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import { SideBar } from './components/SideBar'
@@ -12,8 +12,9 @@ import { Page } from './components/Page'
 import { TasksPage } from './pages/TasksPage'
 import { TaskType } from './pages/TasksPage/types'
 import { FilesPage } from './pages/FilesPage'
-import { getTasks }  from './services/firebase'
+import { getTasks } from './services/firebase'
 import { KanbanPage } from './pages/KanbanPage'
+import { TaskManagerContext } from './store/store'
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },
@@ -26,18 +27,20 @@ const MAIN_MENU: MenuItemType[] = [
 const USERS: string[] = [projectIcon1, projectIcon2, projectIcon3]
 
 function App() {
-
-  const [tasks, setTasks] = useState<TaskType[]>([])
-  useEffect(()=> {getTasksFromServer()},[])
+  const store = useContext(TaskManagerContext)
+  useEffect(() => {
+    getTasksFromServer()
+  }, [])
   const globalTaskUpdated = (task: TaskType) => {
+    store.dispatch({action: 'test', data: 'a'})
   }
-  const getTasksFromServer = async ()=> {
+  const getTasksFromServer = async () => {
     const serversTasks = await getTasks()
-    setTasks(serversTasks)
+    store.dispatch({ action: 'GET_TASKS', data: serversTasks })
   }
-  const files = tasks.map(item => item.files).flat()
-  const toDoTasks: TaskType[] = tasks.filter(item => item.category === 'todo')
-  const backlogTasks: TaskType[] = tasks.filter(item => item.category === 'backlog')
+  const files = store.store.tasks.map(item => item.files).flat()
+  const toDoTasks: TaskType[] = store.store.tasks.filter(item => item.category === 'todo')
+  const backlogTasks: TaskType[] = store.store.tasks.filter(item => item.category === 'backlog')
   return (
     <Router>
       <div className='App'>
@@ -47,18 +50,24 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <Page title='tasks'>
-                {Boolean(tasks.length) &&
-                <TasksPage
-                  tasks={tasks}
-                  globalTaskUpdated={globalTaskUpdated}
-                />}
+                {Boolean(store.store.tasks.length) && (
+                  <TasksPage tasks={store.store.tasks} globalTaskUpdated={globalTaskUpdated} />
+                )}
               </Page>
             </Route>
             <Route path='/files'>
               <Page title='tasks'>{<FilesPage files={files} />}</Page>
             </Route>
             <Route path='/kanban'>
-              <Page title='tasks'>{<KanbanPage globalTaskUpdated={globalTaskUpdated} toDoTasks={toDoTasks} backlogTasks={backlogTasks} />}</Page>
+              <Page title='tasks'>
+                {
+                  <KanbanPage
+                    globalTaskUpdated={globalTaskUpdated}
+                    toDoTasks={toDoTasks}
+                    backlogTasks={backlogTasks}
+                  />
+                }
+              </Page>
             </Route>
           </Switch>
         </div>
