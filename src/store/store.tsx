@@ -7,30 +7,39 @@ interface StoreInterface {
 const INITIAL_STORE: StoreInterface = {
   tasks: []
 }
+export enum ACTION {
+  GET_TASKS = 'GET_TASKS',
+  TOGGLE_DONE_TASK = 'TOGGLE_DONE_TASK'
+}
+interface DispatchInterface {
+  action: ACTION
+  data: any
+}
 
 // создание контекста и задание значений по умолчанию
 export const TaskManagerContext = createContext<{
   store: StoreInterface
-  dispatch: Dispatch<{ action: any; data: any }>
+  dispatch: Dispatch<DispatchInterface>
 }>({ store: INITIAL_STORE, dispatch: () => null })
 
 interface TaskManagerProviderProps {
   children: React.ReactChildren | React.ReactChildren[] | React.ReactChild | React.ReactChild[]
 }
-const reducer = (currentState: StoreInterface, payload: any): StoreInterface => {
-  if (payload.action === 'GET_TASKS') {
-    return { tasks: payload.data }
+const reducer = (currentState: StoreInterface, payload: DispatchInterface): StoreInterface => {
+  switch (payload.action) {
+    case ACTION.GET_TASKS:
+      return {tasks: payload.data}
+    case ACTION.TOGGLE_DONE_TASK:
+      const newTasks = currentState.tasks.map(item => {
+        if (item.id === payload.data) {
+          return {...item, isDone: !item.isDone}
+        }
+        return item
+      })
+      return {tasks: newTasks}
+    default:
+      return currentState
   }
-  if (payload.action === 'TOGGLE_DONE_TASK') {
-    const newTasks = currentState.tasks.map(item => {
-      if(item.id === payload.data) {
-        return { ...item, isDone: !item.isDone }
-      }
-      return item
-    })
-    return { tasks: newTasks}
-  }
-  return { tasks: [] }
 }
 
 export const TaskManagerProvider = ({ children }: TaskManagerProviderProps) => {

@@ -14,7 +14,8 @@ import { TaskType } from './pages/TasksPage/types'
 import { FilesPage } from './pages/FilesPage'
 import { getTasks } from './services/firebase'
 import { KanbanPage } from './pages/KanbanPage'
-import { TaskManagerContext } from './store/store'
+import { TaskManagerContext, ACTION } from './store/store'
+
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },
@@ -32,11 +33,10 @@ function App() {
     getTasksFromServer()
   }, [])
   const globalTaskUpdated = (task: TaskType) => {
-    store.dispatch({action: 'test', data: 'a'})
   }
   const getTasksFromServer = async () => {
     const serversTasks = await getTasks()
-    store.dispatch({ action: 'GET_TASKS', data: serversTasks })
+    store.dispatch({ action: ACTION.GET_TASKS, data: serversTasks })
   }
   const files = store.store.tasks.map(item => item.files).flat()
   const toDoTasks: TaskType[] = store.store.tasks.filter(item => item.category === 'todo')

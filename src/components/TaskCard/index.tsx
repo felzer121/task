@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import {TaskType} from '../../pages/TasksPage/types'
 import {motion} from 'framer-motion'
 import './style.scss'
-import {TaskManagerContext} from '../../store/store'
+import {TaskManagerContext, ACTION} from '../../store/store'
 
 interface TaskCardProps {
   task: TaskType
@@ -17,7 +17,7 @@ const TaskCard = ({task, onSelectTask, onToggleComplete}: TaskCardProps) => {
     const newTask = {...task, isDone: !task.isDone}
     onToggleComplete(newTask)
     setTaskIsDone(!taskIsDone)
-    store.dispatch({action: 'TOGGLE_DONE_TASK', data: task.id})
+    store.dispatch({action: ACTION.TOGGLE_DONE_TASK, data: task.id})
   }
   return (
     <motion.div
