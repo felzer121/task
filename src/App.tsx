@@ -15,14 +15,15 @@ import { FilesPage } from './pages/FilesPage'
 import { getTasks } from './services/firebase'
 import { KanbanPage } from './pages/KanbanPage'
 import { TaskManagerContext, ACTION } from './store/store'
-
+import { Auth } from './pages/Auth'
+import { Register } from './pages/Register'
 
 const MAIN_MENU: MenuItemType[] = [
-  { title: 'TasksPage', url: '/' },
-  { title: 'Kanban', url: '/kanban' },
-  { title: 'Activity', url: '/activity' },
-  { title: 'Calendar', url: '/calendar' },
-  { title: 'FilesPage', url: '/files' }
+  { title: 'TasksPage', url: '/project' },
+  { title: 'Kanban', url: '/project/kanban' },
+  { title: 'Activity', url: '/project/activity' },
+  { title: 'Calendar', url: '/project/calendar' },
+  { title: 'FilesPage', url: '/project/files' }
 ]
 
 const USERS: string[] = [projectIcon1, projectIcon2, projectIcon3]
@@ -43,35 +44,45 @@ function App() {
   const backlogTasks: TaskType[] = store.store.tasks.filter(item => item.category === 'backlog')
   return (
     <Router>
-      <div className='App'>
-        <SideBar />
-        <div className='App__page'>
-          <Header menu={MAIN_MENU} projectName='Website' projectIcon={logo} users={USERS} />
-          <Switch>
-            <Route exact path='/'>
-              <Page title='tasks'>
-                {Boolean(store.store.tasks.length) && (
-                  <TasksPage tasks={store.store.tasks} globalTaskUpdated={globalTaskUpdated} />
-                )}
-              </Page>
-            </Route>
-            <Route path='/files'>
-              <Page title='tasks'>{<FilesPage files={files} />}</Page>
-            </Route>
-            <Route path='/kanban'>
-              <Page title='tasks'>
-                {
-                  <KanbanPage
-                    globalTaskUpdated={globalTaskUpdated}
-                    toDoTasks={toDoTasks}
-                    backlogTasks={backlogTasks}
-                  />
-                }
-              </Page>
-            </Route>
-          </Switch>
-        </div>
-      </div>
+      <Switch>
+        <Route path='/auth'>
+          {<Auth />}
+        </Route>
+        <Route path='/register'>
+          {<Register />}
+        </Route>
+        <Route path='/project'>
+          <div className='App'>
+            <SideBar />
+            <div className='App__page'>
+              <Header menu={MAIN_MENU} projectName='Website' projectIcon={logo} users={USERS} />
+              <Switch>
+                <Route exact path='/project'>
+                  <Page title='tasks'>
+                    {Boolean(store.store.tasks.length) && (
+                      <TasksPage tasks={store.store.tasks} globalTaskUpdated={globalTaskUpdated} />
+                    )}
+                  </Page>
+                </Route>
+                <Route path='/project/files'>
+                  <Page title='tasks'>{<FilesPage files={files} />}</Page>
+                </Route>
+                <Route path='/project/kanban'>
+                  <Page title='tasks'>
+                    {
+                      <KanbanPage
+                        globalTaskUpdated={globalTaskUpdated}
+                        toDoTasks={toDoTasks}
+                        backlogTasks={backlogTasks}
+                      />
+                    }
+                  </Page>
+                </Route>
+              </Switch>
+            </div>
+          </div>
+        </Route>
+      </Switch>
     </Router>
   )
 }

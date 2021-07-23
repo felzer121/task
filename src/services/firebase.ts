@@ -46,3 +46,5 @@ export const updateTask = async (task:TaskType) => {
       console.error("Error updating document: ", error);
     });
 }
+
+export { firebase }
