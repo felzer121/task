@@ -12,10 +12,10 @@ interface TaskProps {
 
 const Task = ({ task, onTaskClose, isClose }: TaskProps) => {
   const onDeleteFile = (fileId: number): void => {
-    const newTask: TaskType = {
-      ...task,
-      files: task.files.filter(item => item.id !== fileId)
-    }
+    // const newTask: TaskType = {
+    //   ...task,
+    //   files: task.files.filter(item => item.id !== fileId)
+    // }
   }
   const closeTask = ():void => {
     onTaskClose()
