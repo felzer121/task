@@ -5,9 +5,10 @@ import './style.scss'
 
 interface MenuProps {
   menu: MenuItemType[]
+  id: string
 }
 
-const Menu = ({ menu }: MenuProps) => {
+const Menu = ({ menu, id }: MenuProps) => {
   return (
     <menu className='Menu'>
       <ul className='Menu__wrapper'>
@@ -18,7 +19,7 @@ const Menu = ({ menu }: MenuProps) => {
                 exact
                 className='Menu__link'
                 activeClassName='Menu__link_selected'
-                to={item.url}>
+                to={`/dashboard/${id}${item.url}`}>
                 {item.title}
               </NavLink>
             </li>

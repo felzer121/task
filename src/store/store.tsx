@@ -2,14 +2,28 @@ import React, { createContext, useReducer, Dispatch } from 'react'
 import { TaskType } from '../pages/TasksPage/types'
 
 interface StoreInterface {
-  tasks: TaskType[]
+  projects: {
+    id: string
+    name: string
+    icon: string
+    description: string
+    tasks: TaskType[]
+  }[]
 }
-const INITIAL_STORE: StoreInterface = {
-  tasks: []
+export const INITIAL_STORE: StoreInterface = {
+  projects: [{
+    id: '',
+    name: '',
+    icon: '',
+    description: '',
+    tasks: [],
+  }]
 }
 export enum ACTION {
-  GET_TASKS = 'GET_TASKS',
-  TOGGLE_DONE_TASK = 'TOGGLE_DONE_TASK'
+  GET_PROJECT = 'GET_PROJECT',
+  TOGGLE_DONE_TASK = 'TOGGLE_DONE_TASK',
+  CREATE_PROJECT = 'CREATE_PROJECT',
+  CREATE_TASK = 'CREATE_TASK'
 }
 interface DispatchInterface {
   action: ACTION
@@ -27,16 +41,30 @@ interface TaskManagerProviderProps {
 }
 const reducer = (currentState: StoreInterface, payload: DispatchInterface): StoreInterface => {
   switch (payload.action) {
-    case ACTION.GET_TASKS:
-      return {tasks: payload.data}
-    case ACTION.TOGGLE_DONE_TASK:
-      const newTasks = currentState.tasks.map(item => {
-        if (item.id === payload.data) {
-          return {...item, isDone: !item.isDone}
-        }
-        return item
+    case ACTION.GET_PROJECT :
+      return {projects: payload.data}
+    case ACTION.CREATE_TASK :
+      const newTask:any = currentState.projects.map(project => {
+        if(project.id === payload.data.id)
+          return {...project, tasks: [...project.tasks, payload.data.task]}
+        return {...project}
       })
-      return {tasks: newTasks}
+      return {projects: newTask}
+    case ACTION.CREATE_PROJECT :
+      return {projects: [...currentState.projects, payload.data]}
+    // case ACTION.TOGGLE_DONE_TASK:
+    //   // const newTasks = currentState.projects.tasks.map(item => {
+    //   //   if (item.id === payload.data) {
+    //   //     return {...item, isDone: !item.isDone}
+    //   //   }
+    //   //   return item
+    //   // })
+    //   return {
+    //     projects: {
+    //       ...currentState.projects,
+    //       tasks: newTasks
+    //     }
+    //   }
     default:
       return currentState
   }

@@ -1,0 +1,61 @@
+.days-of-month {
+  display: flex;
+  padding-left: 25px;
+  color: #858483;
+  flex-wrap: wrap;
+  .month {
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    display: flex;
+  }
+  .break {
+    flex-basis: 100%;
+    height: 0;
+  }
+  .day-of-month {
+    background-color: #F7F6F3;
+    width: 77px;
+    height: 77px;
+    margin: 2.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &.pass {
+      background: none;
+      color: #fff;
+      cursor: not-allowed;
+    }
+
+    &.future {
+      color: rgba(#fff, 0.2);
+    }
+
+    &.active {
+      color: #000;
+      font-weight: bold;
+    }
+
+    &.has-event {
+      position: relative;
+
+      &::after {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: green;
+        border-radius: 50%;
+        position: absolute;
+        top: 10px;
+        right: 4px;
+      }
+    }
+  }
+
+  .dayOff {
+    background-color: #F6E9E9;
+  }
+}

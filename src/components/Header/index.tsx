@@ -7,10 +7,11 @@ interface HeaderProps {
   users?: string[]
   projectName: string
   projectIcon: string
+  id: string
   menu: MenuItemType[]
 }
 
-const Header = ({ menu, projectName, projectIcon, users = [] }: HeaderProps) => {
+const Header = ({ menu, projectName, projectIcon, id, users = [] }: HeaderProps) => {
   return (
     <div className='Header'>
       <div className='Header__top'>
@@ -27,7 +28,7 @@ const Header = ({ menu, projectName, projectIcon, users = [] }: HeaderProps) => 
         </div>
       </div>
 
-      <Menu menu={menu} />
+      <Menu menu={menu} id={id} />
     </div>
   )
 }

@@ -1,14 +1,33 @@
 .SideBarList {
   &__title {
-    margin: 0;
-    font-family: Heebo, sans-serif;
-    font-style: normal;
-    padding: 30px 0 10px 30px;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 18px;
-    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: #878787;
+    padding: 30px 0 10px 0;
+    height: 25px;
+    &Span {
+      margin: 0;
+      font-family: Heebo, sans-serif;
+      font-style: normal;
+      padding: 0 0 0 30px;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 18px;
+      text-transform: uppercase;
+      color: #878787;
+    }
+    &Add {
+      margin: 0 15px 0 0;
+      cursor: pointer;
+      &Icon {
+        transition: .5s;
+        &:hover {
+          padding: 3px;
+          background-color: #202020;
+        }
+      }
+    }
   }
   &__item {
     padding: 0 20px 0 30px;
@@ -21,8 +40,13 @@
     line-height: 22px;
     color: #FFFFFF;
     transition: .5s;
+    cursor: pointer;
+    text-decoration: none;
     width: 100%;
     box-sizing: border-box;
+    &-active{
+      background: #202020;
+    }
   }
   &__number {
     margin-left: 10px;
@@ -37,7 +61,6 @@
   }
   &__item:hover {
     background: #202020;
-    cursor: pointer;
   }
   &__icon {
     padding-right: 10px;
@@ -48,6 +71,59 @@
     justify-content: flex-end;
     &Img:not(:last-child) {
       padding-right: 5px;
+    }
+  }
+}
+.modalProject {
+  &__input-box {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  &__input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  &__select {
+    margin-left: 20px;
+    width: 60px;
+    transition: .5s;
+    &Drop {
+      border-radius: 8px;
+      margin-top: 10px;
+      position: absolute;
+      width: 52px;
+      overflow: hidden;
+      background-color: #eee;
+    }
+    &Item {
+      display: flex;
+      transition: .5s;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      width: 52px;
+      height: 50px;
+      &:hover {
+        background-color: #BFBFBF;
+      }
+      &:not(:last-child) {
+        border-bottom: #D8D8D8 1px solid;
+      }
+    }
+    &Active {
+      margin-top: 5px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #eaeaea;
+      border-radius: 8px;
+      transition: .5s;
+      cursor: pointer;
+      &:hover {
+        background-color: #BFBFBF;
+      }
     }
   }
 }

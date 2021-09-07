@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { singIn } from '../../services/user';
 import './style.scss'
 
@@ -11,7 +11,7 @@ interface SingInFields {
 const Register = () => {
   const [singInFields, setSingInFields] = useState<SingInFields>({email:'', password:'', confirmPassword:''})
   const [error, setError] = useState('')
-  const [passwordLabel, setPasswordLabel] = useState('Password')
+
   const register = async () => {
     if (singInFields.password.length < 6) {
       setError('ваш пароль меньше 6 символов')

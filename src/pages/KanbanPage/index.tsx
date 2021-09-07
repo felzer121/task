@@ -4,23 +4,21 @@ import { TaskType } from '../TasksPage/types'
 import './style.scss'
 import { Task } from '../../components/Task'
 import { motion } from "framer-motion";
+import { ProjectType } from '../../components/SideBarList'
 
 interface KanbanPageProps {
-  globalTaskUpdated: (task: TaskType) => void
+  project: ProjectType
   backlogTasks: TaskType[]
   toDoTasks: TaskType[]
 }
 
-export const KanbanPage = ({toDoTasks, backlogTasks, globalTaskUpdated}:KanbanPageProps) => {
+export const KanbanPage = ({project, toDoTasks, backlogTasks }:KanbanPageProps) => {
   const [openedTask, setOpenedTask] = useState<TaskType | undefined>(undefined)
   const onSelectedTask = (openedTask: TaskType): void => {
     setOpenedTask(openedTask)
   }
   const onTaskClose = ():void => {
     setOpenedTask(undefined)
-  }
-  const onTaskUpdated = (task:TaskType):void => {
-    globalTaskUpdated(task)
   }
   return (
     <div className='Kanban'>
@@ -34,7 +32,7 @@ export const KanbanPage = ({toDoTasks, backlogTasks, globalTaskUpdated}:KanbanPa
         }}
         className='Kanban__backlog'
       >
-        <TaskList tasks={backlogTasks} title='Backlog' onSelectedTask={onSelectedTask} globalTaskUpdated={globalTaskUpdated} />
+        <TaskList tasks={backlogTasks} project={project} title='Backlog' onSelectedTask={onSelectedTask} />
       </motion.div>
       <motion.div
         drag
@@ -46,9 +44,9 @@ export const KanbanPage = ({toDoTasks, backlogTasks, globalTaskUpdated}:KanbanPa
         }}
         className='Kanban__toDo'
       >
-        <TaskList tasks={toDoTasks} title='To Do' onSelectedTask={onSelectedTask} globalTaskUpdated={globalTaskUpdated} />
+        <TaskList tasks={toDoTasks} project={project} title='To Do' onSelectedTask={onSelectedTask} />
       </motion.div>
-      { openedTask? <Task task={openedTask} onTaskUpdated={onTaskUpdated} onTaskClose={onTaskClose} isClose={true} /> : null}
+      { openedTask? <Task task={openedTask} onTaskClose={onTaskClose} isClose={true} /> : null}
     </div>
   )
 }

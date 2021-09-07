@@ -3,32 +3,47 @@ import { CONFIG } from '../config'
 import 'firebase/auth'
 import 'firebase/database'
 import { TaskType } from '../pages/TasksPage/types'
+import { ProjectType } from '../components/SideBarList'
 
 firebase.initializeApp(CONFIG.firebaseConfig)
 
 const db = firebase.firestore();
 
-export const createTask = (task: TaskType) => {
-  db.collection("tasks").add(task)
+export const createProject = async (project: ProjectType) => {
+  let id = ''
+  await db.collection("todo").add(project)
     .then((docRef) => {
-      docRef.update({
-        id: docRef.id
-      })
-      console.log("Document written with ID: ", docRef.id);
+      id = docRef.id
     })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
+  return id
+}
+
+export const createTask = (task: TaskType, id: string) => {
+  const todoProject = db.collection("todo").doc(id);
+  return todoProject.update({
+    tasks : firebase.firestore.FieldValue.arrayUnion(task)
+  }).catch((error) => {
+    console.error("Error adding document: ", error);
+  });
+}
+
+export const getProject = async ():Promise<ProjectType[]> => {
+  let projects:ProjectType[] = [];
+  await db.collection("todo").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc:any) => {
+      projects.push({id: doc.id, ...doc.data()})
     });
+  });
+  return projects
 }
 
 export const getTasks = async ():Promise<TaskType[]> => {
   let tasks:TaskType[] = [];
   await db.collection("tasks").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      // @ts-ignore
+    querySnapshot.forEach((doc:any) => {
       tasks.push(doc.data())
     });
-  }); 
+  });
   return tasks
 }
 
@@ -42,7 +57,6 @@ export const updateTask = async (task:TaskType) => {
       console.log("Document successfully updated!");
     })
     .catch((error) => {
-      // The document probably doesn't exist.
       console.error("Error updating document: ", error);
     });
 }

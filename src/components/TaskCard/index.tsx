@@ -6,11 +6,12 @@ import {TaskManagerContext, ACTION} from '../../store/store'
 
 interface TaskCardProps {
   task: TaskType
+  activeTask?: TaskType
   onSelectTask: (task: TaskType) => void
   onToggleComplete: (task: TaskType) => void
 }
 
-const TaskCard = ({task, onSelectTask, onToggleComplete}: TaskCardProps) => {
+const TaskCard = ({task,activeTask, onSelectTask, onToggleComplete}: TaskCardProps) => {
   const [taskIsDone, setTaskIsDone] = useState(task.isDone)
   const store = useContext(TaskManagerContext)
   const handleComplete = () => {
@@ -19,9 +20,11 @@ const TaskCard = ({task, onSelectTask, onToggleComplete}: TaskCardProps) => {
     setTaskIsDone(!taskIsDone)
     store.dispatch({action: ACTION.TOGGLE_DONE_TASK, data: task.id})
   }
+  console.log(activeTask?.id)
+  console.log(task.id)
   return (
     <motion.div
-      className={'TasksPage__item '}
+      className={`TasksPage__item ${activeTask?.id === task.id ? 'TasksPage__item-active': ''}`}
       whileTap={{
         scale: [1, 1.2, 1],
       }}
