@@ -25,6 +25,7 @@
     box-sizing: border-box;
     overflow: scroll;
     height: 100%;
+    scrollbar-width: none;
     &::-webkit-scrollbar { width: 0; }
   }
   &__files {

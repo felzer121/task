@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './style.scss'
 import { useHistory } from 'react-router-dom';
+import { authUser } from '../../services/user';
 
 interface authField {
   email: string
@@ -12,10 +13,10 @@ const Auth = () => {
   const [authField, setAuthField] = useState<authField>({email: '', password: ''})
   const [error, setError] = useState('')
 
-
   const authentication = async () => {
     try {
-      history.push("/project");
+      await authUser(authField.email, authField.password)
+      history.push("/dashboard");
     } catch (error) {
       setError(error)
     }
