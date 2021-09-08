@@ -8,16 +8,14 @@ interface TaskProps {
   task: TaskType
   isClose: boolean
   onTaskClose: () => void
-  onTaskUpdated: (task: TaskType) => void
 }
 
-const Task = ({ task, onTaskUpdated, onTaskClose, isClose }: TaskProps) => {
+const Task = ({ task, onTaskClose, isClose }: TaskProps) => {
   const onDeleteFile = (fileId: number): void => {
-    const newTask: TaskType = {
-      ...task,
-      files: task.files.filter(item => item.id !== fileId)
-    }
-    onTaskUpdated(newTask)
+    // const newTask: TaskType = {
+    //   ...task,
+    //   files: task.files.filter(item => item.id !== fileId)
+    // }
   }
   const closeTask = ():void => {
     onTaskClose()

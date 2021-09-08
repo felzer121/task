@@ -1,22 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { ACTION, TaskManagerContext } from "../../store/store";
 import { CATEGORY_TYPE, TaskType } from '../../pages/TasksPage/types'
 import { TaskCard } from '../TaskCard'
 import { createTask, updateTask } from '../../services/firebase'
 import Modal from '../Modal'
 import './style.scss'
+import { useParams } from 'react-router-dom'
+import { ProjectType } from '../SideBarList';
 
 interface TaskListProps {
   tasks: TaskType[]
   title: string
+  project: ProjectType
+  activeTask?: TaskType
   onSelectedTask: (task: TaskType) => void
-  globalTaskUpdated: (task: TaskType) => void
 }
 
-export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskListProps) => {
+export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:TaskListProps) => {
   const [taskCategoryForCreation, setTaskCategoryForCreation] = useState<CATEGORY_TYPE>(CATEGORY_TYPE.BACKLOG)
   const [isOpen, setIsOpen] = useState(false)
   const [valName, setValName] = useState('')
   const [valDescription, setValDescription] = useState('')
+  const state = useContext(TaskManagerContext)
+  let { id } = useParams<{id: string}>();
+  console.log(id)
 
   const openedModal = () => {
     setIsOpen(true)
@@ -26,7 +33,7 @@ export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskL
   }
   const onCreateTaskClick = (category: CATEGORY_TYPE) => {
     const newTask: TaskType = {
-      id: '',
+      id: String(project.tasks.length + 1),
       isDone: false,
       title: valName,
       author: 'Added by Kristin A.',
@@ -40,7 +47,7 @@ export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskL
       files: [
         {
           id: 1,
-          icon: 'image/pdf.svg',
+          icon: '/image/pdf.svg',
           name: 'Redesign Brief 2019.pdf',
           size: 159,
           author: 'Mattie Blooman',
@@ -49,7 +56,7 @@ export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskL
         },
         {
           id: 6,
-          icon: 'image/pdf.svg',
+          icon: '/image/pdf.svg',
           name: 'Client Meeting.pdf',
           size: 159,
           author: 'Mattie Blooman',
@@ -60,7 +67,7 @@ export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskL
       comments: [
         {
           id: 1,
-          icon: 'image/base1.png',
+          icon: '/image/base1.png',
           name: 'Helena Brauer',
           position: 'Designer',
           time: 'Yesterday at 12:37pm',
@@ -69,7 +76,7 @@ export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskL
         },
         {
           id: 2,
-          icon: 'image/base2.png',
+          icon: '/image/base2.png',
           name: 'Prescott MacCaffery',
           position: 'Developer',
           time: 'Yesterday at 12:37pm',
@@ -78,8 +85,8 @@ export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskL
         }
       ]
     }
-    createTask(newTask)
-    globalTaskUpdated(newTask)
+    createTask(newTask, id)
+    state.dispatch({ action: ACTION.CREATE_TASK, data: {task: newTask, id: id} })
     setIsOpen(false)
   }
   return (
@@ -128,6 +135,7 @@ export const TaskList = ({tasks, title, onSelectedTask, globalTaskUpdated}:TaskL
         {tasks.map(task => {
           return (
             <TaskCard
+              activeTask={activeTask}
               key={task.id}
               task={task}
               onToggleComplete={updateFirebase}

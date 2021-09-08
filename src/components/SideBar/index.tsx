@@ -1,8 +1,4 @@
 import React from 'react'
-import projectIcon1 from './Icon1.svg'
-import projectIcon2 from './Icon2.svg'
-import projectIcon3 from './Icon3.svg'
-import projectIcon4 from './Icon4.svg'
 import logo from './Logo.svg'
 import userIcon from './Userpic.png'
 import teamImg1 from './team1.png'
@@ -17,18 +13,12 @@ import search from './Search.svg'
 import './style.scss'
 import { SideBarList, SideBarListItem } from '../SideBarList'
 import { Profile } from '../Profile'
+import { Link } from 'react-router-dom'
 
 const menuList: SideBarListItem[] = [
   { title: 'Home' },
   { title: 'My TasksPage' },
   { title: 'Notifications', count: 3 }
-]
-
-const projectList: SideBarListItem[] = [
-  { icon: projectIcon1, title: 'Dashboard UI Kit' },
-  { icon: projectIcon2, title: 'CRM System' },
-  { icon: projectIcon3, title: 'Website Redesign' },
-  { icon: projectIcon4, title: 'Communication Tool' }
 ]
 
 const projectTeams: SideBarListItem[] = [
@@ -38,6 +28,7 @@ const projectTeams: SideBarListItem[] = [
 ]
 
 function SideBar() {
+
   return (
     <div className='SideBar'>
       <div className='SideBar__logo'>
@@ -45,11 +36,14 @@ function SideBar() {
           <img src={logo} alt='' />
           <span className='SideBar__logoHeader'>PROJECTUS</span>
         </a>
-        <img src={search} alt='' />
+        <Link
+          to='/auth'>
+          <img src={search} alt='' />
+        </Link>
       </div>
       <Profile avatarUrl={userIcon} fullName='Emilee Simchenko' position='Product Owner' />
       <SideBarList list={menuList} title={'Menu'} />
-      <SideBarList list={projectList} title={'Projects'} />
+      <SideBarList isProject={true} title={'Projects'} />
       <SideBarList list={projectTeams} title={'Teams'} />
     </div>
   )

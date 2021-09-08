@@ -1,0 +1,21 @@
+.CalendarPage {
+  height: 100%;
+  &__calendar {
+    padding: 30px 0 30px 0;
+    overflow: scroll;
+    height: 100%;
+    max-width: 640px;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &__task {
+    max-width: 440px;
+    width: 100%;
+    background-color: #fff;
+  }
+}
