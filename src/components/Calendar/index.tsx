@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import _map from "lodash/map";
 import _range from 'lodash/range'
 import './style.scss'
-import { TaskManagerContext } from "../../store/store";
 import { ProjectType } from "../SideBarList";
 
 interface CalendarProps {
@@ -15,7 +14,6 @@ interface MonthArray {
 }
 
 export const Calendar = ({today, project}:CalendarProps) => {
-  const state = useContext(TaskManagerContext)
   const month = today.getMonth();
   const year = today.getFullYear();
 
