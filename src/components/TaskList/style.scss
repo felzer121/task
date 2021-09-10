@@ -4,7 +4,17 @@
     margin-bottom: 20px;
     justify-content: space-between;
   }
-
+  .DayPickerInput input {
+    outline: none;
+    margin-top: 5px;
+    background: #eaeaea;
+    border-radius: 8px;
+    height: 50px;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+  }
   &__button {
     cursor: pointer;
     transition: 0.5s;

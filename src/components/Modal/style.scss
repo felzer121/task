@@ -12,6 +12,15 @@
     align-items: center;
     justify-content: center;
   }
+  &__box {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__inputTwo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
   &__close {
     cursor: pointer;
   }

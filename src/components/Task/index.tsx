@@ -17,6 +17,8 @@ const Task = ({ task, onTaskClose, isClose }: TaskProps) => {
     //   files: task.files.filter(item => item.id !== fileId)
     // }
   }
+  const weekDay = ['Mon','Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   const closeTask = ():void => {
     onTaskClose()
   }
@@ -26,7 +28,7 @@ const Task = ({ task, onTaskClose, isClose }: TaskProps) => {
         <div className='TasksPage__boxInfo'>
           <h3 className='TasksPage__boxTile'>{task.title}</h3>
           <span className='TasksPage__boxSubTitle'>
-            Added by {task.author} yesterday at {task.createdAt}
+            Added by {task.author} at {`${task.createdAt.toDate().getDate()} ${month[task.createdAt.toDate().getMonth()]}`}
           </span>
         </div>
         <div className='TasksPage__boxController'>
@@ -84,7 +86,8 @@ const Task = ({ task, onTaskClose, isClose }: TaskProps) => {
         </div>
         <div className='TasksPage__aboutItem'>
           <h4 className='TasksPage__aboutItemTitle'>Due On</h4>
-          <span className='TasksPage__aboutItemSpan'>{task.dueOn}</span>
+          <span className='TasksPage__aboutItemSpan'>{`${weekDay[task.dueOn.toDate().getDay()]}, 
+          ${month[task.dueOn.toDate().getMonth()]} ${task.dueOn.toDate().getDate()}`}</span>
         </div>
         <div className='TasksPage__aboutItem'>
           <h4 className='TasksPage__aboutItemTitle'>Tag</h4>

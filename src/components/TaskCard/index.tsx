@@ -20,8 +20,7 @@ const TaskCard = ({task,activeTask, onSelectTask, onToggleComplete}: TaskCardPro
     setTaskIsDone(!taskIsDone)
     store.dispatch({action: ACTION.TOGGLE_DONE_TASK, data: task.id})
   }
-  console.log(activeTask?.id)
-  console.log(task.id)
+
   return (
     <motion.div
       className={`TasksPage__item ${activeTask?.id === task.id ? 'TasksPage__item-active': ''}`}

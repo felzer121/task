@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import _map from "lodash/map";
 import _range from 'lodash/range'
 import './style.scss'
+import { TaskManagerContext } from "../../store/store";
+import { ProjectType } from "../SideBarList";
 
 interface CalendarProps {
   today: Date
+  project: ProjectType
 }
 interface MonthArray {
   month: number
   year: number
 }
 
-export const Calendar = ({today}:CalendarProps) => {
+export const Calendar = ({today, project}:CalendarProps) => {
+  const state = useContext(TaskManagerContext)
   const month = today.getMonth();
   const year = today.getFullYear();
 
@@ -21,12 +25,13 @@ export const Calendar = ({today}:CalendarProps) => {
   for (let i = month; i < month + 11; i++) {
     if(i < 12) {
       monthArray.push({month: i, year: year})
-      totalDaysOfMonth.push(new Date(year, i+1, 0).getDate())
+      totalDaysOfMonth.push(new Date(year, i + 1, 0).getDate())
     } else {
       monthArray.push({month: i - 12, year: year + 1})
       totalDaysOfMonth.push(new Date(year + 1, i - 11, 0).getDate())
     }
   }
+
 
   const totalWeeksOfMonth = totalDaysOfMonth.map(days =>  Math.ceil(days / 7))
 
