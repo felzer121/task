@@ -11,10 +11,10 @@ export type TaskType = {
   title: string
   isDone: boolean
   author: string
-  createdAt: number
+  createdAt: any
   category: CATEGORY_TYPE
   assignTo: string
-  dueOn: string
+  dueOn: any
   tag: string
   followers: string[]
   description: string

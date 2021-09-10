@@ -68,7 +68,7 @@ export const Project = () => {
           </Page>
         </Route>
         <Route path="/dashboard/:id/calendar/">
-          <Page title="tasks">{<CalendarPage />}</Page>
+          <Page title="tasks">{<CalendarPage project={project} />}</Page>
         </Route>
         <Route path="/dashboard/:id/files/">
           <Page title="tasks">{<FilesPage files={files} />}</Page>

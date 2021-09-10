@@ -7,6 +7,8 @@ import Modal from '../Modal'
 import './style.scss'
 import { useParams } from 'react-router-dom'
 import { ProjectType } from '../SideBarList';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
 
 interface TaskListProps {
   tasks: TaskType[]
@@ -19,11 +21,14 @@ interface TaskListProps {
 export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:TaskListProps) => {
   const [taskCategoryForCreation, setTaskCategoryForCreation] = useState<CATEGORY_TYPE>(CATEGORY_TYPE.BACKLOG)
   const [isOpen, setIsOpen] = useState(false)
-  const [valName, setValName] = useState('')
-  const [valDescription, setValDescription] = useState('')
+  const [value, setValue] = useState({
+    name: '',
+    description: '',
+    date: new Date(),
+    tag: ''
+  })
   const state = useContext(TaskManagerContext)
   let { id } = useParams<{id: string}>();
-  console.log(id)
 
   const openedModal = () => {
     setIsOpen(true)
@@ -35,15 +40,15 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
     const newTask: TaskType = {
       id: String(project.tasks.length + 1),
       isDone: false,
-      title: valName,
+      title: value.name,
       author: 'Added by Kristin A.',
-      createdAt: 1620837011,
+      createdAt: new Date(),
       assignTo: 'Linzell Bowman',
-      dueOn: 'Tue, Dec 25',
-      tag: 'Marketing',
+      dueOn: value.date,
+      tag: value.tag,
       category: category,
       followers: [],
-      description: valDescription,
+      description: value.description,
       files: [
         {
           id: 1,
@@ -100,8 +105,8 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
             type='text'
             name='name'
             className='ModalTask__input'
-            value={valName}
-            onChange={e => setValName(e.target.value)}
+            value={value.name}
+            onChange={e => setValue({...value, name: e.target.value})}
             placeholder='e.g Designer, Developers or Finance'
           />
         </div>
@@ -112,13 +117,34 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
           <input
             type='text'
             name='description'
-            value={valDescription}
-            onChange={e => setValDescription(e.target.value)}
+            value={value.description}
+            onChange={e => setValue({...value, description: e.target.value})}
             className='ModalTask__input'
-            placeholder='e.g Designer, Developers or Finance'
+            placeholder='description'
           />
         </div>
-        <button className='ModalTask__button' onClick={()=>onCreateTaskClick(taskCategoryForCreation)}>
+        <div className="ModalTask__box">
+          <div className='ModalTask__inputTwo'>
+            <label htmlFor='description' className='ModalTask__label'>
+              Date
+            </label>
+            <DayPickerInput value={value.date} onDayChange={date => setValue({...value, date: date})} />
+          </div>
+          <div className='ModalTask__input-box'>
+            <label htmlFor='tag' className='ModalTask__label'>
+              TAG
+            </label>
+            <input
+              type='text'
+              name='tag'
+              value={value.tag}
+              onChange={e => setValue({...value, tag: e.target.value})}
+              className='ModalTask__input'
+              placeholder='tag'
+            />
+          </div>
+        </div>
+        <button className='ModalTask__button' onClick={() => onCreateTaskClick(taskCategoryForCreation)}>
           Create Task
         </button>
       </Modal>
