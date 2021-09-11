@@ -1,12 +1,29 @@
 .days-of-month {
   display: flex;
+  box-sizing: border-box;
   padding-left: 25px;
+  width: 100%;
   color: #858483;
+  font-family: Heebo, sans-serif;
   flex-wrap: wrap;
   .month {
     flex-wrap: wrap;
+    max-width: 100%;
+    width: 100%;
     margin-bottom: 20px;
     display: flex;
+    &__day {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    &__task {
+      font-size: 14px;
+      color: #000;
+      font-weight: 600;
+    }
+    &__active {
+      background-color: #FFF8DD!important;
+    }
   }
   .break {
     flex-basis: 100%;
@@ -17,9 +34,11 @@
     width: 77px;
     height: 77px;
     margin: 2.5px;
+    padding: 10px;
+    box-sizing: border-box;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
