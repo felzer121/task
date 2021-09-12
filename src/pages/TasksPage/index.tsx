@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 import { TaskType } from './types'
 import { Task } from '../../components/Task'
@@ -11,7 +11,10 @@ interface TasksPageProps {
 
 const TasksPage = ({ project }: TasksPageProps) => {
   const isClose = false
-  const [openedTask, setOpenedTask] = useState(project.tasks[0])
+  const [openedTask, setOpenedTask] = useState<TaskType>(project.tasks[0])
+  useEffect(() => {
+    setOpenedTask(project.tasks[0])
+  }, [project])
   const toDoTasks: TaskType[] = project.tasks.filter(item => item.category === 'todo')
   const backlogTasks: TaskType[] = project.tasks.filter(item => item.category === 'backlog')
 
