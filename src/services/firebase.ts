@@ -10,7 +10,8 @@ import { CONFIG } from '../config'
 import 'firebase/auth'
 import 'firebase/database'
 import { TaskType } from '../pages/TasksPage/types'
-import { ProjectType } from '../components/SideBarList'
+import {ProjectType, Teams, Users} from '../components/SideBarList'
+
 
 firebase.initializeApp(CONFIG.firebaseConfig)
 
@@ -23,6 +24,15 @@ export const createProject = async (project: ProjectType) => {
       id = docRef.id
     })
   return id
+}
+export const loadAvatar = async (url: string, file: any) => {
+  let newPath = ''
+  const storageRef = firebase.storage().ref();
+  const imageRef = storageRef.child(`images/${url}`);
+  await imageRef.put(file).then((snapshot) => {
+    newPath = snapshot.metadata.fullPath
+  })
+  return newPath
 }
 
 export const createTask = (task: TaskType, id: string) => {
@@ -44,6 +54,31 @@ export const getProject = async ():Promise<ProjectType[]> => {
   return projects
 }
 
+export const getUrlAvatar = async (name: string) => {
+  const storage = firebase.storage();
+  return storage.ref(name).getDownloadURL().then()
+}
+
+export const getUsers = async (): Promise<Users[]> => {
+  let users:Users[] = [];
+  await db.collection("users").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc:any) => {
+      users.push({id: doc.id, ...doc.data()})
+    })
+  })
+  return users
+}
+export const getTeams = async (): Promise<Teams[]> => {
+  let teams:Teams[] = [];
+  await db.collection("teams").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc:any) => {
+      teams.push({id: doc.id, ...doc.data()})
+    })
+  })
+  return teams
+}
+
+
 export const getTasks = async ():Promise<TaskType[]> => {
   let tasks:TaskType[] = [];
   await db.collection("tasks").get().then((querySnapshot) => {
@@ -54,15 +89,24 @@ export const getTasks = async ():Promise<TaskType[]> => {
   return tasks
 }
 
+export const updateAvatar = async (user: Users) => {
+
+  const taskRef = db.collection("users").doc(user.id);
+
+  return taskRef.update({
+    namePic: user.namePic
+  })
+    .catch((error) => {
+      console.error("Error updating document: ", error);
+    });
+}
+
 export const updateTask = async (task:TaskType) => {
-  var taskRef = db.collection("tasks").doc(task.id);
+  const taskRef = db.collection("tasks").doc(task.id);
 
   return taskRef.update({
     isDone: task.isDone
   })
-    .then(() => {
-      console.log("Document successfully updated!");
-    })
     .catch((error) => {
       console.error("Error updating document: ", error);
     });

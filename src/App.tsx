@@ -6,6 +6,7 @@ import { Register } from './pages/Register'
 import { PrivateRoute } from './components/PrivateRoute'
 import { AuthProvider } from './store/auth'
 import { Dashboard } from './pages/Dashboard'
+import {ProfilePage} from "./pages/ProfilePage";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <Route path='/auth' component={Auth} />
           <Route path='/register' component={Register} />
+          <PrivateRoute path="/profile" component={ProfilePage} />
           <PrivateRoute path='/dashboard' component={Dashboard} />
           <Redirect to="/dashboard" />
         </Switch>

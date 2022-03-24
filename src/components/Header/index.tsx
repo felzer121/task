@@ -6,12 +6,13 @@ import './style.scss'
 interface HeaderProps {
   users?: string[]
   projectName: string
-  projectIcon: string
+  projectIcon?: string
+  type: string
   id: string
   menu: MenuItemType[]
 }
 
-const Header = ({ menu, projectName, projectIcon, id, users = [] }: HeaderProps) => {
+const Header = ({ menu, projectName, projectIcon, type, id, users = [] }: HeaderProps) => {
   return (
     <div className='Header'>
       <div className='Header__top'>
@@ -19,16 +20,17 @@ const Header = ({ menu, projectName, projectIcon, id, users = [] }: HeaderProps)
           <img src={projectIcon} alt='' />
           <h1 className='Header__title'>{projectName}</h1>
         </div>
-        <div className='Header__team'>
-          {users?.map(user => (
-            <img className='Header__teamPerson' src={user} key={user} alt='' />
-          ))}
-          <button className='Header__share'>share</button>
-          <button className='Header__chat'>chat</button>
-        </div>
+        {
+          type === 'dashboard' && <div className='Header__team'>
+            {users?.map(user => (
+              <img className='Header__teamPerson' src={user} key={user} alt='' />
+            ))}
+                <button className='Header__share'>share</button>
+                <button className='Header__chat'>chat</button>
+            </div>
+        }
       </div>
-
-      <Menu menu={menu} id={id} />
+      <Menu menu={menu} id={id} type={type} />
     </div>
   )
 }

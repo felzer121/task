@@ -14,6 +14,19 @@ export type SideBarListItem = {
     users?: string[]
 };
 
+export type Users = {
+  id: string
+  name: string
+  namePic: string
+  url: string
+}
+
+export type Teams = {
+  id: string
+  name: string
+  users: string[]
+}
+
 
 interface SideBarListProps {
   list?: SideBarListItem[],
