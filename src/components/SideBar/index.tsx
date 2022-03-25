@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import logo from './Logo.svg'
-import userIcon from './Userpic.png'
 import teamImg1 from './team1.png'
 import teamImg2 from './team2.png'
 import teamImg3 from './team3.png'
@@ -13,7 +12,7 @@ import search from './Search.svg'
 import './style.scss'
 import { SideBarList, SideBarListItem } from '../SideBarList'
 import { Profile } from '../Profile'
-import { Link } from 'react-router-dom'
+import {TaskManagerContext} from "../../store/store";
 
 const menuList: SideBarListItem[] = [
   { title: 'Home' },
@@ -28,7 +27,7 @@ const projectTeams: SideBarListItem[] = [
 ]
 
 function SideBar() {
-
+  const state = useContext(TaskManagerContext)
   return (
     <div className='SideBar'>
       <div className='SideBar__logo'>
@@ -36,12 +35,11 @@ function SideBar() {
           <img src={logo} alt='' />
           <span className='SideBar__logoHeader'>PROJECTUS</span>
         </a>
-        <Link
-          to='/auth'>
-          <img src={search} alt='' />
-        </Link>
+        <img src={search} alt='' />
       </div>
-      <Profile avatarUrl={userIcon} fullName='Emilee Simchenko' position='Product Owner' />
+
+      <Profile avatarUrl={state.store.user.url} fullName={state.store.user.name} position={state.store.user.role} />
+
       <SideBarList list={menuList} title={'Menu'} />
       <SideBarList isProject={true} title={'Projects'} />
       <SideBarList list={projectTeams} title={'Teams'} />
@@ -49,4 +47,5 @@ function SideBar() {
   )
 }
 
-export { SideBar }
+export {SideBar};
+

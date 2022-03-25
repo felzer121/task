@@ -15,7 +15,7 @@ const Auth = () => {
 
   const authentication = async () => {
     try {
-      await authUser(authField.email, authField.password)
+      await authUser(authField.email, authField.password).then(e => console.log(e))
       history.push("/dashboard");
     } catch (error) {
       setError(error)

@@ -14,6 +14,12 @@ export type SideBarListItem = {
     users?: string[]
 };
 
+export type Users = {
+  id: string
+  name: string
+  namePic: string
+  url: string
+}
 
 interface SideBarListProps {
   list?: SideBarListItem[],

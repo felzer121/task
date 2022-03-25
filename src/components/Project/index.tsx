@@ -47,7 +47,7 @@ export const Project = () => {
 
   return (
     <>
-      <Header menu={MAIN_MENU} projectName={project.name} id={id} projectIcon={logo} users={USERS} />
+      <Header menu={MAIN_MENU} projectName={project.name} id={id} type={'dashboard'} projectIcon={logo} users={USERS} />
       <Switch>
         <Route exact path="/dashboard/:id">
           <Page title="home">
