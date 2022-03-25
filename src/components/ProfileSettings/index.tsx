@@ -1,12 +1,45 @@
 import React, {useContext} from 'react';
 import './style.scss'
-import {loadAvatar, updateAvatar} from "../../services/firebase";
-import {ACTION, TaskManagerContext} from "../../store/store";
+import {loadAvatar, updateAvatar, updateUser} from "../../services/firebase";
+import {ACTION, TaskManagerContext, TeamsType, User} from "../../store/store";
 import {Autocomplete, TextField} from "@mui/material";
+import {useHistory} from "react-router-dom";
+
 
 export const ProfileSettings = () => {
   const state = useContext(TaskManagerContext)
   let url: string | ArrayBuffer | null = null
+  const history = useHistory();
+
+  const [value, setValue] = React.useState<User>({
+    name: '',
+    role: '',
+    teams: [],
+    about: ''
+  })
+  React.useEffect(() => {
+    setValue({
+      name: state.store.user.name,
+      role: state.store.user.role,
+      teams: state.store.user.teams,
+      about: ''
+    })
+  }, [state])
+
+  const handleChange =
+    (prop: string) =>
+      (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setValue({...value, [prop]: event.target.value})
+      }
+  const handleAutocompleteChange = (prop: string, newValue: TeamsType[]) => {
+    setValue({...value, teams: [...newValue]})
+  }
+  const handleClick = () => {
+    updateUser({...state.store.user, ...value}).then()
+    state.dispatch({action: ACTION.UPDATE_USER, data: {...state.store.user, ...value}})
+    history.push('/home')
+  }
+
   const loadFile = (e: any) => {
     const reader = new FileReader()
     reader.readAsDataURL(e.target.files[0])
@@ -19,8 +52,7 @@ export const ProfileSettings = () => {
       updateAvatar({...state.store.user, namePic: name }).then()
     })
   }
-  const userTeams = state.store.user.teams
-  const teams = state.store.teams.map(team => team.name)
+
   return (
     <div className='ProfileSettings'>
       <div className='ProfileSettings__avatar'>
@@ -34,18 +66,22 @@ export const ProfileSettings = () => {
       </div>
       <div className='ProfileSettings__inputBox'>
         <label htmlFor="ProfileSettings__input">Name</label>
-        <TextField value={state.store.user.name} className='ProfileSettings__input' placeholder="Favorites" />
+        <TextField value={value.name} onChange={handleChange('name')}
+                   className='ProfileSettings__input' placeholder="Favorites" />
       </div>
       <div className='ProfileSettings__inputBox'>
         <label htmlFor="ProfileSettings__input">Role</label>
-        <TextField value={state.store.user.role} className='ProfileSettings__input' placeholder="Favorites" />
+        <TextField value={value.role} onChange={handleChange('role')}
+                   className='ProfileSettings__input' placeholder="Favorites" />
       </div>
       <div className='ProfileSettings__inputBox'>
         <label htmlFor="ProfileSettings__textArea">Teams</label>
         <Autocomplete
           multiple
-          value={userTeams}
-          options={teams}
+          value={value.teams}
+          options={state.store.teams}
+          getOptionLabel={(option) => option.name}
+          onChange={(event, newValue) => handleAutocompleteChange('teams', newValue)}
           renderInput={(params) => (
             <TextField {...params} className='ProfileSettings__textArea' placeholder="Teams" />
           )}
@@ -56,13 +92,13 @@ export const ProfileSettings = () => {
         <TextField
           id="outlined-multiline-static"
           multiline
+          onChange={handleChange('about')}
           rows={4}
         />
       </div>
       <div className='ProfileSettings__button-form'>
-        <button className='TasksPage__button ProfileSettings__button'>Update Profile</button>
+        <button className='TasksPage__button ProfileSettings__button' onClick={handleClick}>Update Profile</button>
       </div>
-
     </div>
   );
 };

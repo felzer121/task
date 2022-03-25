@@ -18,6 +18,7 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
       state.dispatch({ action: ACTION.GET_ALL_DATA, data: {projects: serversProjects, teams: serversTeam, user: {...user, url: url}} })
     }
     getUsersFromServer().then()
+    // eslint-disable-next-line
   }, [])
 
   return (

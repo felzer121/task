@@ -10,7 +10,8 @@ import { CONFIG } from '../config'
 import 'firebase/auth'
 import 'firebase/database'
 import { TaskType } from '../pages/TasksPage/types'
-import {ProjectType, Teams, Users} from '../components/SideBarList'
+import {ProjectType, Users} from '../components/SideBarList'
+import {TeamsType, UserFull} from "../store/store";
 
 
 firebase.initializeApp(CONFIG.firebaseConfig)
@@ -68,8 +69,8 @@ export const getUsers = async (): Promise<Users[]> => {
   })
   return users
 }
-export const getTeams = async (): Promise<Teams[]> => {
-  let teams:Teams[] = [];
+export const getTeams = async (): Promise<TeamsType[]> => {
+  let teams:TeamsType[] = [];
   await db.collection("teams").get().then((querySnapshot) => {
     querySnapshot.forEach((doc:any) => {
       teams.push({id: doc.id, ...doc.data()})
@@ -95,6 +96,19 @@ export const updateAvatar = async (user: Users) => {
 
   return taskRef.update({
     namePic: user.namePic
+  })
+    .catch((error) => {
+      console.error("Error updating document: ", error);
+    });
+}
+
+export const updateUser = async (user: UserFull) => {
+  const taskRef = db.collection("users").doc(user.id);
+  return taskRef.update({
+    name: user.name,
+    role: user.role,
+    teams: user.teams,
+    about: user.about
   })
     .catch((error) => {
       console.error("Error updating document: ", error);

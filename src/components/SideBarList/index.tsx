@@ -21,13 +21,6 @@ export type Users = {
   url: string
 }
 
-export type Teams = {
-  id: string
-  name: string
-  users: string[]
-}
-
-
 interface SideBarListProps {
   list?: SideBarListItem[],
   isProject?: boolean,

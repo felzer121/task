@@ -12,7 +12,6 @@ import search from './Search.svg'
 import './style.scss'
 import { SideBarList, SideBarListItem } from '../SideBarList'
 import { Profile } from '../Profile'
-import { Link } from 'react-router-dom'
 import {TaskManagerContext} from "../../store/store";
 
 const menuList: SideBarListItem[] = [
@@ -36,15 +35,10 @@ function SideBar() {
           <img src={logo} alt='' />
           <span className='SideBar__logoHeader'>PROJECTUS</span>
         </a>
-        <Link
-          to='/auth'>
-          <img src={search} alt='' />
-        </Link>
+        <img src={search} alt='' />
       </div>
 
-      <Link to={'/profile/settings'} style={{textDecoration: 'none'}}>
-        <Profile avatarUrl={state.store.user.url} fullName={state.store.user.name} position={state.store.user.role} />
-      </Link>
+      <Profile avatarUrl={state.store.user.url} fullName={state.store.user.name} position={state.store.user.role} />
 
       <SideBarList list={menuList} title={'Menu'} />
       <SideBarList isProject={true} title={'Projects'} />

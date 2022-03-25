@@ -1,22 +1,27 @@
 import React, { createContext, useReducer, Dispatch } from 'react'
 import { TaskType } from '../pages/TasksPage/types'
 
-type teams = {
+export type TeamsType = {
   id: string
   name: string
   users: string[]
 }
+export type User = {
+  name: string
+  role: string
+  teams: TeamsType[]
+  about: string
+}
+
+export interface UserFull extends User {
+  id: string
+  url: string
+  namePic: string
+}
 
 interface StoreInterface {
-  teams: teams[]
-  user: {
-    id: string
-    name: string
-    role: string
-    url: string
-    teams: string[]
-    namePic: string
-  },
+  teams: TeamsType[]
+  user: UserFull,
   projects: {
     id: string
     name: string
@@ -39,6 +44,7 @@ export const INITIAL_STORE: StoreInterface = {
     name: '',
     teams: [],
     role: '',
+    about: '',
     url: '',
     namePic: ''
   }
@@ -46,6 +52,7 @@ export const INITIAL_STORE: StoreInterface = {
 export enum ACTION {
   GET_PROJECT = 'GET_PROJECT',
   GET_ALL_DATA = 'GET_ALL_DATA',
+  UPDATE_USER = 'UPDATE_USER',
   GET_USER = 'GET_USER',
   UPDATE_AVATAR = 'UPDATE_AVATAR',
   TOGGLE_DONE_TASK = 'TOGGLE_DONE_TASK',
@@ -72,6 +79,8 @@ const reducer = (currentState: StoreInterface, payload: DispatchInterface): Stor
       return {user: currentState.user, projects: payload.data, teams: currentState.teams}
     case ACTION.GET_ALL_DATA :
       return {user: payload.data.user, projects: payload.data.projects, teams: payload.data.teams}
+    case ACTION.UPDATE_USER :
+      return {user: payload.data, projects: currentState.projects, teams: currentState.teams}
     case ACTION.GET_USER :
       return {user: payload.data, projects: currentState.projects, teams: currentState.teams}
     case ACTION.UPDATE_AVATAR :
