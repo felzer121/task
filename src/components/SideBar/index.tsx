@@ -13,6 +13,7 @@ import './style.scss'
 import { SideBarList, SideBarListItem } from '../SideBarList'
 import { Profile } from '../Profile'
 import {TaskManagerContext} from "../../store/store";
+import { getUrlAvatar } from '../../services/firebase'
 
 const menuList: SideBarListItem[] = [
   { title: 'Home' },
@@ -20,14 +21,22 @@ const menuList: SideBarListItem[] = [
   { title: 'Notifications', count: 3 }
 ]
 
-const projectTeams: SideBarListItem[] = [
-  { title: 'Designers', users: [teamImg1, teamImg2, teamImg3] },
-  { title: 'Backend', users: [teamImg4, teamImg5] },
-  { title: 'Frontend', users: [teamImg6, teamImg7, teamImg8] }
-]
-
 function SideBar() {
   const state = useContext(TaskManagerContext)
+  console.log(state)
+  const projectTeams1 = state.store.teams.map(team => {
+    return {
+      title: team.name,
+      users: team.users.map(user => getUrlAvatar(user.namePic))
+    }
+  })
+  console.log(projectTeams1)
+  const projectTeams: SideBarListItem[] = [
+    { title: 'Designers', users: [teamImg1, teamImg2, teamImg3] },
+    { title: 'Backend', users: [teamImg4, teamImg5] },
+    { title: 'Frontend', users: [teamImg6, teamImg7, teamImg8] }
+  ]
+
   return (
     <div className='SideBar'>
       <div className='SideBar__logo'>

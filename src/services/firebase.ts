@@ -17,6 +17,7 @@ import {TeamsType, UserFull} from "../store/store";
 firebase.initializeApp(CONFIG.firebaseConfig)
 
 const db = firebase.firestore();
+const storage = firebase.storage();
 
 export const createProject = async (project: ProjectType) => {
   let id = ''
@@ -56,8 +57,11 @@ export const getProject = async ():Promise<ProjectType[]> => {
 }
 
 export const getUrlAvatar = async (name: string) => {
-  const storage = firebase.storage();
   return storage.ref(name).getDownloadURL().then()
+}
+export const getUrlAvatarTeams = async (names: string[]) => {
+  const urls = names.map(name => storage.ref(name).getDownloadURL().then())
+  return urls
 }
 
 export const getUsers = async (): Promise<Users[]> => {
@@ -102,17 +106,23 @@ export const updateAvatar = async (user: Users) => {
     });
 }
 
-export const updateUser = async (user: UserFull) => {
+export const updateUser = async (user: UserFull, teams: TeamsType[]) => {
   const taskRef = db.collection("users").doc(user.id);
-  return taskRef.update({
+  const teamsRef = db.collection("teams")
+  taskRef.update({
     name: user.name,
     role: user.role,
-    teams: user.teams,
+    teams: user.teams.map(team => {return { id: team.id, name: team.name }}),
     about: user.about
   })
     .catch((error) => {
       console.error("Error updating document: ", error);
     });
+  user.teams.map(userTeam => {
+    const currentTeams = teams.find(item => item.id === userTeam.id)!.users
+    if(!currentTeams.some(team => team.id.includes(user.id)))
+      teamsRef.doc(userTeam.id).update({ users: [...currentTeams, {name: user.name, namePic: user.namePic, id: user.id} ] })
+  })
 }
 
 export const updateTask = async (task:TaskType) => {

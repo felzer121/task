@@ -3,7 +3,6 @@ import { TaskList } from '../../components/TaskList'
 import { TaskType } from '../TasksPage/types'
 import './style.scss'
 import { Task } from '../../components/Task'
-import { motion } from "framer-motion";
 import { ProjectType } from '../../components/SideBarList'
 
 interface KanbanPageProps {
@@ -22,30 +21,16 @@ export const KanbanPage = ({project, toDoTasks, backlogTasks }:KanbanPageProps) 
   }
   return (
     <div className='Kanban'>
-      <motion.div
-        drag
-        dragConstraints={{
-          top: -10,
-          left: -10,
-          right: 600,
-          bottom: 10,
-        }}
+      <div
         className='Kanban__backlog'
       >
         <TaskList tasks={backlogTasks} project={project} title='Backlog' onSelectedTask={onSelectedTask} />
-      </motion.div>
-      <motion.div
-        drag
-        dragConstraints={{
-          top: -10,
-          left: -500,
-          right: 200,
-          bottom: 10,
-        }}
+      </div>
+      <div
         className='Kanban__toDo'
       >
         <TaskList tasks={toDoTasks} project={project} title='To Do' onSelectedTask={onSelectedTask} />
-      </motion.div>
+      </div>
       { openedTask? <Task task={openedTask} onTaskClose={onTaskClose} isClose={true} /> : null}
     </div>
   )

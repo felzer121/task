@@ -1,10 +1,16 @@
 import React, { createContext, useReducer, Dispatch } from 'react'
 import { TaskType } from '../pages/TasksPage/types'
 
+type userTeam = {
+  id: string
+  name: string
+  namePic: string
+}
+
 export type TeamsType = {
   id: string
   name: string
-  users: string[]
+  users: userTeam[]
 }
 export type User = {
   name: string

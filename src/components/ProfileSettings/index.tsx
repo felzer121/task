@@ -35,7 +35,7 @@ export const ProfileSettings = () => {
     setValue({...value, teams: [...newValue]})
   }
   const handleClick = () => {
-    updateUser({...state.store.user, ...value}).then()
+    updateUser({...state.store.user, ...value}, state.store.teams).then()
     state.dispatch({action: ACTION.UPDATE_USER, data: {...state.store.user, ...value}})
     history.push('/home')
   }
