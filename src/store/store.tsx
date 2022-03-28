@@ -2,6 +2,7 @@ import React, { createContext, useReducer, Dispatch } from 'react'
 import { TaskType } from '../pages/TasksPage/types'
 
 type userTeam = {
+  url: string;
   id: string
   name: string
   namePic: string

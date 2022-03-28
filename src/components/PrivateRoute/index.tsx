@@ -11,15 +11,29 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
     const getUsersFromServer = async () => {
       const serversUser = await getUsers()
       const serversTeam = await getTeams()
-      const teams = serversTeam.map(team => team.users.map(async user => user.namePic))
       const user = serversUser.find(item => item.id === currentUser.email)
       const url = !!user && await getUrlAvatar(user.namePic)
       const serversProjects = await getProject()
-      const asas = await getUrlAvatarTeams(teams)
-      console.log(asas)
+      const urlTeams = await getUrlAvatarTeams(serversTeam)
+      const teams = serversTeam.map((team, index) => {
+        const users = team.users.map(user => {
+          return {
+            id: user.id,
+            name: user.name,
+            url: urlTeams[index]
+          }
+        })
+        return {
+          ...team,
+          users: users
+        }
+      })
+
+      console.log(urlTeams)
+      console.log(url);
       state.dispatch({
         action: ACTION.GET_ALL_DATA,
-        data: { projects: serversProjects, teams: serversTeam, user: { ...user, url: url } }
+        data: { projects: serversProjects, teams: teams, user: { ...user, url: url } }
       })
     }
     !!currentUser && getUsersFromServer().then()
@@ -29,6 +43,7 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
   return (
     <Route
       {...rest}
+      exact
       render={props => {
         return currentUser ? <Component {...props} /> : <Redirect to="/auth" />
       }}

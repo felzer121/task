@@ -24,6 +24,8 @@ export type Users = {
 interface SideBarListProps {
   list?: SideBarListItem[],
   isProject?: boolean,
+  isMenu?: boolean,
+  isTeams?: boolean,
   title: string
 }
 
@@ -35,7 +37,7 @@ export interface ProjectType {
   tasks: TaskType[]
 }
 
-function SideBarList({ list, isProject, title }: SideBarListProps) {
+function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListProps) {
   const state = useContext(TaskManagerContext)
   const [isOpen, setIsOpen] = useState({
     isModalOpen: false,
@@ -138,14 +140,25 @@ function SideBarList({ list, isProject, title }: SideBarListProps) {
         return (
           <NavLink className="SideBarList__item" activeClassName='SideBarList__item-active' key={ project.id } to={`/dashboard/${ project.id }`}>
             <img className="SideBarList__icon" src={ project.icon } alt="" />
-            { project.name }
+            <span className='SideBarList__itemTitle'>{ project.name }</span>
           </NavLink>
         )
       })}
-      {list?.map((item) =>
+      {isTeams && state.store.teams.map(team => {
+        return (
+          <NavLink activeClassName='SideBarList__item-active' className="SideBarList__item"
+                   key={team.id} to={`/teams/${team.id}`}>
+            <span className='SideBarList__itemTitle'>{team.name}</span>
+            {team?.users && <div className="SideBarList__teams">
+              {team.users.map(item => <img key={item.id} src={item.url} className="SideBarList__teamsImg" alt={item.name}/>)}
+            </div>}
+          </NavLink>
+        );
+      })}
+      {isMenu && list?.map((item) =>
         <div className="SideBarList__item" key={item.title}>
           { item?.icon && <img src={item.icon} className="SideBarList__icon" alt={item.title} /> }
-          { item.title } { item?.count && <span className="SideBarList__number">{ item.count }</span> }
+          <span className='SideBarList__itemTitle'>{ item.title }</span> { item?.count && <span className="SideBarList__number">{ item.count }</span> }
           { item?.users && <div className="SideBarList__teams">{ item.users.map(item => <img key={item} src={item} className="SideBarList__teamsImg" alt={item} />) }</div> }
         </div>)}
     </div>

@@ -52,16 +52,21 @@ export const getProject = async ():Promise<ProjectType[]> => {
     querySnapshot.forEach((doc:any) => {
       projects.push({id: doc.id, ...doc.data()})
     });
-  });
+  })
   return projects
 }
 
 export const getUrlAvatar = async (name: string) => {
   return storage.ref(name).getDownloadURL().then()
 }
-export const getUrlAvatarTeams = async (names: string[]) => {
-  const urls = names.map(name => storage.ref(name).getDownloadURL().then())
-  return urls
+export const getUrlAvatarTeams = async (teams: TeamsType[]): Promise<any[]> => {
+  const arrayImg = teams.map(team => team.users.map(user => user.namePic))
+  const result:any = []
+  for(let i = 0; i < arrayImg.length; i++) {
+    const pathImg = arrayImg[i].map(async name => await storage.ref(name).getDownloadURL())
+    result.push(Promise.all(pathImg))
+  }
+  return Promise.all(result)
 }
 
 export const getUsers = async (): Promise<Users[]> => {

@@ -13,7 +13,6 @@ import './style.scss'
 import { SideBarList, SideBarListItem } from '../SideBarList'
 import { Profile } from '../Profile'
 import {TaskManagerContext} from "../../store/store";
-import { getUrlAvatar } from '../../services/firebase'
 
 const menuList: SideBarListItem[] = [
   { title: 'Home' },
@@ -24,18 +23,17 @@ const menuList: SideBarListItem[] = [
 function SideBar() {
   const state = useContext(TaskManagerContext)
   console.log(state)
-  const projectTeams1 = state.store.teams.map(team => {
+  const projectTeams = state.store.teams.map(team => {
     return {
       title: team.name,
-      users: team.users.map(user => getUrlAvatar(user.namePic))
+      users: team.users.map(user => user.url)
     }
   })
-  console.log(projectTeams1)
-  const projectTeams: SideBarListItem[] = [
-    { title: 'Designers', users: [teamImg1, teamImg2, teamImg3] },
-    { title: 'Backend', users: [teamImg4, teamImg5] },
-    { title: 'Frontend', users: [teamImg6, teamImg7, teamImg8] }
-  ]
+  // const projectTeams1: SideBarListItem[] = [
+  //   { title: 'Designers', users: [teamImg1, teamImg2, teamImg3] },
+  //   { title: 'Backend', users: [teamImg4, teamImg5] },
+  //   { title: 'Frontend', users: [teamImg6, teamImg7, teamImg8] }
+  // ]
 
   return (
     <div className='SideBar'>
@@ -49,9 +47,9 @@ function SideBar() {
 
       <Profile avatarUrl={state.store.user.url} fullName={state.store.user.name} position={state.store.user.role} />
 
-      <SideBarList list={menuList} title={'Menu'} />
+      <SideBarList isMenu={true} list={menuList} title={'Menu'} />
       <SideBarList isProject={true} title={'Projects'} />
-      <SideBarList list={projectTeams} title={'Teams'} />
+      <SideBarList isTeams={true} title={'Teams'} />
     </div>
   )
 }
