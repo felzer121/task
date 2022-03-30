@@ -4,6 +4,7 @@ import { TaskType } from '../TasksPage/types'
 import './style.scss'
 import { Task } from '../../components/Task'
 import { ProjectType } from '../../components/SideBarList'
+import {DragDropContext, Droppable} from "react-beautiful-dnd";
 
 interface KanbanPageProps {
   project: ProjectType
@@ -21,17 +22,35 @@ export const KanbanPage = ({project, toDoTasks, backlogTasks }:KanbanPageProps) 
   }
   return (
     <div className='Kanban'>
-      <div
-        className='Kanban__backlog'
-      >
-        <TaskList tasks={backlogTasks} project={project} title='Backlog' onSelectedTask={onSelectedTask} />
-      </div>
-      <div
-        className='Kanban__toDo'
-      >
-        <TaskList tasks={toDoTasks} project={project} title='To Do' onSelectedTask={onSelectedTask} />
-      </div>
-      { openedTask? <Task task={openedTask} onTaskClose={onTaskClose} isClose={true} /> : null}
+      <DragDropContext onDragEnd={(e) => {
+        console.log(e)
+      }}>
+        <div className='Kanban__backlog'>
+          <Droppable droppableId="backlog">
+            {(provided, snapshot) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                <TaskList tasks={backlogTasks} project={project} title='Backlog' onSelectedTask={onSelectedTask}/>
+              </div>
+            )}
+          </Droppable>
+        </div>
+        <div className='Kanban__toDo'>
+          <Droppable droppableId="backlog">
+            {(provided, snapshot) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                <TaskList tasks={toDoTasks} project={project} title='To Do' onSelectedTask={onSelectedTask}/>
+              </div>
+            )}
+          </Droppable>
+        </div>
+        {openedTask ? <Task task={openedTask} onTaskClose={onTaskClose} isClose={true}/> : null}
+      </DragDropContext>
     </div>
-  )
+  );
 }

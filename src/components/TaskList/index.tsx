@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom'
 import { ProjectType } from '../SideBarList';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
+import {Draggable} from "react-beautiful-dnd";
 
 interface TaskListProps {
   tasks: TaskType[]
@@ -34,9 +35,9 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
     setIsOpen(true)
   }
   const updateFirebase = (task: TaskType) => {
-    updateTask(task)
+    updateTask(task).then()
   }
-  const onCreateTaskClick = (category: CATEGORY_TYPE) => {
+  const onCreateTaskClick = (category: CATEGORY_TYPE) =>  {
     const newTask: TaskType = {
       id: String(project.tasks.length + 1),
       isDone: false,
@@ -90,7 +91,7 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
         }
       ]
     }
-    createTask(newTask, id)
+    createTask(newTask, id).then()
     state.dispatch({ action: ACTION.CREATE_TASK, data: {task: newTask, id: id} })
     setIsOpen(false)
   }
@@ -158,16 +159,25 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
         </button>
       </div>
       <div className='TasksPage__content'>
-        {tasks.map(task => {
+        {tasks.map((task,index) => {
           return (
-            <TaskCard
-              activeTask={activeTask}
-              key={task.id}
-              task={task}
-              onToggleComplete={updateFirebase}
-              onSelectTask={onSelectedTask}
-            />
-          )
+            <Draggable draggableId={task.id} key={task.id} index={index}>
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                >
+                  <TaskCard
+                    activeTask={activeTask}
+                    task={task}
+                    onToggleComplete={updateFirebase}
+                    onSelectTask={onSelectedTask}
+                  />
+                </div>
+              )}
+            </Draggable>
+          );
         })}
       </div>
     </div>

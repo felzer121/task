@@ -64,6 +64,7 @@ export enum ACTION {
   UPDATE_AVATAR = 'UPDATE_AVATAR',
   TOGGLE_DONE_TASK = 'TOGGLE_DONE_TASK',
   CREATE_PROJECT = 'CREATE_PROJECT',
+  UPDATE_TASKS = 'UPDATE_TASKS',
   CREATE_TASK = 'CREATE_TASK'
 }
 interface DispatchInterface {
@@ -90,6 +91,8 @@ const reducer = (currentState: StoreInterface, payload: DispatchInterface): Stor
       return {user: payload.data, projects: currentState.projects, teams: currentState.teams}
     case ACTION.GET_USER :
       return {user: payload.data, projects: currentState.projects, teams: currentState.teams}
+    case ACTION.UPDATE_TASKS :
+      return {user: currentState.user, projects: payload.data, teams: currentState.teams}
     case ACTION.UPDATE_AVATAR :
       return {user: {...currentState.user, namePic: payload.data.name, url: payload.data.url},
         projects: currentState.projects, teams: currentState.teams}
