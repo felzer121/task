@@ -1,6 +1,6 @@
 import React from 'react'
 import {SideBar} from "../../components/SideBar";
-import {Route, Switch} from "react-router-dom";
+import { Route, Switch,  } from 'react-router-dom'
 import {TeamsList} from "../../components/TeamsList";
 
 const TeamsPage = () => {

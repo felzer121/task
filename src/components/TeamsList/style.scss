@@ -1,0 +1,66 @@
+.Team {
+  &__users {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 38px;
+    color: #131313;
+    &-length {
+      opacity: 0.7;
+    }
+  }
+  &__cards {
+    margin-top: 20px;
+  }
+  &__card {
+    background: #F7F6F3;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 88px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Heebo', sans-serif;
+    font-style: normal;
+    margin: 0;
+    font-weight: 700;
+    color: #131313;
+    &User {
+      display: flex;
+    }
+    &Task {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    &Tasks {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+    &TaskCount {
+      font-size: 26px;
+    }
+    &Info {
+      padding-left: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    &Txt {
+      font-size: 18px;
+    }
+    &Role {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+    &Avatar {
+      border: 2px solid #FFFFFF;
+      border-radius: 50%;
+      height: 48px;
+      width: 48px;
+    }
+  }
+}

@@ -127,6 +127,7 @@ export const updateUser = async (user: UserFull, teams: TeamsType[]) => {
     const currentTeams = teams.find(item => item.id === userTeam.id)!.users
     if(!currentTeams.some(team => team.id.includes(user.id)))
       teamsRef.doc(userTeam.id).update({ users: [...currentTeams, {name: user.name, namePic: user.namePic, id: user.id} ] })
+    return ''
   })
 }
 

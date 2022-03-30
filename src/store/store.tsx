@@ -5,6 +5,8 @@ type userTeam = {
   url: string;
   id: string
   name: string
+  open_task: number
+  role: string
   namePic: string
 }
 

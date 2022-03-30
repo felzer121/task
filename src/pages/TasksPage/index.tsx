@@ -6,6 +6,7 @@ import { TaskList } from '../../components/TaskList'
 import { ProjectType } from '../../components/SideBarList'
 import {DragDropContext, Droppable, Draggable, DropResult} from "react-beautiful-dnd";
 import {ACTION, TaskManagerContext} from "../../store/store";
+import { BoxScroll } from '../../element/BoxScroll'
 
 interface TasksPageProps {
   project: ProjectType
@@ -20,7 +21,6 @@ const reorder = (list: TaskType[], result: DropResult) => {
   const startIndex = list.findIndex(task => parseInt(task.id) === parseInt(result.draggableId))
   const arr = Array.from(list)
   const [removed] = arr.splice(startIndex, 1)
-  // @ts-ignore
   arr.splice(result.destination.index, 0, removed)
   return arr
 };
@@ -57,7 +57,7 @@ const TasksPage = ({ project }: TasksPageProps) => {
   return (
     <div className='TasksPage'>
       <div className='TasksPage__container'>
-        <div className='TasksPage__left'>
+        <BoxScroll>
           <DragDropContext onDragEnd={onDragEnd}
           >
             <Droppable droppableId="backlog">
@@ -84,7 +84,7 @@ const TasksPage = ({ project }: TasksPageProps) => {
               )}
             </Droppable>
           </DragDropContext>
-        </div>
+        </BoxScroll>
         {Boolean(openedTask) &&
             <Task task={openedTask} onTaskClose={() => {
             }} isClose={isClose}/>}

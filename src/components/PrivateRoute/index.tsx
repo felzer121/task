@@ -20,6 +20,8 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
           return {
             id: user.id,
             name: user.name,
+            role: user.role,
+            open_task: user.open_task,
             url: urlTeams[index]
           }
         })
@@ -29,8 +31,7 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
         }
       })
 
-      console.log(urlTeams)
-      console.log(url);
+
       state.dispatch({
         action: ACTION.GET_ALL_DATA,
         data: { projects: serversProjects, teams: teams, user: { ...user, url: url } }

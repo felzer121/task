@@ -14,18 +14,6 @@ const menuList: SideBarListItem[] = [
 
 function SideBar() {
   const state = useContext(TaskManagerContext)
-  console.log(state)
-  const projectTeams = state.store.teams.map(team => {
-    return {
-      title: team.name,
-      users: team.users.map(user => user.url)
-    }
-  })
-  // const projectTeams1: SideBarListItem[] = [
-  //   { title: 'Designers', users: [teamImg1, teamImg2, teamImg3] },
-  //   { title: 'Backend', users: [teamImg4, teamImg5] },
-  //   { title: 'Frontend', users: [teamImg6, teamImg7, teamImg8] }
-  // ]
 
   return (
     <div className='SideBar'>
