@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
-import {TaskType} from '../../pages/TasksPage/types'
+import { TaskType } from '../../pages/TasksPage/types'
 import './style.scss'
-import {TaskManagerContext, ACTION} from '../../store/store'
+import { TaskManagerContext, ACTION } from '../../store/store'
 
 interface TaskCardProps {
   task: TaskType

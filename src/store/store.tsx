@@ -30,7 +30,8 @@ export interface UserFull extends User {
 
 interface StoreInterface {
   teams: TeamsType[]
-  user: UserFull,
+  user: UserFull
+  users: UserFull[]
   projects: {
     id: string
     name: string
@@ -48,6 +49,17 @@ export const INITIAL_STORE: StoreInterface = {
     description: '',
     tasks: [],
   }],
+  users: [
+    {
+      id: '',
+      name: '',
+      teams: [],
+      role: '',
+      about: '',
+      url: '',
+      namePic: ''
+    }
+  ],
   user: {
     id: '',
     name: '',
@@ -86,28 +98,28 @@ interface TaskManagerProviderProps {
 const reducer = (currentState: StoreInterface, payload: DispatchInterface): StoreInterface => {
   switch (payload.action) {
     case ACTION.GET_PROJECT :
-      return {user: currentState.user, projects: payload.data, teams: currentState.teams}
+      return {user: currentState.user, projects: payload.data, teams: currentState.teams, users: currentState.users}
     case ACTION.GET_ALL_DATA :
-      return {user: payload.data.user, projects: payload.data.projects, teams: payload.data.teams}
+      return {user: payload.data.user, projects: payload.data.projects, teams: payload.data.teams, users: payload.data.users}
     case ACTION.UPDATE_USER :
-      return {user: payload.data, projects: currentState.projects, teams: currentState.teams}
+      return {user: payload.data, projects: currentState.projects, teams: currentState.teams, users: currentState.users}
     case ACTION.GET_USER :
-      return {user: payload.data, projects: currentState.projects, teams: currentState.teams}
+      return {user: payload.data, projects: currentState.projects, teams: currentState.teams, users: currentState.users}
     case ACTION.UPDATE_TASKS :
-      return {user: currentState.user, projects: payload.data, teams: currentState.teams}
+      return {user: currentState.user, projects: payload.data, teams: currentState.teams, users: currentState.users}
     case ACTION.UPDATE_AVATAR :
       return {user: {...currentState.user, namePic: payload.data.name, url: payload.data.url},
-        projects: currentState.projects, teams: currentState.teams}
+        projects: currentState.projects, teams: currentState.teams, users: currentState.users}
     case ACTION.CREATE_TASK :
       const newTask:any = currentState.projects.map(project => {
         if(project.id === payload.data.id)
           return {...project, tasks: [...project.tasks, payload.data.task]}
         return {...project}
       })
-      return {projects: newTask, user: currentState.user, teams: currentState.teams}
+      return {projects: newTask, user: currentState.user, teams: currentState.teams, users: currentState.users}
     case ACTION.CREATE_PROJECT :
       return {projects: [...currentState.projects, payload.data],
-        user: currentState.user, teams: currentState.teams}
+        user: currentState.user, teams: currentState.teams, users: currentState.users}
     // case ACTION.TOGGLE_DONE_TASK:
     //   // const newTasks = currentState.projects.tasks.map(item => {
     //   //   if (item.id === payload.data) {

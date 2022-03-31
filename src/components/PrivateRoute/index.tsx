@@ -30,11 +30,12 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
           users: users
         }
       })
+      const users = serversUser.map((item, index) => { return {...item, url:  urlTeams[index]} })
 
 
       state.dispatch({
         action: ACTION.GET_ALL_DATA,
-        data: { projects: serversProjects, teams: teams, user: { ...user, url: url } }
+        data: { projects: serversProjects, teams: teams, user: { ...user, url: url }, users: users }
       })
     }
     !!currentUser && getUsersFromServer().then()

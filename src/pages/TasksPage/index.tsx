@@ -4,8 +4,8 @@ import { TaskType } from './types'
 import { Task } from '../../components/Task'
 import { TaskList } from '../../components/TaskList'
 import { ProjectType } from '../../components/SideBarList'
-import {DragDropContext, Droppable, Draggable, DropResult} from "react-beautiful-dnd";
-import {ACTION, TaskManagerContext} from "../../store/store";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { ACTION, TaskManagerContext } from "../../store/store";
 import { BoxScroll } from '../../element/BoxScroll'
 
 interface TasksPageProps {
@@ -23,7 +23,7 @@ const reorder = (list: TaskType[], result: DropResult) => {
   const [removed] = arr.splice(startIndex, 1)
   arr.splice(result.destination.index, 0, removed)
   return arr
-};
+}
 
 const TasksPage = ({ project }: TasksPageProps) => {
   const isClose = false
@@ -42,7 +42,7 @@ const TasksPage = ({ project }: TasksPageProps) => {
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    console.log(result);
+
     const tasks = reorder(
       project.tasks,
       result
@@ -57,7 +57,7 @@ const TasksPage = ({ project }: TasksPageProps) => {
   return (
     <div className='TasksPage'>
       <div className='TasksPage__container'>
-        <BoxScroll>
+        <BoxScroll style={{maxWidth: '385px'}}>
           <DragDropContext onDragEnd={onDragEnd}
           >
             <Droppable droppableId="backlog">
