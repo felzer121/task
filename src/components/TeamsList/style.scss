@@ -49,17 +49,16 @@
     }
   }
   &__card {
-    background: #F7F6F3;
-    border-radius: 10px;
-    padding: 20px;
     box-sizing: border-box;
-    height: 88px;
     display: flex;
+    width: 100%;
     justify-content: space-between;
     font-family: 'Heebo', sans-serif;
     font-style: normal;
     margin: 0;
+    align-items: center;
     font-weight: 700;
+    min-height: 88px;
     color: #131313;
     &User {
       display: flex;
@@ -80,12 +79,14 @@
     }
     &Info {
       padding-left: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
     }
     &Txt {
+      text-align: start;
       font-size: 18px;
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &Role {
       margin: 0;

@@ -6,7 +6,8 @@ import { BoxScroll } from '../../element/BoxScroll'
 import { Page } from '../Page'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import './style.scss'
-import {IconButton} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
+import Card from "../../element/Card";
 
 const TeamsList = () => {
 
@@ -38,19 +39,21 @@ const TeamsList = () => {
                 <span className='Team__users'>Members <span className='Team__users-length'>{team.users.length}</span></span>
                 <div className='Team__cards'>
                   {team.users.map(user => (
-                    <div className='Team__card' key={user.id} onClick={()=>handleClick(user.id)}>
-                      <div className='Team__cardUser'>
-                        <img src={user.url} className='Team__cardAvatar' alt='' />
-                        <div className='Team__cardInfo'>
-                          <span className='Team__cardTxt'>{user.name}</span>
-                          <p className='Team__cardTxt Team__cardRole'>{user.role}</p>
+                    <Card key={user.id}>
+                      <div className='Team__card active' onClick={()=>handleClick(user.id)}>
+                        <div className='Team__cardUser'>
+                          <img src={user.url} className='Team__cardAvatar' alt='' />
+                          <div className='Team__cardInfo'>
+                            <span className='Team__cardTxt'>{user.name}</span>
+                            <p className='Team__cardTxt Team__cardRole'>{user.role}</p>
+                          </div>
+                        </div>
+                        <div className='Team__cardTask'>
+                          <span className='Team__cardTaskCount'>{user.open_task}</span>
+                          <p className='Team__cardTasks'>TASKS</p>
                         </div>
                       </div>
-                      <div className='Team__cardTask'>
-                        <span className='Team__cardTaskCount'>{user.open_task}</span>
-                        <p className='Team__cardTasks'>TASKS</p>
-                      </div>
-                    </div>
+                    </Card>
                   ))}
                 </div>
               </>
