@@ -58,8 +58,7 @@ const TasksPage = ({ project }: TasksPageProps) => {
     <div className='TasksPage'>
       <div className='TasksPage__container'>
         <BoxScroll style={{maxWidth: '385px'}}>
-          <DragDropContext onDragEnd={onDragEnd}
-          >
+          <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="backlog">
               {(provided, snapshot) => (
                 <div
@@ -67,7 +66,7 @@ const TasksPage = ({ project }: TasksPageProps) => {
                   ref={provided.innerRef}
                 >
                   <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='Backlog'
-                            onSelectedTask={onSelectedTask}/>
+                            onSelectedTask={onSelectedTask} />
                   {provided.placeholder}
                 </div>
               )}

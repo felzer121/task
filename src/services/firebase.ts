@@ -62,6 +62,7 @@ export const getUrlAvatar = async (name: string) => {
 export const getUrlAvatarTeams = async (teams: TeamsType[]): Promise<any[]> => {
   const arrayImg = teams.map(team => team.users.map(user => user.namePic))
   const result:any = []
+  console.log(arrayImg);
   for(let i = 0; i < arrayImg.length; i++) {
     const pathImg = arrayImg[i].map(async name => await storage.ref(name).getDownloadURL())
     result.push(Promise.all(pathImg))
@@ -69,8 +70,8 @@ export const getUrlAvatarTeams = async (teams: TeamsType[]): Promise<any[]> => {
   return Promise.all(result)
 }
 
-export const getUsers = async (): Promise<Users[]> => {
-  let users:Users[] = [];
+export const getUsers = async (): Promise<UserFull[]> => {
+  let users:UserFull[] = [];
   await db.collection("users").get().then((querySnapshot) => {
     querySnapshot.forEach((doc:any) => {
       users.push({id: doc.id, ...doc.data()})

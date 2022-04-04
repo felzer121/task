@@ -5,26 +5,26 @@ import { Header } from '../Header'
 import { BoxScroll } from '../../element/BoxScroll'
 import { Page } from '../Page'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import './style.scss'
-import {Button, IconButton} from "@mui/material";
+import { IconButton } from "@mui/material";
 import Card from "../../element/Card";
+import './style.scss'
 
 const TeamsList = () => {
-
   const state = useContext(TaskManagerContext)
   const [team, setTeam] = React.useState<TeamsType>()
   let { id } = useParams<{id: string}>();
-  const [user, setUser] = React.useState<UserFull>()
+  const [activeUser, setActiveUser] = React.useState<UserFull>()
 
   useEffect(() => {
     setTeam(state.store.teams.find(team => team.id === id))
+    setActiveUser(state.store.users.find((user, index) => index === 0))
   }, [state, id])
 
   const handleClick = (id: string) => {
-    setUser(state.store.users.find(user => user.id === id))
+    setActiveUser(state.store.users.find(user => user.id === id))
   }
   const handleMoreUser = () => {
-    console.log(user);
+    // console.log(user);
   }
   if(!team) return <div>'load'</div>
 
@@ -33,13 +33,13 @@ const TeamsList = () => {
       <Header projectName={team.name} type={'teams'}  id={'0'}/>
       <div className='Team'>
         <Page title="Team">
-            <div className='Team__container'>
+          <div className='Team__container'>
             <BoxScroll style={{maxWidth: '385px'}}>
               <>
                 <span className='Team__users'>Members <span className='Team__users-length'>{team.users.length}</span></span>
                 <div className='Team__cards'>
                   {team.users.map(user => (
-                    <Card key={user.id}>
+                    <Card key={user.id} isActive={user.id === activeUser?.id}>
                       <div className='Team__card active' onClick={()=>handleClick(user.id)}>
                         <div className='Team__cardUser'>
                           <img src={user.url} className='Team__cardAvatar' alt='' />
@@ -59,13 +59,14 @@ const TeamsList = () => {
               </>
             </BoxScroll>
             {
-              !!user && <BoxScroll style={{maxWidth: '100%', marginLeft: '30px'}}>
+              !!activeUser && <BoxScroll style={{maxWidth: '100%', marginLeft: '30px'}}>
                     <div className='Team__user'>
                         <div className='Team__userBox'>
-                            <img src={user.url} className='Team__userAvatar' alt=""/>
+                            <img src={activeUser.url} className='Team__userAvatar' alt=""/>
                             <div className='Team__userInfo'>
-                                <h4 className='Team__userInfoName'>{user.name}</h4>
-                                <p className='Team__userInfoRole'>{user.role}</p>
+                                <h4 className='Team__userInfoName'>{activeUser.name}</h4>
+                                <p className='Team__userInfoRole'>{activeUser.role}</p>
+                                <p className='Team__userInfoRole'>{activeUser.role}</p>
                             </div>
                         </div>
                         <div>

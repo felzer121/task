@@ -16,13 +16,13 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
       const serversProjects = await getProject()
       const urlTeams = await getUrlAvatarTeams(serversTeam)
       const teams = serversTeam.map((team, index) => {
-        const users = team.users.map(user => {
+        const users = team.users.map((user, indexUser) => {
           return {
             id: user.id,
             name: user.name,
             role: user.role,
             open_task: user.open_task,
-            url: urlTeams[index]
+            url: urlTeams[index][indexUser]
           }
         })
         return {
@@ -30,8 +30,17 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
           users: users
         }
       })
-      const users = serversUser.map((item, index) => { return {...item, url:  urlTeams[index]} })
 
+      let users
+      for(let i = 0; i < teams.length-1; i++) {
+        users = serversUser.map((item, index) => {
+          console.log(urlTeams[i]);
+          console.log(urlTeams[i][index]);
+          return {...item, url:  urlTeams[i][index]}
+        })
+      }
+
+      console.log(users);
 
       state.dispatch({
         action: ACTION.GET_ALL_DATA,
