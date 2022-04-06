@@ -41,6 +41,7 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
     const newTask: TaskType = {
       id: String(project.tasks.length + 1),
       isDone: false,
+      userID: 'admin@mail.ru',
       title: value.name,
       author: 'Added by Kristin A.',
       createdAt: new Date(),

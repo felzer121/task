@@ -25,6 +25,13 @@
     &Info {
       font-family: 'Heebo', sans-serif;
       margin-left: 30px;
+      &Location {
+        margin: 0;
+        color: #131313;
+        font-weight: 400;
+        font-size: 16px;
+        opacity: 0.7;
+      }
       &Name {
         margin: 10px 0;
         font-weight: 700;

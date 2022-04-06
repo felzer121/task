@@ -20,7 +20,7 @@ const CardButton = styled(Button)<ButtonProps>(({ theme}) => ({
 
 interface CardProps {
   children: React.ReactChildren | React.ReactChildren[] | Element | React.ReactNode,
-  isActive: boolean
+  isActive?: boolean
 }
 
 const Card = ({children, isActive}: CardProps) => {

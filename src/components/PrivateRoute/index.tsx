@@ -34,13 +34,9 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
       let users
       for(let i = 0; i < teams.length-1; i++) {
         users = serversUser.map((item, index) => {
-          console.log(urlTeams[i]);
-          console.log(urlTeams[i][index]);
           return {...item, url:  urlTeams[i][index]}
         })
       }
-
-      console.log(users);
 
       state.dispatch({
         action: ACTION.GET_ALL_DATA,

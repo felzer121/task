@@ -7,6 +7,7 @@ export enum CATEGORY_TYPE {
 }
 
 export type TaskType = {
+  userID: string;
   id: string
   title: string
   isDone: boolean

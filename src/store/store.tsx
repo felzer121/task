@@ -25,6 +25,7 @@ export type User = {
 export interface UserFull extends User {
   id: string
   url: string
+  location: string
   namePic: string
 }
 
@@ -54,6 +55,7 @@ export const INITIAL_STORE: StoreInterface = {
       id: '',
       name: '',
       teams: [],
+      location: '',
       role: '',
       about: '',
       url: '',
@@ -64,12 +66,14 @@ export const INITIAL_STORE: StoreInterface = {
     id: '',
     name: '',
     teams: [],
+    location: '',
     role: '',
     about: '',
     url: '',
     namePic: ''
   }
 }
+
 export enum ACTION {
   GET_PROJECT = 'GET_PROJECT',
   GET_ALL_DATA = 'GET_ALL_DATA',
