@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Route, Switch, useParams } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { TasksPage } from "../../pages/TasksPage";
 import { TaskManagerContext } from "../../store/store";
 import { Page } from "../Page";
@@ -48,15 +48,15 @@ export const Project = () => {
   return (
     <>
       <Header menu={MAIN_MENU} projectName={project.name} id={id} type={'dashboard'} projectIcon={logo} users={USERS} />
-      <Switch>
-        <Route exact path="/dashboard/:id">
+      <Routes>
+        <Route path="/dashboard/:id">
           <Page title="home">
             {Boolean(project.tasks) && (
               <TasksPage project={project} />
             )}
           </Page>
         </Route>
-        <Route exact path="/dashboard/:id/kanban">
+        <Route path="/dashboard/:id/kanban">
           <Page title="tasks">
             {
               <KanbanPage
@@ -73,7 +73,7 @@ export const Project = () => {
         <Route path="/dashboard/:id/files/">
           <Page title="tasks">{<FilesPage files={files} />}</Page>
         </Route>
-      </Switch>
+      </Routes>
     </>
   );
 };

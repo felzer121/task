@@ -1,8 +1,9 @@
 import React, {useContext} from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 import { useAuth } from "../../store/auth";
 import { getProject, getTeams, getUrlAvatar, getUrlAvatarTeams, getUsers } from '../../services/firebase'
 import {ACTION, TaskManagerContext} from "../../store/store";
+
 
 export const PrivateRoute = ({ component: Component, ...rest }:any) => {
   const { currentUser }:any = useAuth()
@@ -37,22 +38,18 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
           return {...item, url:  urlTeams[i][index]}
         })
       }
-
       state.dispatch({
         action: ACTION.GET_ALL_DATA,
         data: { projects: serversProjects, teams: teams, user: { ...user, url: url }, users: users }
       })
     }
     !!currentUser && getUsersFromServer().then()
-    // eslint-disable-next-line
   }, [])
-
   return (
     <Route
       {...rest}
-      exact
-      render={props => {
-        return currentUser ? <Component {...props} /> : <Redirect to="/auth" />
+      render={(props: JSX.IntrinsicAttributes) => {
+        return currentUser ? <Component {...props} /> : <Navigate to="/auth" />
       }}
     />
   );

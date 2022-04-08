@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style.scss'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { authUser } from '../../services/user';
 
 interface authField {
@@ -9,15 +9,16 @@ interface authField {
 }
 
 const Auth = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [authField, setAuthField] = useState<authField>({email: '', password: ''})
   const [error, setError] = useState('')
 
   const authentication = async () => {
     try {
       await authUser(authField.email, authField.password).then(e => console.log(e))
-      history.push("/dashboard");
+      navigate("/dashboard");
     } catch (error) {
+      // @ts-ignore
       setError(error)
     }
   }

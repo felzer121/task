@@ -7,6 +7,7 @@ export const singIn = async (email:string, password:string) => {
   try {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
   } catch (error) {
+    // @ts-ignore
     return Promise.reject(error.message)
   }
   })
@@ -19,6 +20,7 @@ export const authUser = async (email:string, password:string) => {
   try {
     return await firebase.auth().signInWithEmailAndPassword(email, password)
   } catch (error) {
+    // @ts-ignore
     return Promise.reject(error.message)
   }
 }
