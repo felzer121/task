@@ -2,10 +2,8 @@ import React from 'react';
 import {Header} from "../../components/Header";
 import {MenuItemType} from "../../components/Menu/types";
 import {SideBar} from "../../components/SideBar";
-import {Route, Routes} from "react-router-dom";
-import {Page} from "../../components/Page";
-import {ProfileSettings} from "../../components/ProfileSettings";
 import './style.scss'
+import { Outlet } from "react-router-dom";
 
 const PROFILE_MENU: MenuItemType[] = [
   { title: 'Profile', url: '/profile/settings' },
@@ -20,16 +18,7 @@ export const ProfilePage = () => {
         <SideBar/>
         <div className='App__page profile-page'>
           <Header projectName={'ProfilePage Settings'} type={'profile'} menu={PROFILE_MENU} id={'0'}/>
-          {/*<Routes>*/}
-          {/*  <Route path="/profile/settings" element={*/}
-          {/*    <Page title="home">*/}
-          {/*      <ProfileSettings/>*/}
-          {/*    </Page>} />*/}
-          {/*  <Route path="/profile/notifications" element={*/}
-          {/*    <Page title="home">*/}
-          {/*      notifications*/}
-          {/*    </Page>} />*/}
-          {/*</Routes>*/}
+          <Outlet />
         </div>
       </div>
   );

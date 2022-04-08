@@ -8,7 +8,6 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {Checkbox, IconButton} from "@mui/material";
 import Card from "../../element/Card";
 import './style.scss'
-import {TaskType} from "../../pages/TasksPage/types";
 
 const TeamsList = () => {
   const state = useContext(TaskManagerContext)

@@ -138,7 +138,8 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
       </div>
       {isProject && state.store.projects.map(project => {
         return (
-          <NavLink className="SideBarList__item" activeClassName='SideBarList__item-active' key={ project.id } to={`/dashboard/${ project.id }`}>
+          <NavLink className={(navData) => navData.isActive ? "SideBarList__item-active SideBarList__item" : "SideBarList__item" }
+                   key={ project.id } to={`/dashboard/${ project.id }`}>
             <img className="SideBarList__icon" src={ project.icon } alt="" />
             <span className='SideBarList__itemTitle'>{ project.name }</span>
           </NavLink>
@@ -146,7 +147,7 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
       })}
       {isTeams && state.store.teams.map(team => {
         return (
-          <NavLink activeClassName='SideBarList__item-active' className="SideBarList__item"
+          <NavLink className={(navData) => navData.isActive ? "SideBarList__item-active SideBarList__item" : "SideBarList__item" }
                    key={team.id} to={`/teams/${team.id}`}>
             <span className='SideBarList__itemTitle'>{team.name}</span>
             {team?.users && <div className="SideBarList__teams">

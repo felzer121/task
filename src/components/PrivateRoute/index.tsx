@@ -1,13 +1,18 @@
 import React, {useContext} from "react";
-import { Route, Navigate } from "react-router-dom";
+import {Route, Navigate, useLocation} from "react-router-dom";
 import { useAuth } from "../../store/auth";
 import { getProject, getTeams, getUrlAvatar, getUrlAvatarTeams, getUsers } from '../../services/firebase'
 import {ACTION, TaskManagerContext} from "../../store/store";
 
 
-export const PrivateRoute = ({ component: Component, ...rest }:any) => {
+export const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   const { currentUser }:any = useAuth()
   const state = useContext(TaskManagerContext)
+  let location = useLocation();
+
+  if (!currentUser)
+    return <Navigate to="/auth" state={{ from: location }} replace />;
+
   React.useEffect(() => {
     const getUsersFromServer = async () => {
       const serversUser = await getUsers()
@@ -45,12 +50,5 @@ export const PrivateRoute = ({ component: Component, ...rest }:any) => {
     }
     !!currentUser && getUsersFromServer().then()
   }, [])
-  return (
-    <Route
-      {...rest}
-      render={(props: JSX.IntrinsicAttributes) => {
-        return currentUser ? <Component {...props} /> : <Navigate to="/auth" />
-      }}
-    />
-  );
+  return children;
 };

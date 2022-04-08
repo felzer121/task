@@ -19,7 +19,7 @@ const Auth = () => {
       navigate("/dashboard");
     } catch (error) {
       // @ts-ignore
-      setError(error)
+        setError(typeof error === 'string' ? error : '')
     }
   }
   return (

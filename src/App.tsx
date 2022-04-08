@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import { Auth } from './pages/Auth'
 import { Register } from './pages/Register'
@@ -13,15 +13,11 @@ import {RouterManeger} from "./RouterManeger/Router";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path='/auth' element={<Auth />} />
-          <Route path='/register' element={<Register/>} />
-        </Routes>
        <RouterManeger />
       </AuthProvider>
-    </Router>
+    </BrowserRouter>
   )
 }
 

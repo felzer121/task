@@ -8,10 +8,14 @@ export const singIn = async (email:string, password:string) => {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
   } catch (error) {
     // @ts-ignore
-    return Promise.reject(error.message)
-  }
+    if(error instanceof Error)
+      return Promise.reject(error.message)
+    else
+      return Promise.reject('Unexpected error')
+    }
   })
 }
+
 export const logOut = async () => {
   await firebase.auth().signOut()
 }
@@ -21,7 +25,10 @@ export const authUser = async (email:string, password:string) => {
     return await firebase.auth().signInWithEmailAndPassword(email, password)
   } catch (error) {
     // @ts-ignore
-    return Promise.reject(error.message)
+    if(error instanceof Error)
+      return Promise.reject(error.message)
+    else
+      return Promise.reject('Unexpected error')
   }
 }
 
