@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { SideBar } from "../../components/SideBar";
 import { Project } from "../../components/Project";
 
@@ -10,9 +10,11 @@ export const Dashboard = () => {
     <div className='App'>
       <SideBar />
       <div className='App__page'>
-        <Switch>
-          <Route path='/dashboard/:id' component={Project} />
-        </Switch>
+        <Routes>
+            <Route path='/dashboard/:id'>
+                <Project />
+            </Route>
+        </Routes>
       </div>
     </div>
   );

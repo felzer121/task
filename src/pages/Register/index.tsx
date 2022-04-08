@@ -22,6 +22,7 @@ const Register = () => {
       try {
         await singIn(singInFields.email, singInFields.password)
       } catch (error) {
+        // @ts-ignore
         setError(error)
       }
     }

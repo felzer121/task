@@ -3,13 +3,13 @@ import './style.scss'
 import {loadAvatar, updateAvatar, updateUser} from "../../services/firebase";
 import {ACTION, TaskManagerContext, TeamsType, User} from "../../store/store";
 import {Autocomplete, TextField} from "@mui/material";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 export const ProfileSettings = () => {
   const state = useContext(TaskManagerContext)
   let url: string | ArrayBuffer | null = null
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [value, setValue] = React.useState<User>({
     name: '',
@@ -37,7 +37,7 @@ export const ProfileSettings = () => {
   const handleClick = () => {
     updateUser({...state.store.user, ...value}, state.store.teams).then()
     state.dispatch({action: ACTION.UPDATE_USER, data: {...state.store.user, ...value}})
-    history.push('/home')
+    navigate('/home')
   }
 
   const loadFile = (e: any) => {
