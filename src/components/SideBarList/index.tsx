@@ -139,7 +139,7 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
       {isProject && state.store.projects.map(project => {
         return (
           <NavLink className={(navData) => navData.isActive ? "SideBarList__item-active SideBarList__item" : "SideBarList__item" }
-                   key={ project.id } to={`/dashboard/${ project.id }`}>
+                   key={ project.id } to={`/dashboard/${ project.id }/task-page/`}>
             <img className="SideBarList__icon" src={ project.icon } alt="" />
             <span className='SideBarList__itemTitle'>{ project.name }</span>
           </NavLink>

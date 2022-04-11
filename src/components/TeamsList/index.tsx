@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { TaskManagerContext, TeamsType, UserFull } from '../../store/store'
-import { useParams } from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import { Header } from '../Header'
 import { BoxScroll } from '../../element/BoxScroll'
 import { Page } from '../Page'
@@ -8,13 +8,17 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {Checkbox, IconButton} from "@mui/material";
 import Card from "../../element/Card";
 import './style.scss'
+import Loader from "../Loader/Loader";
+import {Tag} from "../../element/Tag";
 
 const TeamsList = () => {
   const state = useContext(TaskManagerContext)
-  const [team, setTeam] = React.useState<TeamsType>()
   let { id } = useParams<{id: string}>()
+
+  const [team, setTeam] = React.useState<TeamsType>()
   const [activeUser, setActiveUser] = React.useState<UserFull>()
   const [tasks, setTasks] = React.useState<any>()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const baseUser = state.store.users.find((user, index) => index === 0)
@@ -22,6 +26,7 @@ const TeamsList = () => {
     setActiveUser(baseUser)
     setTasks(state.store.projects.map(project => project.tasks.filter(task => {return task.userID === baseUser?.id})))
   }, [state, id])
+
   const handleClick = (id: string) => {
     setActiveUser(state.store.users.find(user => user.id === id))
     setTasks(state.store.projects.map(project => project.tasks.filter(task => task.userID === id)))
@@ -29,7 +34,12 @@ const TeamsList = () => {
   const handleMoreUser = () => {
     // console.log(activeUser);
   }
-  if(!team) return <div>'load'</div>
+  const handleTaskClick = (id:string, idProject:string, event: React.MouseEvent) => {
+    const { className } = event.target as HTMLDivElement;
+   if(className === 'tasksElement__card')
+     navigate(`/dashboard/${idProject}/task-page`)
+  }
+  if(!team) return <Loader />
 
   return (
     <>
@@ -43,7 +53,7 @@ const TeamsList = () => {
                   className='Team__users-length'>{team.users.length}</span></span>
                 <div className='Team__cards'>
                   {team.users.map(user => (
-                    <Card key={user.id} isActive={user.id === activeUser?.id}>
+                    <Card key={user.id} isActive={user.id === activeUser?.id} type={'card'}>
                       <div className='Team__card active' onClick={() => handleClick(user.id)}>
                         <div className='Team__cardUser'>
                           <img src={user.url} className='Team__cardAvatar' alt=''/>
@@ -83,14 +93,19 @@ const TeamsList = () => {
                       <h3>Assigned Tasks</h3>
                       {tasks.map((taskProject:any) => (
                         taskProject.map((task:any) => (
-                          <Card key={task.id}>
-                            <div className='task'>
+                          <div key={task.id} className='tasksElement' onMouseDown={(e) => handleTaskClick(task.id, task.idProject, e)}>
+                            <div className='tasksElement__checkbox'>
                               <Checkbox
                                 sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                               />
-                              {task.title}
                             </div>
-                          </Card>
+                            <Card type={'task'}>
+                              <div className='tasksElement__card'>
+                                <p>{task.title}</p>
+                                <Tag tag={task.tag} />
+                              </div>
+                            </Card>
+                          </div>
                         ))
                       ))}
                     </div>

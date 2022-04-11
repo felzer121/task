@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Route, Navigate, useLocation} from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../store/auth";
 import { getProject, getTeams, getUrlAvatar, getUrlAvatarTeams, getUsers } from '../../services/firebase'
 import {ACTION, TaskManagerContext} from "../../store/store";

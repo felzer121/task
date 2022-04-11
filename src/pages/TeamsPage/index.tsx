@@ -1,18 +1,13 @@
 import React from 'react'
 import {SideBar} from "../../components/SideBar";
-import { Route, Routes } from 'react-router-dom'
-import {TeamsList} from "../../components/TeamsList";
+import { Outlet } from "react-router-dom";
 
 const TeamsPage = () => {
   return (
     <div className='App'>
       <SideBar />
       <div className='App__page'>
-        <Routes>
-            <Route path='/teams/:id' >
-                <TeamsList/>
-            </Route>
-        </Routes>
+        <Outlet />
       </div>
     </div>
   )

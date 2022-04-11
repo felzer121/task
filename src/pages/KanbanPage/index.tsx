@@ -5,15 +5,15 @@ import './style.scss'
 import { Task } from '../../components/Task'
 import { ProjectType } from '../../components/SideBarList'
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import {useOutletContext} from "react-router-dom";
 
-interface KanbanPageProps {
-  project: ProjectType
-  backlogTasks: TaskType[]
-  toDoTasks: TaskType[]
-}
 
-export const KanbanPage = ({project, toDoTasks, backlogTasks }:KanbanPageProps) => {
+export const KanbanPage = () => {
   const [openedTask, setOpenedTask] = useState<TaskType | undefined>(undefined)
+  const project = useOutletContext<ProjectType>()
+  const toDoTasks: TaskType[] = project.tasks.filter(item => item.category === 'todo')
+  const backlogTasks: TaskType[] = project.tasks.filter(item => item.category === 'backlog')
+
   const onSelectedTask = (openedTask: TaskType): void => {
     setOpenedTask(openedTask)
   }

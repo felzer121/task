@@ -31,6 +31,9 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
   const state = useContext(TaskManagerContext)
   let { id } = useParams<{id: string}>();
 
+  if(!id)
+    return <div />
+
   const openedModal = () => {
     setIsOpen(true)
   }
@@ -40,6 +43,7 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
   const onCreateTaskClick = (category: CATEGORY_TYPE) =>  {
     const newTask: TaskType = {
       id: String(project.tasks.length + 1),
+      idProject: String(project.id),
       isDone: false,
       userID: 'admin@mail.ru',
       title: value.name,

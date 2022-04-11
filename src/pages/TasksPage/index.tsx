@@ -7,6 +7,7 @@ import { ProjectType } from '../../components/SideBarList'
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { ACTION, TaskManagerContext } from "../../store/store";
 import { BoxScroll } from '../../element/BoxScroll'
+import { useOutletContext } from "react-router-dom";
 
 interface TasksPageProps {
   project: ProjectType
@@ -25,7 +26,8 @@ const reorder = (list: TaskType[], result: DropResult) => {
   return arr
 }
 
-const TasksPage = ({ project }: TasksPageProps) => {
+const TasksPage = () => {
+  const project = useOutletContext<ProjectType>()
   const isClose = false
   const state = useContext(TaskManagerContext)
   const [openedTask, setOpenedTask] = useState<TaskType>(project.tasks[0])

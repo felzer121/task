@@ -3,6 +3,7 @@ import {Button, ButtonProps, styled} from "@mui/material";
 
 const CardButton = styled(Button)<ButtonProps>(({ theme}) => ({
   color: '#131313',
+  width: '100%',
   boxShadow: 'none',
   backgroundColor: '#F7F6F3',
   '&:hover': {
@@ -21,11 +22,17 @@ const CardButton = styled(Button)<ButtonProps>(({ theme}) => ({
 interface CardProps {
   children: React.ReactChildren | React.ReactChildren[] | Element | React.ReactNode,
   isActive?: boolean
+  type: string
 }
 
-const Card = ({children, isActive}: CardProps) => {
+const Card = ({children, isActive, type}: CardProps) => {
+  let style
+  if(type === 'task')
+    style = {padding: '20px 25px 20px 60px'}
+  else if(type === 'card')
+    style = isActive ? { backgroundColor: '#FFF8DD', boxShadow: '1px 1px 8px rgba(197, 181, 120, 0.5)'} : {}
   return (
-    <CardButton variant="contained" style={isActive ? { backgroundColor: '#FFF8DD', boxShadow: '1px 1px 8px rgba(197, 181, 120, 0.5)'} : {}}>
+    <CardButton variant="contained" style={style}>
       {children}
     </CardButton>
   )

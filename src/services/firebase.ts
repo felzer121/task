@@ -37,7 +37,7 @@ export const loadAvatar = async (url: string, file: any) => {
   return newPath
 }
 
-export const createTask = (task: TaskType, id: string) => {
+export const createTask = (task: TaskType, id: string | undefined) => {
   const todoProject = db.collection("todo").doc(id);
   return todoProject.update({
     tasks : firebase.firestore.FieldValue.arrayUnion(task)
