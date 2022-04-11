@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, {useState, useContext, useCallback} from 'react'
 import { ACTION, TaskManagerContext } from "../../store/store";
 import { CATEGORY_TYPE, TaskType } from '../../pages/TasksPage/types'
 import { TaskCard } from '../TaskCard'
@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom'
 import { ProjectType } from '../SideBarList';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import {Draggable} from "react-beautiful-dnd";
 
 interface TaskListProps {
   tasks: TaskType[]
@@ -100,9 +99,24 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
     state.dispatch({ action: ACTION.CREATE_TASK, data: {task: newTask, id: id} })
     setIsOpen(false)
   }
+
+  const renderCard = useCallback((task, index) => {
+    return (
+      <TaskCard
+        key={task.id}
+        task={task}
+        index={index}
+        id={task.id}
+        activeTask={activeTask}
+        onToggleComplete={updateFirebase}
+        onSelectTask={onSelectedTask}
+      />
+    )
+  }, [])
+
   return (
     <div className='TasksPage__backlog'>
-      <Modal open={isOpen} onCloseClick={() => setIsOpen(false)} >
+      <Modal open={isOpen} onCloseClick={() => setIsOpen(false)}>
         <div className='ModalTask__input-box'>
           <label htmlFor='name' className='ModalTask__label'>
             Name
@@ -134,7 +148,8 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
             <label htmlFor='description' className='ModalTask__label'>
               Date
             </label>
-            <DayPickerInput value={value.date} onDayChange={date => setValue({...value, date: date})} />
+            {/* @ts-ignore*/}
+            <DayPickerInput value={value.date} onDayChange={date => setValue({...value, date: date})}/>
           </div>
           <div className='ModalTask__input-box'>
             <label htmlFor='tag' className='ModalTask__label'>
@@ -164,27 +179,8 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
         </button>
       </div>
       <div className='TasksPage__content'>
-        {tasks.map((task,index) => {
-          return (
-            <Draggable draggableId={task.id} key={task.id} index={index}>
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                >
-                  <TaskCard
-                    activeTask={activeTask}
-                    task={task}
-                    onToggleComplete={updateFirebase}
-                    onSelectTask={onSelectedTask}
-                  />
-                </div>
-              )}
-            </Draggable>
-          );
-        })}
+        {tasks.map((task, index) => renderCard(task, index))}
       </div>
     </div>
-  )
+  );
 }

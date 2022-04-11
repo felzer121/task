@@ -22,35 +22,17 @@ export const KanbanPage = () => {
   }
   return (
     <div className='Kanban'>
-      <DragDropContext onDragEnd={(e) => {
-        console.log(e)
-      }}>
+
         <div className='Kanban__backlog'>
-          <Droppable droppableId="backlog">
-            {(provided, snapshot) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                <TaskList tasks={backlogTasks} project={project} title='Backlog' onSelectedTask={onSelectedTask}/>
-              </div>
-            )}
-          </Droppable>
+
+          <TaskList tasks={backlogTasks} project={project} title='Backlog' onSelectedTask={onSelectedTask}/>
+
         </div>
         <div className='Kanban__toDo'>
-          <Droppable droppableId="backlog">
-            {(provided, snapshot) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                <TaskList tasks={toDoTasks} project={project} title='To Do' onSelectedTask={onSelectedTask}/>
-              </div>
-            )}
-          </Droppable>
+
+          <TaskList tasks={toDoTasks} project={project} title='To Do' onSelectedTask={onSelectedTask}/>
         </div>
         {openedTask ? <Task task={openedTask} onTaskClose={onTaskClose} isClose={true}/> : null}
-      </DragDropContext>
     </div>
   );
 }

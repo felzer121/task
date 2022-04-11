@@ -4,27 +4,28 @@ import { TaskType } from './types'
 import { Task } from '../../components/Task'
 import { TaskList } from '../../components/TaskList'
 import { ProjectType } from '../../components/SideBarList'
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { ACTION, TaskManagerContext } from "../../store/store";
 import { BoxScroll } from '../../element/BoxScroll'
 import { useOutletContext } from "react-router-dom";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {DndProvider} from "react-dnd";
 
 interface TasksPageProps {
   project: ProjectType
 }
 
 
-const reorder = (list: TaskType[], result: DropResult) => {
-  if(result.source.droppableId !== result.destination?.droppableId) {
-    return list.map(task => parseInt(task.id) === parseInt(result.draggableId) ? {...task, category: 'todo' } : task)
-  }
-
-  const startIndex = list.findIndex(task => parseInt(task.id) === parseInt(result.draggableId))
-  const arr = Array.from(list)
-  const [removed] = arr.splice(startIndex, 1)
-  arr.splice(result.destination.index, 0, removed)
-  return arr
-}
+// const reorder = (list: TaskType[], result: DropResult) => {
+//   if(result.source.droppableId !== result.destination?.droppableId) {
+//     return list.map(task => parseInt(task.id) === parseInt(result.draggableId) ? {...task, category: 'todo' } : task)
+//   }
+//
+//   const startIndex = list.findIndex(task => parseInt(task.id) === parseInt(result.draggableId))
+//   const arr = Array.from(list)
+//   const [removed] = arr.splice(startIndex, 1)
+//   arr.splice(result.destination.index, 0, removed)
+//   return arr
+// }
 
 const TasksPage = () => {
   const project = useOutletContext<ProjectType>()
@@ -41,18 +42,6 @@ const TasksPage = () => {
     setOpenedTask(openedTask)
   }
 
-  const onDragEnd = (result: DropResult) => {
-    if (!result.destination) return;
-    if (result.destination.index === result.source.index) return;
-
-    const tasks = reorder(
-      project.tasks,
-      result
-    );
-    const projects = state.store.projects.map(item => item.id === project.id ? {...project, tasks: tasks} : item)
-    state.dispatch({action: ACTION.UPDATE_TASKS, data: projects})
-  }
-
   // const onTaskUpdated = (task: TaskType) => {
   //   setOpenedTask(task)
   // }
@@ -60,31 +49,14 @@ const TasksPage = () => {
     <div className='TasksPage'>
       <div className='TasksPage__container'>
         <BoxScroll style={{maxWidth: '385px'}}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="backlog">
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='Backlog'
-                            onSelectedTask={onSelectedTask} />
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-            <Droppable droppableId="toDo">
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='To Do'
-                            onSelectedTask={onSelectedTask}/>
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <DndProvider backend={HTML5Backend}>
+          <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='Backlog'
+                    onSelectedTask={onSelectedTask}/>
+
+
+          <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='To Do'
+                    onSelectedTask={onSelectedTask}/>
+          </DndProvider>
         </BoxScroll>
         {Boolean(openedTask) &&
             <Task task={openedTask} onTaskClose={() => {

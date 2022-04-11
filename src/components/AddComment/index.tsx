@@ -4,7 +4,7 @@ import './style.scss'
 const AddComment = () => {
   return (
     <div className='AddComment'>
-      <img src='./Userpic.jpg' alt='' />
+      {/*<img src='./Userpic.jpg' alt='' />*/}
       <textarea className='AddComment__input'
              placeholder='Add a comment…'
       />
