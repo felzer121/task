@@ -3,48 +3,41 @@ import { TaskType } from '../../pages/TasksPage/types'
 import './style.scss'
 import { TaskManagerContext, ACTION } from '../../store/store'
 import {useDrag, useDrop} from "react-dnd";
+import type { Identifier, XYCoord } from 'dnd-core'
 
 interface TaskCardProps {
   task: TaskType
   activeTask?: TaskType
   index: number
   id: string
+  currentColumnName: string
   onSelectTask: (task: TaskType) => void
   onToggleComplete: (task: TaskType) => void
+  moveCard: (dragIndex: number, hoverIndex: number) => void
+}
+
+interface DragItem {
+  index: number
+  id: string
+  type: string
 }
 
 export const ItemTypes = {
   CARD: 'card',
 }
 
-const TaskCard = ({task, activeTask, index, id, onSelectTask, onToggleComplete}: TaskCardProps) => {
+const TaskCard = ({task, activeTask, index, id, onSelectTask, currentColumnName, moveCard, onToggleComplete}: TaskCardProps) => {
   const [taskIsDone, setTaskIsDone] = useState(task.isDone)
   const store = useContext(TaskManagerContext)
-  const ref = React.useRef(null)
-  const [{ handlerId }, drop] = useDrop({
-    accept: ItemTypes.CARD,
-    collect(monitor) {
-      return {
-        handlerId: monitor.getHandlerId(),
-      }
-    },
-    hover(item, monitor) {
-      if (!ref.current) {
-        return
-      }
-    },
-  })
+
   const [{ isDragging }, drag] = useDrag({
-    type: ItemTypes.CARD,
-    item: () => {
-      return { id, index }
-    },
+    type: 'OurFirstType',
+    item: { name: 'Any custom name' },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-  })
+  });
   const opacity = isDragging ? 0 : 1
-  drag(drop(ref))
 
 
   const handleComplete = () => {
@@ -58,7 +51,7 @@ const TaskCard = ({task, activeTask, index, id, onSelectTask, onToggleComplete}:
     <div
       style={{ opacity }}
       className={`TasksPage__item ${activeTask?.id === task.id ? 'TasksPage__item-active': ''}`}
-      ref={ref}
+      ref={drag}
       onClick={() => onSelectTask(task)}>
       <div
         style={{

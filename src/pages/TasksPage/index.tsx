@@ -8,7 +8,7 @@ import { ACTION, TaskManagerContext } from "../../store/store";
 import { BoxScroll } from '../../element/BoxScroll'
 import { useOutletContext } from "react-router-dom";
 import {HTML5Backend} from "react-dnd-html5-backend";
-import {DndProvider} from "react-dnd";
+import {DndProvider, useDrop} from "react-dnd";
 
 interface TasksPageProps {
   project: ProjectType
@@ -26,6 +26,13 @@ interface TasksPageProps {
 //   arr.splice(result.destination.index, 0, removed)
 //   return arr
 // }
+export const COLUMN_NAMES = {
+  TO_DO: 'To Do',
+  BACKLOG: 'Backlog',
+}
+
+
+
 
 const TasksPage = () => {
   const project = useOutletContext<ProjectType>()
@@ -50,12 +57,13 @@ const TasksPage = () => {
       <div className='TasksPage__container'>
         <BoxScroll style={{maxWidth: '385px'}}>
           <DndProvider backend={HTML5Backend}>
-          <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='Backlog'
-                    onSelectedTask={onSelectedTask}/>
 
+              <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='Backlog'
+                        onSelectedTask={onSelectedTask}/>
 
-          <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='To Do'
-                    onSelectedTask={onSelectedTask}/>
+              <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='To Do'
+                        onSelectedTask={onSelectedTask}/>
+
           </DndProvider>
         </BoxScroll>
         {Boolean(openedTask) &&

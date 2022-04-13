@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom'
 import { ProjectType } from '../SideBarList';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
+import {useDrop} from "react-dnd";
 
 interface TaskListProps {
   tasks: TaskType[]
@@ -100,22 +101,48 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
     setIsOpen(false)
   }
 
+  const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+    // setCards((prevCards: Item[]) =>
+    //   update(prevCards, {
+    //     $splice: [
+    //       [dragIndex, 1],
+    //       [hoverIndex, 0, prevCards[dragIndex] as Item],
+    //     ],
+    //   }),
+    // )
+  }, [])
+
+
+  const [{ canDrop, isOver }, drop] = useDrop(() => ({
+    accept: 'OurFirstType',
+    drop: () => ({ name: 'Dustbin' }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  }))
+  console.log('opt', isOver, canDrop)
+
+
+
   const renderCard = useCallback((task, index) => {
     return (
       <TaskCard
         key={task.id}
         task={task}
+        currentColumnName={title}
         index={index}
         id={task.id}
         activeTask={activeTask}
         onToggleComplete={updateFirebase}
         onSelectTask={onSelectedTask}
+        moveCard={moveCard}
       />
     )
   }, [])
 
   return (
-    <div className='TasksPage__backlog'>
+    <div className='TasksPage__backlog' ref={drop} role={'Dustbin'}>
       <Modal open={isOpen} onCloseClick={() => setIsOpen(false)}>
         <div className='ModalTask__input-box'>
           <label htmlFor='name' className='ModalTask__label'>
