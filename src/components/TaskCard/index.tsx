@@ -32,10 +32,15 @@ const TaskCard = ({task, activeTask, index, id, onSelectTask, currentColumnName,
 
   const [{ isDragging }, drag] = useDrag({
     type: 'OurFirstType',
-    item: { name: 'Any custom name' },
+    item: { ...task },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
+    end: (draggedItem, monitor) => {
+        const dropResult = monitor.getDropResult()
+      if(dropResult.category !== draggedItem.category)
+        console.log(draggedItem);
+    }
   });
   const opacity = isDragging ? 0 : 1
 

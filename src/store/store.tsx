@@ -114,6 +114,7 @@ const reducer = (currentState: StoreInterface, payload: DispatchInterface): Stor
     case ACTION.UPDATE_AVATAR :
       return {user: {...currentState.user, namePic: payload.data.name, url: payload.data.url},
         projects: currentState.projects, teams: currentState.teams, users: currentState.users}
+
     case ACTION.CREATE_TASK :
       const newTask:any = currentState.projects.map(project => {
         if(project.id === payload.data.id)

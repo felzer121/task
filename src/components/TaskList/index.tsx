@@ -47,6 +47,7 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
       isDone: false,
       userID: 'admin@mail.ru',
       title: value.name,
+      position: project.tasks.length + 1,
       author: 'Added by Kristin A.',
       createdAt: new Date(),
       assignTo: 'Linzell Bowman',
@@ -113,17 +114,10 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
   }, [])
 
 
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
+  const [, drop] = useDrop(() => ({
     accept: 'OurFirstType',
-    drop: () => ({ name: 'Dustbin' }),
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
+    drop: () => ({ category: title })
   }))
-  console.log('opt', isOver, canDrop)
-
-
 
   const renderCard = useCallback((task, index) => {
     return (

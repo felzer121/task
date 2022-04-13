@@ -4,7 +4,6 @@ import { TaskType } from '../TasksPage/types'
 import './style.scss'
 import { Task } from '../../components/Task'
 import { ProjectType } from '../../components/SideBarList'
-import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {useOutletContext} from "react-router-dom";
 
 

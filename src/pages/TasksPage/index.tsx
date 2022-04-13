@@ -42,8 +42,11 @@ const TasksPage = () => {
   useEffect(() => {
     setOpenedTask(project.tasks[0])
   }, [project])
+
   let toDoTasks: TaskType[] = project.tasks.filter(item => item.category === 'todo')
+    .sort((a, b) => a.position > b.position ? 1 : -1);
   const backlogTasks: TaskType[] = project.tasks.filter(item => item.category === 'backlog')
+    .sort((a, b) => a.position > b.position ? 1 : -1);
 
   const onSelectedTask = (openedTask: TaskType): void => {
     setOpenedTask(openedTask)
@@ -58,10 +61,10 @@ const TasksPage = () => {
         <BoxScroll style={{maxWidth: '385px'}}>
           <DndProvider backend={HTML5Backend}>
 
-              <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='Backlog'
+              <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='backlog'
                         onSelectedTask={onSelectedTask}/>
 
-              <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='To Do'
+              <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='to Do'
                         onSelectedTask={onSelectedTask}/>
 
           </DndProvider>
