@@ -16,10 +16,11 @@ interface TaskListProps {
   title: string
   project: ProjectType
   activeTask?: TaskType
+  category: string
   onSelectedTask: (task: TaskType) => void
 }
 
-export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:TaskListProps) => {
+export const TaskList = ({tasks, project, activeTask, title, category, onSelectedTask }:TaskListProps) => {
   const [taskCategoryForCreation, setTaskCategoryForCreation] = useState<CATEGORY_TYPE>(CATEGORY_TYPE.BACKLOG)
   const [isOpen, setIsOpen] = useState(false)
   const [value, setValue] = useState({
@@ -103,30 +104,32 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
   }
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-    // setCards((prevCards: Item[]) =>
-    //   update(prevCards, {
-    //     $splice: [
-    //       [dragIndex, 1],
-    //       [hoverIndex, 0, prevCards[dragIndex] as Item],
-    //     ],
-    //   }),
-    // )
+    let tasks = project.tasks
+
+    // dragCard is card we are dragging
+    let dragCard = tasks[dragIndex];
+
+    // removing this dragCard from array
+    tasks.splice(dragIndex, 1);
+
+    // insert dragCard at hover position
+    tasks.splice(hoverIndex, 0, dragCard);
+
+    const uploadProjects = state.store.projects.map(stateProject => stateProject.id === id ? {...project, tasks: tasks} : project)
+    state.dispatch({action: ACTION.UPDATE_TASKS_DND, data: uploadProjects})
   }, [])
 
 
-  const [, drop] = useDrop(() => ({
-    accept: 'OurFirstType',
-    drop: () => ({ category: title })
-  }))
 
   const renderCard = useCallback((task, index) => {
     return (
       <TaskCard
         key={task.id}
         task={task}
+        category={category}
         currentColumnName={title}
         index={index}
-        id={task.id}
+        taskID={task.id}
         activeTask={activeTask}
         onToggleComplete={updateFirebase}
         onSelectTask={onSelectedTask}
@@ -136,7 +139,7 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
   }, [])
 
   return (
-    <div className='TasksPage__backlog' ref={drop} role={'Dustbin'}>
+    <div className='TasksPage__backlog' role={'Dustbin'}>
       <Modal open={isOpen} onCloseClick={() => setIsOpen(false)}>
         <div className='ModalTask__input-box'>
           <label htmlFor='name' className='ModalTask__label'>

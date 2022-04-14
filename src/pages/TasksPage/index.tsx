@@ -61,11 +61,11 @@ const TasksPage = () => {
         <BoxScroll style={{maxWidth: '385px'}}>
           <DndProvider backend={HTML5Backend}>
 
-              <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='backlog'
-                        onSelectedTask={onSelectedTask}/>
+              <TaskList tasks={backlogTasks} project={project} activeTask={openedTask} title='Backlog'
+                        onSelectedTask={onSelectedTask} category={'backlog'} />
 
-              <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='to Do'
-                        onSelectedTask={onSelectedTask}/>
+              <TaskList tasks={toDoTasks} project={project} activeTask={openedTask} title='To Do'
+                        onSelectedTask={onSelectedTask} category={'todo'} />
 
           </DndProvider>
         </BoxScroll>
