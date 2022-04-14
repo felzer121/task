@@ -44,7 +44,7 @@ export const CalendarPage = () => {
       </div>
       {Boolean(!openedTask) &&
         <div className='CalendarPage__task'>
-          <TaskList tasks={onOpenTask} project={project} title='Backlog' onSelectedTask={onSelectedTask} />
+          <TaskList tasks={onOpenTask} project={project} title='Backlog' category='backlog' isDrag={false} onSelectedTask={onSelectedTask} />
         </div>}
       {Boolean(openedTask) &&
         <Task task={openedTask!} onTaskClose={() => {}} isClose={isClose} />}

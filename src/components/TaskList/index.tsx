@@ -10,17 +10,21 @@ import { ProjectType } from '../SideBarList';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import {useDrop} from "react-dnd";
+import Card from "../../element/Card";
+import {Checkbox} from "@mui/material";
+import {Tag} from "../../element/Tag";
 
 interface TaskListProps {
   tasks: TaskType[]
   title: string
   project: ProjectType
+  isDrag: boolean
   activeTask?: TaskType
   category: string
   onSelectedTask: (task: TaskType) => void
 }
 
-export const TaskList = ({tasks, project, activeTask, title, category, onSelectedTask }:TaskListProps) => {
+export const TaskList = ({tasks, project, activeTask, isDrag, title, category, onSelectedTask }:TaskListProps) => {
   const [taskCategoryForCreation, setTaskCategoryForCreation] = useState<CATEGORY_TYPE>(CATEGORY_TYPE.BACKLOG)
   const [isOpen, setIsOpen] = useState(false)
   const [value, setValue] = useState({
@@ -117,10 +121,25 @@ export const TaskList = ({tasks, project, activeTask, title, category, onSelecte
 
     const uploadProjects = state.store.projects.map(stateProject => stateProject.id === id ? {...project, tasks: tasks} : project)
     state.dispatch({action: ACTION.UPDATE_TASKS_DND, data: uploadProjects})
-
   }, [])
 
-
+  const renderNotDndCard = useCallback((task) => {
+    return (
+      <div key={task.id} className='tasksElement'>
+        <div className='tasksElement__checkbox'>
+          <Checkbox
+            sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+          />
+        </div>
+        <Card type={'task'}>
+          <div className='tasksElement__card'>
+            <p>{task.title}</p>
+            <Tag tag={task.tag} />
+          </div>
+        </Card>
+      </div>
+    )
+  }, [])
 
   const renderCard = useCallback((task, index) => {
     return (
@@ -204,7 +223,8 @@ export const TaskList = ({tasks, project, activeTask, title, category, onSelecte
         </button>
       </div>
       <div className='TasksPage__content'>
-        {tasks.map((task, index) => renderCard(task, index))}
+        { isDrag ? tasks.map((task, index) => renderCard(task, index)) :
+          tasks.map((task) => renderNotDndCard(task))}
       </div>
     </div>
   );
