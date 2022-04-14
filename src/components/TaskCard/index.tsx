@@ -62,7 +62,7 @@ const TaskCard = ({task, activeTask, index, category, taskID, onSelectTask, curr
       if (!ref.current) {
         return;
       }
-      const dragIndex = item.index;
+      const dragIndex = item.position;
       const hoverIndex = index;
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
@@ -75,14 +75,13 @@ const TaskCard = ({task, activeTask, index, category, taskID, onSelectTask, curr
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
       // Get pixels to the top
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top
 
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY)
         return;
-      }
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY)
         return;
-      }
 
       moveCard(dragIndex, hoverIndex);
       item.index = hoverIndex;

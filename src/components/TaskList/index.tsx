@@ -104,7 +104,7 @@ export const TaskList = ({tasks, project, activeTask, title, category, onSelecte
   }
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-    let tasks = project.tasks
+    let tasks = project.tasks;
 
     // dragCard is card we are dragging
     let dragCard = tasks[dragIndex];
@@ -113,10 +113,11 @@ export const TaskList = ({tasks, project, activeTask, title, category, onSelecte
     tasks.splice(dragIndex, 1);
 
     // insert dragCard at hover position
-    tasks.splice(hoverIndex, 0, dragCard);
+    tasks.splice(hoverIndex, 0, {...dragCard, position: hoverIndex});
 
     const uploadProjects = state.store.projects.map(stateProject => stateProject.id === id ? {...project, tasks: tasks} : project)
     state.dispatch({action: ACTION.UPDATE_TASKS_DND, data: uploadProjects})
+
   }, [])
 
 

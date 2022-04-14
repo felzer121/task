@@ -42,11 +42,10 @@ const TasksPage = () => {
   useEffect(() => {
     setOpenedTask(project.tasks[0])
   }, [project])
-
   let toDoTasks: TaskType[] = project.tasks.filter(item => item.category === 'todo')
-    .sort((a, b) => a.position > b.position ? 1 : -1);
+
   const backlogTasks: TaskType[] = project.tasks.filter(item => item.category === 'backlog')
-    .sort((a, b) => a.position > b.position ? 1 : -1);
+
 
   const onSelectedTask = (openedTask: TaskType): void => {
     setOpenedTask(openedTask)
