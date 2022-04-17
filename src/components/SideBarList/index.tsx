@@ -6,6 +6,7 @@ import Modal from '../Modal';
 import { createProject } from '../../services/firebase'
 import { TaskType } from "../../pages/TasksPage/types";
 import { NavLink } from "react-router-dom";
+import {Button} from "@mui/material";
 
 export type SideBarListItem = {
     title: string,
@@ -91,18 +92,18 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
               Icon
             </label>
             <div className="modalProject__selectActive" onClick={selectOnHandle}>
-              <img src={value.icon} alt="" />
+              <img src={value.icon} alt=""/>
             </div>
-            { isOpen.isSelectOpen &&
-              <div className='modalProject__selectDrop'>
-                {icons.map(icon => {
-                  return (
-                    <div className='modalProject__selectItem' key={icon} onClick={() => selectItemOnHandle(icon)}>
-                      <img className='modalProject__selectIcon' src={icon} alt="icon" />
-                    </div>
-                  )
-                })}
-              </div>
+            {isOpen.isSelectOpen &&
+            <div className='modalProject__selectDrop'>
+              {icons.map(icon => {
+                return (
+                  <div className='modalProject__selectItem' key={icon} onClick={() => selectItemOnHandle(icon)}>
+                    <img className='modalProject__selectIcon' src={icon} alt="icon"/>
+                  </div>
+                )
+              })}
+            </div>
             }
           </div>
         </div>
@@ -128,39 +129,44 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
       </Modal>
       <div className="SideBarList__title">
         <h2 className="SideBarList__titleSpan">{title}</h2>
-        {isProject && <div className="SideBarList__titleAdd">
-          <img className="SideBarList__titleAddIcon"
-               src={plusIcon}
-               alt=""
-               onClick={() => openedModal()}
-          />
-        </div>}
       </div>
-      {isProject && state.store.projects.map(project => {
-        return (
-          <NavLink className={(navData) => navData.isActive ? "SideBarList__item-active SideBarList__item" : "SideBarList__item" }
-                   key={ project.id } to={`/dashboard/${ project.id }/task-page/`}>
-            <img className="SideBarList__icon" src={ project.icon } alt="" />
-            <span className='SideBarList__itemTitle'>{ project.name }</span>
-          </NavLink>
-        )
-      })}
+      {isProject && <>
+        {state.store.projects.map(project => {
+          return (
+            <NavLink
+              className={(navData) => navData.isActive ? "SideBarList__item-active SideBarList__item" : "SideBarList__item"}
+              key={project.id} to={`/dashboard/${project.id}/task-page/`}>
+              <img className="SideBarList__icon" src={project.icon} alt=""/>
+              <span className='SideBarList__itemTitle'>{project.name}</span>
+            </NavLink>
+          )
+        })}
+        <div className='SideBarList__addProject' onClick={() => openedModal()}>
+           <Button variant="text" >+ Add a Project</Button>
+        </div>
+      </>
+      }
       {isTeams && state.store.teams.map(team => {
         return (
-          <NavLink className={(navData) => navData.isActive ? "SideBarList__item-active SideBarList__item" : "SideBarList__item" }
-                   key={team.id} to={`/teams/${team.id}`}>
+          <NavLink
+            className={(navData) => navData.isActive ? "SideBarList__item-active SideBarList__item" : "SideBarList__item"}
+            key={team.id} to={`/teams/${team.id}`}>
             <span className='SideBarList__itemTitle'>{team.name}</span>
             {team?.users && <div className="SideBarList__teams">
-              {team.users.map(item => <img key={item.id} src={item.url} className="SideBarList__teamsImg" alt={item.name}/>)}
+              {team.users.map(item => <img key={item.id} src={item.url} className="SideBarList__teamsImg"
+                                           alt={item.name}/>)}
             </div>}
           </NavLink>
         );
       })}
       {isMenu && list?.map((item) =>
         <div className="SideBarList__item" key={item.title}>
-          { item?.icon && <img src={item.icon} className="SideBarList__icon" alt={item.title} /> }
-          <span className='SideBarList__itemTitle'>{ item.title }</span> { item?.count && <span className="SideBarList__number">{ item.count }</span> }
-          { item?.users && <div className="SideBarList__teams">{ item.users.map(item => <img key={item} src={item} className="SideBarList__teamsImg" alt={item} />) }</div> }
+          {item?.icon && <img src={item.icon} className="SideBarList__icon" alt={item.title}/>}
+          <span className='SideBarList__itemTitle'>{item.title}</span> {item?.count &&
+        <span className="SideBarList__number">{item.count}</span>}
+          {item?.users && <div className="SideBarList__teams">{item.users.map(item => <img key={item} src={item}
+                                                                                           className="SideBarList__teamsImg"
+                                                                                           alt={item}/>)}</div>}
         </div>)}
     </div>
   );

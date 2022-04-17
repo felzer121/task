@@ -131,7 +131,7 @@ export const TaskList = ({tasks, project, activeTask, isDrag, title, category, o
             sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
           />
         </div>
-        <Card type={'task'}>
+        <Card type={'task'} onSelectedTask={onSelectedTask} task={task}>
           <div className='tasksElement__card'>
             <p>{task.title}</p>
             <Tag tag={task.tag} />

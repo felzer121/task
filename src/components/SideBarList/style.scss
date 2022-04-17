@@ -29,6 +29,16 @@
       }
     }
   }
+  &__addProject {
+    margin: 8px 0;
+    padding: 0 20px 0 22px;
+    button {
+      font-family: Heebo, sans-serif;
+      color: #FFC200;
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
   &__item {
     padding: 0 20px 0 30px;
     display: flex;

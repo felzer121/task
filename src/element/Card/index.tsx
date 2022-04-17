@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, ButtonProps, styled} from "@mui/material";
+import {TaskType} from "../../pages/TasksPage/types";
 
 const CardButton = styled(Button)<ButtonProps>(({ theme}) => ({
   color: '#131313',
@@ -21,18 +22,26 @@ const CardButton = styled(Button)<ButtonProps>(({ theme}) => ({
 
 interface CardProps {
   children: React.ReactChildren | React.ReactChildren[] | Element | React.ReactNode,
+  onSelectedTask?: (task: TaskType) => void
   isActive?: boolean
+  task?: TaskType
   type: string
 }
 
-const Card = ({children, isActive, type}: CardProps) => {
+const Card = ({children, onSelectedTask, isActive, task, type}: CardProps) => {
   let style
+
+  const handleClick = () => {
+    if(onSelectedTask && task)
+      onSelectedTask(task)
+  }
+
   if(type === 'task')
     style = {padding: '20px 25px 20px 60px'}
   else if(type === 'card')
     style = isActive ? { backgroundColor: '#FFF8DD', boxShadow: '1px 1px 8px rgba(197, 181, 120, 0.5)'} : {}
   return (
-    <CardButton variant="contained" style={style}>
+    <CardButton variant="contained" style={style} onClick={handleClick}>
       {children}
     </CardButton>
   )
