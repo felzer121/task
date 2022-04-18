@@ -30,8 +30,8 @@ export const RouterManeger = () => {
             notifications
           </Page>}/>
       </Route>
-      <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>}>
-        <Route path=':id/task-page' element={<Page title="home">
+      <Route path="/dashboard/:id/" element={<PrivateRoute><Dashboard/></PrivateRoute>}>
+        <Route index element={<Page title="home">
           <TasksPage/>
         </Page>}/>
         <Route path=":id/kanban" element={<Page title="tasks">
@@ -39,10 +39,18 @@ export const RouterManeger = () => {
         </Page>}/>
         <Route path=":id/calendar/" element={<Page title="tasks">{<CalendarPage/>}</Page>}/>
         <Route path=":id/files/" element={<Page title="tasks">{<FilesPage/>}</Page>}/>
+        <Route
+          path=":id"
+          element={<Navigate to=":id/task-page" replace />}
+        />
       </Route>
       <Route path="/teams" element={<PrivateRoute><TeamsPage/></PrivateRoute>}>
         <Route path=":id" element={<TeamsList />}/>
       </Route>
+      <Route
+        path="*"
+        element={<Navigate to="/auth" replace />}
+      />
     </Routes>
   );
 };

@@ -102,7 +102,7 @@ const TaskCard = ({task, activeTask, index, category, taskID, onSelectTask, curr
       ref={ref}
       onClick={() => onSelectTask(task)}>
       <div
-        style={{
+          style={{
           background: taskIsDone ? '#9DDD91' : '#fff',
         }}
         onClick={handleComplete}

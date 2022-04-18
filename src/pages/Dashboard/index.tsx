@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams, useLocation} from "react-router-dom";
 import { SideBar } from "../../components/SideBar";
 import logo from "../../logo.svg";
 import {Header} from "../../components/Header";
@@ -22,15 +22,14 @@ const MAIN_MENU: MenuItemType[] = [
 ]
 const USERS: string[] = [projectIcon1, projectIcon2, projectIcon3]
 export const Dashboard = () => {
-
   const state = useContext(TaskManagerContext)
   let { id } = useParams<{id: string}>();
   const [project, setProject] = React.useState<ProjectType>()
-  if(!id)
-    return <Loader />
+
+  !id ? id = state.store.projects[0].id : id
 
   React.useEffect(() => {
-    setProject(state.store.projects.find(project => project.id === id))
+    id && setProject(state.store.projects.find(project => project.id === id))
   },[state, id])
 
   if(!project)
