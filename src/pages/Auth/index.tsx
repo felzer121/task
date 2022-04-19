@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './style.scss'
 import { useNavigate } from 'react-router-dom';
 import { authUser } from '../../services/user';
+import {useAuth} from "../../store/auth";
+
 
 interface authField {
   email: string
@@ -12,14 +14,18 @@ const Auth = () => {
   const navigate = useNavigate();
   const [authField, setAuthField] = useState<authField>({email: '', password: ''})
   const [error, setError] = useState('')
+  const { currentUser } = useAuth();
+
+  React.useEffect(() => {
+    !!currentUser && navigate("/home")
+  },[])
 
   const authentication = async () => {
     try {
       await authUser(authField.email, authField.password).then(e => console.log(e))
       navigate("/dashboard");
     } catch (error) {
-      // @ts-ignore
-        setError(typeof error === 'string' ? error : '')
+      setError(typeof error === 'string' ? error : '')
     }
   }
   return (

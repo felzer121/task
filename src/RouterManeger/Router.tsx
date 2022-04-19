@@ -14,12 +14,14 @@ import {KanbanPage} from "../pages/KanbanPage";
 import {CalendarPage} from "../pages/CalendarPage";
 import {FilesPage} from "../pages/FilesPage";
 import {TeamsList} from "../components/TeamsList";
+import {Home} from "../pages/Home";
 
 export const RouterManeger = () => {
   return (
     <Routes>
       <Route path='/auth' element={<Auth/>}/>
       <Route path='/register' element={<Register/>}/>
+      <Route path="/home" element={<PrivateRoute><Home/></PrivateRoute>} />
       <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}>
         <Route path="/profile/settings" element={
           <Page title="home">
@@ -34,14 +36,14 @@ export const RouterManeger = () => {
         <Route index element={<Page title="home">
           <TasksPage/>
         </Page>}/>
-        <Route path=":id/kanban" element={<Page title="tasks">
+        <Route path="kanban" element={<Page title="tasks">
           <KanbanPage/>
         </Page>}/>
-        <Route path=":id/calendar/" element={<Page title="tasks">{<CalendarPage/>}</Page>}/>
-        <Route path=":id/files/" element={<Page title="tasks">{<FilesPage/>}</Page>}/>
+        <Route path="calendar/" element={<Page title="tasks">{<CalendarPage/>}</Page>}/>
+        <Route path="files/" element={<Page title="tasks">{<FilesPage/>}</Page>}/>
         <Route
           path=":id"
-          element={<Navigate to=":id/task-page" replace />}
+          element={<Navigate to="task-page" replace />}
         />
       </Route>
       <Route path="/teams" element={<PrivateRoute><TeamsPage/></PrivateRoute>}>

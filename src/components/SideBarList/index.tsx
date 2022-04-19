@@ -9,10 +9,11 @@ import { NavLink } from "react-router-dom";
 import {Button} from "@mui/material";
 
 export type SideBarListItem = {
-    title: string,
-    count?: number,
-    icon?: string,
-    users?: string[]
+  title: string,
+  count?: number,
+  path?: string,
+  icon?: string,
+  users?: string[]
 };
 
 export type Users = {
@@ -95,15 +96,15 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
               <img src={value.icon} alt=""/>
             </div>
             {isOpen.isSelectOpen &&
-            <div className='modalProject__selectDrop'>
-              {icons.map(icon => {
-                return (
-                  <div className='modalProject__selectItem' key={icon} onClick={() => selectItemOnHandle(icon)}>
-                    <img className='modalProject__selectIcon' src={icon} alt="icon"/>
-                  </div>
-                )
-              })}
-            </div>
+                <div className='modalProject__selectDrop'>
+                  {icons.map(icon => {
+                    return (
+                      <div className='modalProject__selectItem' key={icon} onClick={() => selectItemOnHandle(icon)}>
+                        <img className='modalProject__selectIcon' src={icon} alt="icon"/>
+                      </div>
+                    )
+                  })}
+                </div>
             }
           </div>
         </div>
@@ -141,9 +142,9 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
             </NavLink>
           )
         })}
-        <div className='SideBarList__addProject' onClick={() => openedModal()}>
-           <Button variant="text" >+ Add a Project</Button>
-        </div>
+          <div className='SideBarList__addProject' onClick={() => openedModal()}>
+              <Button variant="text">+ Add a Project</Button>
+          </div>
       </>
       }
       {isTeams && state.store.teams.map(team => {
@@ -160,13 +161,14 @@ function SideBarList({ list, isProject, isMenu, isTeams, title }: SideBarListPro
         );
       })}
       {isMenu && list?.map((item) =>
-        <div className="SideBarList__item" key={item.title}>
-          {item?.icon && <img src={item.icon} className="SideBarList__icon" alt={item.title}/>}
-          <span className='SideBarList__itemTitle'>{item.title}</span> {item?.count &&
-        <span className="SideBarList__number">{item.count}</span>}
-          {item?.users && <div className="SideBarList__teams">{item.users.map(item => <img key={item} src={item}
-                                                                                           className="SideBarList__teamsImg"
-                                                                                           alt={item}/>)}</div>}
+        <div key={item.title}>
+          <NavLink to={`${item.path}`} className={(navData) => navData.isActive ? 'SideBarList__item-active SideBarList__item' : 'SideBarList__item'}>
+            <span className='SideBarList__itemTitle'>{item.title}</span>
+            {item?.count && <span className="SideBarList__number">{item.count}</span>}
+          </NavLink>
+          {item?.users && <div className="SideBarList__teams">
+            {item.users.map(item => <img key={item} src={item} className="SideBarList__teamsImg" alt={item}/>)}
+          </div>}
         </div>)}
     </div>
   );

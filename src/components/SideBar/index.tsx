@@ -7,9 +7,9 @@ import { Profile } from '../Profile'
 import {TaskManagerContext} from "../../store/store";
 
 const menuList: SideBarListItem[] = [
-  { title: 'Home' },
-  { title: 'My TasksPage' },
-  { title: 'Notifications', count: 3 }
+  { title: 'Home', path: '/home' },
+  { title: 'My TasksPage', path: '1' },
+  { title: 'Notifications', path: '2', count: 3 }
 ]
 
 function SideBar() {

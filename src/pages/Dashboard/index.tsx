@@ -14,7 +14,7 @@ import projectIcon3 from "../../Pic3.png";
 import Loader from "../../components/Loader/Loader";
 
 const MAIN_MENU: MenuItemType[] = [
-  { title: 'TasksPage', url: '/task-page/' },
+  { title: 'TasksPage', url: '/' },
   { title: 'Kanban', url: '/kanban/' },
   { title: 'Activity', url: '/activity/' },
   { title: 'Calendar', url: '/calendar/' },
