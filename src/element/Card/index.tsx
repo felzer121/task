@@ -21,7 +21,7 @@ const CardButton = styled(Button)<ButtonProps>(({ theme}) => ({
 }))
 
 interface CardProps {
-  children: React.ReactChildren | React.ReactChildren[] | Element | React.ReactNode,
+  children: React.ReactNode,
   onSelectedTask?: (task: TaskType) => void
   isActive?: boolean
   task?: TaskType

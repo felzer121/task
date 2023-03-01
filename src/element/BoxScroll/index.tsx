@@ -3,7 +3,7 @@ import './style.scss'
 
 interface BoxScrollProps {
   style: object
-  children: React.ReactChild | React.ReactChild[]
+  children: React.ReactNode
 }
 
 export const BoxScroll = ({style, children}: BoxScrollProps) => {

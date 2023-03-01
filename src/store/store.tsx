@@ -98,7 +98,7 @@ export const TaskManagerContext = createContext<{
 }>({ store: INITIAL_STORE, dispatch: () => null })
 
 interface TaskManagerProviderProps {
-  children: React.ReactChildren | React.ReactChildren[] | React.ReactChild | React.ReactChild[]
+  children: React.ReactNode
 }
 const reducer = (currentState: StoreInterface, payload: DispatchInterface): StoreInterface => {
   switch (payload.action) {
