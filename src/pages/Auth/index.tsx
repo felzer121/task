@@ -58,7 +58,7 @@ const Auth = () => {
   const { currentUser } = useAuth()
 
   React.useEffect(() => {
-    !!currentUser && navigate('/home')
+    !!currentUser && navigate('/dashboard/9aue7YHGz8D3DhcicRlm/')
   }, [])
 
   const handleValidField = (type: 'email' | 'password', value: string) => {
@@ -108,7 +108,7 @@ const Auth = () => {
               </Typography>
               <Typography variant='subtitle1' sx={{ display: 'flex' }} component='p'>
                 <HowToRegIcon sx={{ marginRight: '7px' }} />
-                Введите email и получите код авторизации
+                Тестовый креды admin@mail.ru admin123
               </Typography>
             </div>
             <div className='auth__loginForm'>
@@ -169,16 +169,14 @@ const Auth = () => {
               </Box>
             </div>
             <div className='auth__loginControl'>
-              <Tooltip disableHoverListener={validateField.email.isValid && validateField.password.isValid ? true : false} title="fill the form">
-                <span>
-                  <Button variant='contained' disabled onClick={authentication} className='auth__loginButton'>
-                    Войти
-                  </Button>
-                </span>
-              </Tooltip>
+              {/* <Tooltip disableHoverListener={validateField.email.isValid && validateField.password.isValid ? true : false} title="fill the form"> */}
+                <Button variant='contained'  onClick={authentication} className='auth__loginButton'>
+                  Войти
+                </Button>
+              {/* </Tooltip> */}
             </div>
           </div>
-          <div>asggas</div>
+          {/* <div>asggas</div> */}
         </div>
       </div>
       <div className='auth__background'>

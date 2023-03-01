@@ -7,8 +7,8 @@ import Modal from '../Modal'
 import './style.scss'
 import { useParams } from 'react-router-dom'
 import { ProjectType } from '../SideBarList';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import 'react-day-picker/lib/style.css';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 import {useDrop} from "react-dnd";
 import Card from "../../element/Card";
 import {Checkbox} from "@mui/material";
@@ -193,7 +193,7 @@ export const TaskList = ({tasks, project, activeTask, isDrag, title, category, o
               Date
             </label>
             {/* @ts-ignore*/}
-            <DayPickerInput value={value.date} onDayChange={date => setValue({...value, date: date})}/>
+            <DayPicker value={value.date} onDayChange={date => setValue({...value, date: date})}/>
           </div>
           <div className='ModalTask__input-box'>
             <label htmlFor='tag' className='ModalTask__label'>

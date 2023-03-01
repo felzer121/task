@@ -10,6 +10,7 @@ import Card from "../../element/Card";
 import './style.scss'
 import Loader from "../Loader/Loader";
 import {Tag} from "../../element/Tag";
+import { Home } from '../../pages/Home'
 
 const TeamsList = () => {
   const state = useContext(TaskManagerContext)
@@ -39,7 +40,7 @@ const TeamsList = () => {
    if(className === 'tasksElement__card')
      navigate(`/dashboard/${idProject}/task-page`)
   }
-  if(!team) return <Loader />
+  if(!team) return <Home />
 
   return (
     <>

@@ -27,7 +27,7 @@ function SideBar() {
 
       <Profile avatarUrl={state.store.user.url} fullName={state.store.user.name} position={state.store.user.role} />
 
-      <SideBarList isMenu={true} list={menuList} title={'Menu'} />
+      {/* <SideBarList isMenu={true} list={menuList} title={'Menu'} /> */}
       <SideBarList isProject={true} title={'Projects'} />
       <SideBarList isTeams={true} title={'Teams'} />
     </div>

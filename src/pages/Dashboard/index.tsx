@@ -12,6 +12,7 @@ import projectIcon1 from "../../Pic1.png";
 import projectIcon2 from "../../Pic2.png";
 import projectIcon3 from "../../Pic3.png";
 import Loader from "../../components/Loader/Loader";
+import { Home } from "../Home";
 
 const MAIN_MENU: MenuItemType[] = [
   { title: 'TasksPage', url: '/' },
@@ -33,7 +34,7 @@ export const Dashboard = () => {
   },[state, id])
 
   if(!project)
-    return <Loader />
+    return <Home />
 
   return (
     <div className='App'>
