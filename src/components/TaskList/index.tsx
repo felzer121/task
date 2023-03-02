@@ -7,8 +7,8 @@ import Modal from '../Modal'
 import './style.scss'
 import { useParams } from 'react-router-dom'
 import { ProjectType } from '../SideBarList';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
+// import { DayPicker } from 'react-day-picker';
+// import 'react-day-picker/dist/style.css';
 import {useDrop} from "react-dnd";
 import Card from "../../element/Card";
 import {Checkbox} from "@mui/material";
@@ -123,7 +123,7 @@ export const TaskList = ({tasks, project, activeTask, isDrag, title, category, o
     state.dispatch({action: ACTION.UPDATE_TASKS_DND, data: uploadProjects})
   }, [])
 
-  const renderNotDndCard = useCallback((task) => {
+  const renderNotDndCard = useCallback((task: TaskType) => {
     return (
       <div key={task.id} className='tasksElement'>
         <div className='tasksElement__checkbox'>
@@ -141,7 +141,7 @@ export const TaskList = ({tasks, project, activeTask, isDrag, title, category, o
     )
   }, [])
 
-  const renderCard = useCallback((task, index) => {
+  const renderCard = useCallback((task:TaskType, index: number) => {
     return (
       <TaskCard
         key={task.id}
@@ -192,8 +192,7 @@ export const TaskList = ({tasks, project, activeTask, isDrag, title, category, o
             <label htmlFor='description' className='ModalTask__label'>
               Date
             </label>
-            {/* @ts-ignore*/}
-            <DayPicker value={value.date} onDayChange={date => setValue({...value, date: date})}/>
+            {/* <DayPicker value={value.date} onDayChange={date => setValue({...value, date: date})}/> */}
           </div>
           <div className='ModalTask__input-box'>
             <label htmlFor='tag' className='ModalTask__label'>

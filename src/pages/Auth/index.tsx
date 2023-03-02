@@ -176,7 +176,7 @@ const Auth = () => {
               {/* </Tooltip> */}
             </div>
           </div>
-          {/* <div>asggas</div> */}
+          <div> </div>
         </div>
       </div>
       <div className='auth__background'>
