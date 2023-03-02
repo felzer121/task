@@ -7,7 +7,10 @@ export enum CATEGORY_TYPE {
 }
 
 export type TaskType = {
+  userID: string;
   id: string
+  position: number
+  idProject: string
   title: string
   isDone: boolean
   author: string

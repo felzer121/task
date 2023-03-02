@@ -9,7 +9,7 @@ interface HeaderProps {
   projectIcon?: string
   type: string
   id: string
-  menu: MenuItemType[]
+  menu?: MenuItemType[]
 }
 
 const Header = ({ menu, projectName, projectIcon, type, id, users = [] }: HeaderProps) => {
@@ -17,11 +17,11 @@ const Header = ({ menu, projectName, projectIcon, type, id, users = [] }: Header
     <div className='Header'>
       <div className='Header__top'>
         <div className='Header__logo'>
-          <img src={projectIcon} alt='' />
+          {!!projectIcon && <img src={projectIcon} className='Header__icon' alt='' />}
           <h1 className='Header__title'>{projectName}</h1>
         </div>
         {
-          type === 'dashboard' && <div className='Header__team'>
+          (type === 'dashboard' || 'teams') && <div className='Header__team'>
             {users?.map(user => (
               <img className='Header__teamPerson' src={user} key={user} alt='' />
             ))}
@@ -30,7 +30,7 @@ const Header = ({ menu, projectName, projectIcon, type, id, users = [] }: Header
             </div>
         }
       </div>
-      <Menu menu={menu} id={id} type={type} />
+      {!!menu && <Menu menu={menu} id={id} type={type} />}
     </div>
   )
 }

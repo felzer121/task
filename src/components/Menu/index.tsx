@@ -17,9 +17,7 @@ const Menu = ({ menu, type, id }: MenuProps) => {
           return (
             <li key={item.url}>
               <NavLink
-                exact
-                className='Menu__link'
-                activeClassName='Menu__link_selected'
+                className={(navData) => navData.isActive ? "Menu__link_selected Menu__link" : "Menu__link" }
                 to={type === 'dashboard' ? `/dashboard/${id}${item.url}` : item.url}>
                 {item.title}
               </NavLink>

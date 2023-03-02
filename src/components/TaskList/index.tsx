@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, {useState, useContext, useCallback} from 'react'
 import { ACTION, TaskManagerContext } from "../../store/store";
 import { CATEGORY_TYPE, TaskType } from '../../pages/TasksPage/types'
 import { TaskCard } from '../TaskCard'
@@ -7,18 +7,24 @@ import Modal from '../Modal'
 import './style.scss'
 import { useParams } from 'react-router-dom'
 import { ProjectType } from '../SideBarList';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import 'react-day-picker/lib/style.css';
+// import { DayPicker } from 'react-day-picker';
+// import 'react-day-picker/dist/style.css';
+import {useDrop} from "react-dnd";
+import Card from "../../element/Card";
+import {Checkbox} from "@mui/material";
+import {Tag} from "../../element/Tag";
 
 interface TaskListProps {
   tasks: TaskType[]
   title: string
   project: ProjectType
+  isDrag: boolean
   activeTask?: TaskType
+  category: string
   onSelectedTask: (task: TaskType) => void
 }
 
-export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:TaskListProps) => {
+export const TaskList = ({tasks, project, activeTask, isDrag, title, category, onSelectedTask }:TaskListProps) => {
   const [taskCategoryForCreation, setTaskCategoryForCreation] = useState<CATEGORY_TYPE>(CATEGORY_TYPE.BACKLOG)
   const [isOpen, setIsOpen] = useState(false)
   const [value, setValue] = useState({
@@ -30,17 +36,23 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
   const state = useContext(TaskManagerContext)
   let { id } = useParams<{id: string}>();
 
+  if(!id)
+    return <div />
+
   const openedModal = () => {
     setIsOpen(true)
   }
   const updateFirebase = (task: TaskType) => {
-    updateTask(task)
+    updateTask(task).then()
   }
-  const onCreateTaskClick = (category: CATEGORY_TYPE) => {
+  const onCreateTaskClick = (category: CATEGORY_TYPE) =>  {
     const newTask: TaskType = {
       id: String(project.tasks.length + 1),
+      idProject: String(project.id),
       isDone: false,
+      userID: 'admin@mail.ru',
       title: value.name,
+      position: project.tasks.length + 1,
       author: 'Added by Kristin A.',
       createdAt: new Date(),
       assignTo: 'Linzell Bowman',
@@ -90,13 +102,65 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
         }
       ]
     }
-    createTask(newTask, id)
+    createTask(newTask, id).then()
     state.dispatch({ action: ACTION.CREATE_TASK, data: {task: newTask, id: id} })
     setIsOpen(false)
   }
+
+  const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+    let tasks = project.tasks;
+
+    // dragCard is card we are dragging
+    let dragCard = tasks[dragIndex];
+
+    // removing this dragCard from array
+    tasks.splice(dragIndex, 1);
+
+    // insert dragCard at hover position
+    tasks.splice(hoverIndex, 0, {...dragCard, position: hoverIndex});
+
+    const uploadProjects = state.store.projects.map(stateProject => stateProject.id === id ? {...project, tasks: tasks} : project)
+    state.dispatch({action: ACTION.UPDATE_TASKS_DND, data: uploadProjects})
+  }, [])
+
+  const renderNotDndCard = useCallback((task: TaskType) => {
+    return (
+      <div key={task.id} className='tasksElement'>
+        <div className='tasksElement__checkbox'>
+          <Checkbox
+            sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+          />
+        </div>
+        <Card type={'task'} onSelectedTask={onSelectedTask} task={task}>
+          <div className='tasksElement__card'>
+            <p>{task.title}</p>
+            <Tag tag={task.tag} />
+          </div>
+        </Card>
+      </div>
+    )
+  }, [])
+
+  const renderCard = useCallback((task:TaskType, index: number) => {
+    return (
+      <TaskCard
+        key={task.id}
+        task={task}
+        category={category}
+        currentColumnName={title}
+        index={index}
+        taskID={task.id}
+        activeTask={activeTask}
+        onToggleComplete={updateFirebase}
+        onSelectTask={onSelectedTask}
+        moveCard={moveCard}
+      />
+    )
+  }, [])
+
   return (
-    <div className='TasksPage__backlog'>
-      <Modal open={isOpen} onCloseClick={() => setIsOpen(false)} >
+    <div className='TasksPage__backlog' role={'Dustbin'}>
+      <Modal open={isOpen} onCloseClick={() => setIsOpen(false)}>
         <div className='ModalTask__input-box'>
           <label htmlFor='name' className='ModalTask__label'>
             Name
@@ -128,7 +192,7 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
             <label htmlFor='description' className='ModalTask__label'>
               Date
             </label>
-            <DayPickerInput value={value.date} onDayChange={date => setValue({...value, date: date})} />
+            {/* <DayPicker value={value.date} onDayChange={date => setValue({...value, date: date})}/> */}
           </div>
           <div className='ModalTask__input-box'>
             <label htmlFor='tag' className='ModalTask__label'>
@@ -158,18 +222,9 @@ export const TaskList = ({tasks, project, activeTask, title, onSelectedTask }:Ta
         </button>
       </div>
       <div className='TasksPage__content'>
-        {tasks.map(task => {
-          return (
-            <TaskCard
-              activeTask={activeTask}
-              key={task.id}
-              task={task}
-              onToggleComplete={updateFirebase}
-              onSelectTask={onSelectedTask}
-            />
-          )
-        })}
+        { isDrag ? tasks.map((task, index) => renderCard(task, index)) :
+          tasks.map((task) => renderNotDndCard(task))}
       </div>
     </div>
-  )
+  );
 }

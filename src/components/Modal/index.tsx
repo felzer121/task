@@ -4,7 +4,7 @@ import './style.scss'
 interface ModalProps{
   open: boolean
   onCloseClick: () => void
-  children: React.ReactChild | React.ReactChild[]
+  children: React.ReactNode
 }
 
 const Modal = ({open, onCloseClick, children}: ModalProps) => {

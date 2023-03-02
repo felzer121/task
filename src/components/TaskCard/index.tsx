@@ -1,31 +1,108 @@
 import React, {useState, useContext} from 'react'
-import {TaskType} from '../../pages/TasksPage/types'
+import { TaskType } from '../../pages/TasksPage/types'
 import './style.scss'
-import {TaskManagerContext, ACTION} from '../../store/store'
+import { TaskManagerContext, ACTION } from '../../store/store'
+import {useDrag, useDrop} from "react-dnd";
+import type { Identifier, XYCoord } from 'dnd-core'
+import {useParams} from "react-router-dom";
 
 interface TaskCardProps {
   task: TaskType
   activeTask?: TaskType
+  index: number
+  taskID: string
+  currentColumnName: string
   onSelectTask: (task: TaskType) => void
   onToggleComplete: (task: TaskType) => void
+  category: string
+  moveCard: (dragIndex: number, hoverIndex: number) => void
 }
 
-const TaskCard = ({task,activeTask, onSelectTask, onToggleComplete}: TaskCardProps) => {
-  const [taskIsDone, setTaskIsDone] = useState(task.isDone)
-  const store = useContext(TaskManagerContext)
+interface DragItem {
+  index: number
+  id: string
+  type: string
+}
+
+interface DropResult {
+  category: string
+}
+
+export const ItemTypes = {
+  CARD: 'card',
+}
+
+const TaskCard = ({task, activeTask, index, category, taskID, onSelectTask, currentColumnName, moveCard, onToggleComplete}: TaskCardProps) => {
+  const [taskIsDone, setTaskIsDone] = React.useState(task.isDone)
+  const state = React.useContext(TaskManagerContext)
+  const ref = React.useRef<HTMLDivElement>(null)
+
+  let { id } = useParams<{id: string}>();
+  const [{ isDragging }, drag] = useDrag({
+    type: 'OurFirstType',
+    item: { ...task },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    end: (draggedItem, monitor) => {
+      const dropResult = monitor.getDropResult<DropResult>()
+      if (!!dropResult?.category)
+        if(dropResult.category !== draggedItem.category) {
+          const projects = state.store.projects.map(project => project.id === id ? {...project, tasks: project.tasks.map(task => task.id === taskID ? {...task, category: dropResult.category} : task)} : project)
+            state.dispatch({action: ACTION.UPDATE_TASKS_DND, data: projects})
+          }
+    },
+  });
+  const opacity = isDragging ? 0 : 1
+
+  const [, drop] = useDrop(() => ({
+    accept: 'OurFirstType',
+    drop: () => ({ category: category }),
+    hover(item: any, monitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dragIndex = item.position;
+      const hoverIndex = index;
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      // Get vertical middle
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+      // Get pixels to the top
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top
+
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY)
+        return;
+
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY)
+        return;
+
+      moveCard(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    }
+  }))
+
   const handleComplete = () => {
     const newTask = {...task, isDone: !task.isDone}
     onToggleComplete(newTask)
     setTaskIsDone(!taskIsDone)
-    store.dispatch({action: ACTION.TOGGLE_DONE_TASK, data: task.id})
+    state.dispatch({action: ACTION.TOGGLE_DONE_TASK, data: task.id})
   }
-
+  drag(drop(ref))
   return (
     <div
+      style={{ opacity }}
       className={`TasksPage__item ${activeTask?.id === task.id ? 'TasksPage__item-active': ''}`}
+      ref={ref}
       onClick={() => onSelectTask(task)}>
       <div
-        style={{
+          style={{
           background: taskIsDone ? '#9DDD91' : '#fff',
         }}
         onClick={handleComplete}

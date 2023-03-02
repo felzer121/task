@@ -6,13 +6,12 @@ import { Task } from "../../components/Task";
 import { TaskList } from "../../components/TaskList";
 import { TaskType } from "../TasksPage/types";
 import './style.scss'
+import {useOutletContext} from "react-router-dom";
 
-interface CalendarProps {
-  project: ProjectType
-}
 
-export const CalendarPage = ({project}: CalendarProps) => {
+export const CalendarPage = () => {
   const date = new Date();
+  const project = useOutletContext<ProjectType>()
   const dateCurrentMonth = project.tasks.reduce((prevTask, currentTask) => {
     if(prevTask.dueOn.toDate().getFullYear() < currentTask.dueOn.toDate().getFullYear())
       return prevTask
@@ -45,7 +44,7 @@ export const CalendarPage = ({project}: CalendarProps) => {
       </div>
       {Boolean(!openedTask) &&
         <div className='CalendarPage__task'>
-          <TaskList tasks={onOpenTask} project={project} title='Backlog' onSelectedTask={onSelectedTask} />
+          <TaskList tasks={onOpenTask} project={project} title='Backlog' category='backlog' isDrag={false} onSelectedTask={onSelectedTask} />
         </div>}
       {Boolean(openedTask) &&
         <Task task={openedTask!} onTaskClose={() => {}} isClose={isClose} />}

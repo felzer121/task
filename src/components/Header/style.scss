@@ -3,16 +3,23 @@
   padding: 0 30px;
   box-sizing: border-box;
   background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   height: 128px;
   &__logo {
     display: flex;
   }
+  &__icon {
+    padding-right: 15px;
+  }
   &__title {
-    padding-left: 15px;
     font-size: 32px;
   }
   &__top {
     display: flex;
+    align-items: center;
+    height: 100px;
     justify-content: space-between;
   }
   &__team {

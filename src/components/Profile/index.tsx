@@ -4,6 +4,7 @@ import './style.scss'
 import more from './More.svg'
 import {IconButton, MenuItem, Menu} from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { logOut } from '../../services/user'
 
 interface ProfileProps {
     avatarUrl: string,
@@ -51,7 +52,9 @@ function Profile({ avatarUrl, fullName, position }: ProfileProps) {
         <NavLink to={'/profile/settings'} style={{textDecoration: 'none', color: '#000'}}>
           <MenuItem onClick={handleClose}>Settings</MenuItem>
         </NavLink>
-        <MenuItem onClick={handleClose}>Exit</MenuItem>
+        <div onClick={logOut}>
+          <MenuItem onClick={handleClose}>Exit</MenuItem>
+        </div>
       </Menu>
     </div>
   );

@@ -24,7 +24,7 @@
     padding: 30px;
     box-sizing: border-box;
     overflow: scroll;
-    height: 100%;
+    height: calc(100vh - 188px);
     scrollbar-width: none;
     &::-webkit-scrollbar { width: 0; }
   }

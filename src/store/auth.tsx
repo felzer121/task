@@ -1,8 +1,11 @@
-import React, { useContext, useState, useEffect } from "react"
-import { firebase } from "../services/firebase"
+import React, {useContext, useEffect, useState} from "react"
+import {firebase} from "../services/firebase"
 
-// @ts-ignore
-const AuthContext = React.createContext()
+const authContextDefault = {
+  currentUser: null
+}
+
+const AuthContext = React.createContext(authContextDefault)
 
 export function useAuth() {
   return useContext(AuthContext)
@@ -30,12 +33,10 @@ export function AuthProvider({ children }:any) {
 
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    return firebase.auth().onAuthStateChanged(user => {
       setCurrentUser(user)
       setLoading(false)
     })
-
-    return unsubscribe
   }, [])
 
   const value = {

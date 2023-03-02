@@ -37,7 +37,7 @@ export const loadAvatar = async (url: string, file: any) => {
   return newPath
 }
 
-export const createTask = (task: TaskType, id: string) => {
+export const createTask = (task: TaskType, id: string | undefined) => {
   const todoProject = db.collection("todo").doc(id);
   return todoProject.update({
     tasks : firebase.firestore.FieldValue.arrayUnion(task)
@@ -52,20 +52,25 @@ export const getProject = async ():Promise<ProjectType[]> => {
     querySnapshot.forEach((doc:any) => {
       projects.push({id: doc.id, ...doc.data()})
     });
-  });
+  })
   return projects
 }
 
 export const getUrlAvatar = async (name: string) => {
   return storage.ref(name).getDownloadURL().then()
 }
-export const getUrlAvatarTeams = async (names: string[]) => {
-  const urls = names.map(name => storage.ref(name).getDownloadURL().then())
-  return urls
+export const getUrlAvatarTeams = async (teams: TeamsType[]): Promise<any[]> => {
+  const arrayImg = teams.map(team => team.users.map(user => user.namePic))
+  const result:any = []
+  for(let i = 0; i < arrayImg.length; i++) {
+    const pathImg = arrayImg[i].map(async name => await storage.ref(name).getDownloadURL())
+    result.push(Promise.all(pathImg))
+  }
+  return Promise.all(result)
 }
 
-export const getUsers = async (): Promise<Users[]> => {
-  let users:Users[] = [];
+export const getUsers = async (): Promise<UserFull[]> => {
+  let users:UserFull[] = [];
   await db.collection("users").get().then((querySnapshot) => {
     querySnapshot.forEach((doc:any) => {
       users.push({id: doc.id, ...doc.data()})
@@ -122,6 +127,7 @@ export const updateUser = async (user: UserFull, teams: TeamsType[]) => {
     const currentTeams = teams.find(item => item.id === userTeam.id)!.users
     if(!currentTeams.some(team => team.id.includes(user.id)))
       teamsRef.doc(userTeam.id).update({ users: [...currentTeams, {name: user.name, namePic: user.namePic, id: user.id} ] })
+    return ''
   })
 }
 
