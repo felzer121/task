@@ -2,6 +2,8 @@
   "name": "task-manager-ui-kit",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
+  "main": "dist/assets/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
